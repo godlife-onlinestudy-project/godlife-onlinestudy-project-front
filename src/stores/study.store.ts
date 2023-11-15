@@ -18,6 +18,7 @@ interface StudyStore {
     studyNextStartDatetime : string | null;
     studyNextEndDatetime  : string | null;
     studyTotalDay : number | null;
+    createStudyUserEmail : string;
 
     setStudyName : (studyName : string ) => void;
     setStudyStartDate : ( studyStartDate : string ) => void;
@@ -36,6 +37,7 @@ interface StudyStore {
     setStudyNextStartDatetime : (studyNextStartDatetime : string | null)=> void;
     setStudyNextEndDatetime : (studyNextEndDatetime : string | null)=> void;
     setTotalday : (studyTotalDay : number ) => void;
+    setCreateStudyUserEmail : ( createStudyUserEmail : string ) => void;
     resetService: () => void;
 }
 
@@ -56,6 +58,7 @@ const useStudyStore = create<StudyStore>((set) => ({
     studyNextStartDatetime : '',
     studyNextEndDatetime : '',
     studyTotalDay : 0,
+    createStudyUserEmail : '',
 
     setStudyName : (studyName : string ) => {set((state) => ({ ...state, studyName }))},
     setStudyStartDate : ( studyStartDate : string ) => {set((state) => ({ ...state, studyStartDate }))},
@@ -74,9 +77,10 @@ const useStudyStore = create<StudyStore>((set) => ({
     setStudyNextStartDatetime :(studyNextStartDatetime : string | null)=> {set((state) => ({ ...state, studyNextStartDatetime }))},
     setStudyNextEndDatetime : (studyNextEndDatetime : string | null)=> {set((state) => ({ ...state, studyNextEndDatetime}))},
     setTotalday : (studyTotalDay : number ) => {set((state) => ({ ...state, studyTotalDay}))},
+    setCreateStudyUserEmail : ( createStudyUserEmail : string ) => {set((state) => ({ ...state, createStudyUserEmail }))},
 
     resetService : () => {set((state) => ({ ...state, studyName: '', studyStartDate: '', studyEndDate: '' , studyPersonal : 0 , studyCategory1 : '',studyCategory2:'', studyCategory3 : '',isStudyPublic : true,
-                                            studyPrivatePassword : '', studyCoverImageUrl :'',studyNextStartDatetime: '',studyNextEndDatetime : '', studyTotalDay : 0
+                                            studyPrivatePassword : '', studyCoverImageUrl :'',studyNextStartDatetime: '',studyNextEndDatetime : '', studyTotalDay : 0, createStudyUserEmail:'',
     }))}
 
 }));

@@ -5,10 +5,21 @@ import DropDownFirstCategory from 'components/Dropdown1Category';
 import DropDownStudyCreateCategory from 'components/DropdownStudyCreateCategory';
 import DatePickerComponent from 'components/DatePicker';
 import MaterialManageModal from 'views/MaterialManageModal';
+import { useStudyStore } from 'stores';
+import { PostStudyRequestDto } from 'apis/request/study';
+import { PostStudyRequest } from 'apis';
+import { useCookies } from 'react-cookie';
 
 //          component: 스터디 생성 페이지          //
 export default function StudyCreate() {
     // const countRef = useRef<HTMLSpanElement | null>(null);
+
+    //          state: useStudyStore 요소 전역 상태          //
+    const { studyName, studyStartDate, studyEndDate, studyPersonal, studyCategory1, studyCategory2, studyCategory3 } = useStudyStore();
+    const { isStudyPublic, studyPrivatePassword, studyCoverImageUrl, resetService } = useStudyStore();
+
+    //          state: cookie 상태          //
+  const [cookies, setCookies] = useCookies();
 
     //          state: 스터디 생성 오류 상태          //
     const[error, setError] = useState<boolean>(false);
@@ -30,6 +41,19 @@ export default function StudyCreate() {
     const [coverImage, setCoverImage] = useState<string | null>('');
     //          state: 모달 창 상태          //
     const [show, setShow] = useState<boolean>(false);
+
+    //          function: post study response 처리 함수          //
+    const postStudyResponse = (code: string) => {
+        if (code === 'VF') alert('모두 입력하세요.');
+        if (code === 'NU' || code === 'SF') {
+            // todo: navigator
+            return;
+        }
+        if (code === 'DBE') alert('데이터베이스 오류입니다.');
+        if (code !== 'SU') return;
+
+        resetService();
+    }
 
 
     //          event handler: 스터디 제목 글자수 20제한 이벤트 처리         //
@@ -55,17 +79,29 @@ export default function StudyCreate() {
     const [code, setCode] = useState(onGernerateRandomCode());
 
     //          event handler: 스터디 만들기 클릭 이벤트 처리          //
-    const onClickCreateStudyRoomHandler = () => {
-        
-        setTitleError(false);
-        setTitleErrorMessage('');
-        
+    const onClickCreateStudyRoomHandler = async () => {
+
+        // const accessToken = cookies.accessToken;
+        // if (!accessToken) return;
+
+        const accessToken = cookies?.accessToken;
+
         // description : 스터디 제목 확인 //
         const checkedTitle = title.trim().length < 2;
         if (checkedTitle) {
             setTitleError(true);
             setTitleErrorMessage('최소 2글자 이상 입력해야 합니다.')
-        } else alert('스터디 만들기 완료!');
+        }
+        
+        setTitleError(false);
+        setTitleErrorMessage('');
+
+        const requestBody: PostStudyRequestDto = {
+            studyName, studyStartDate, studyEndDate, studyPersonal, studyCategory1, studyCategory2, studyCategory3,
+            studyPublicCheck: isStudyPublic, studyPrivatePassword, studyCoverImageUrl
+        }
+        PostStudyRequest(requestBody, accessToken).then(postStudyResponse);
+        
     };
     //          event handler: 공개방 / 비공개방 이벤트 처리          //
     const onClickPublicHandler = () => {
