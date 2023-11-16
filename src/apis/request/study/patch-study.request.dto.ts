@@ -1,12 +1,9 @@
-export default interface PostStudyRequestDto {
+export default interface PatchStudyRequestDto {
     studyName: string;
-    studyStartDate: string | null;
-    studyEndDate: string | null;
+    studyEndDate: string;
     studyPersonal: number;
     studyCategory1: string;
-    studyCategory2: string | null;
-    studyCategory3: string | null;
     studyPublicCheck: boolean;
-    studyPrivatePassword: string | null;
+    studyPrivatePasword: string | null;
     studyCoverImageUrl: string | null;
 }

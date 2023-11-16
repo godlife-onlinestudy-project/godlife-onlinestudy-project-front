@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
 
-import 'react-calendar/dist/Calendar.css';
 import ModalSideMenu from 'components/ModalSideMenu';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
@@ -10,13 +9,13 @@ import DropDownModifyStudyCategory from 'components/DropdownModifyStudyCategory'
 import { StudyListItem } from 'types';
 import { studyListMock } from 'mocks';
 
-//          interface: 스터디방 리스트 아이템 Props          //
-interface Props {
-    studyListItem: StudyListItem;
-}
+// //          interface: 스터디방 리스트 아이템 Props          //
+// interface Props {
+//     studyListItem: StudyListItem;
+// }
 
 //          component : 스터디 방 재설정 모달 페이지          //
-export default function StudyModifyModal({ studyListItem }: Props) {
+export default function StudyModifyModal() {
 
     // //          state: Properties          //
     // const { studyNumber, studyName, studyStartDate, studyPersonNumber, studyEndDate } = studyListItem;
@@ -46,14 +45,14 @@ export default function StudyModifyModal({ studyListItem }: Props) {
     const [studyCoverImage, setStudyCoverImage] = useState<string | null>('');
 
 
-    const initialStudyData: StudyListItem | undefined = studyListMock.find(
-        (study) => study.studyNumber === studyListItem.studyNumber
-    );
-    // const [studyNumber, setStudyNumber] = useState<number>(initialStudyData?.studyNumber || 0);
-    const [studyTitle, setStudyTitle] = useState<string>(initialStudyData?.studyName || '');
-    const [studyPersonNumber, setStudyPersonNumber] = useState<number>(initialStudyData?.studyPersonNumber || 0);
-    const [studyEndDate, setStudyEndDate] = useState<string>(initialStudyData?.studyEndDate || '');
-    const [studyCategory1, setStudyCategory1] = useState<string>(initialStudyData?.studyCategory1 || '');
+    // const initialStudyData: StudyListItem | undefined = studyListMock.find(
+    //     (study) => study.studyNumber === studyListItem.studyNumber
+    // );
+    // // const [studyNumber, setStudyNumber] = useState<number>(initialStudyData?.studyNumber || 0);
+    // const [studyTitle, setStudyTitle] = useState<string>(initialStudyData?.studyName || '');
+    // const [studyPersonNumber, setStudyPersonNumber] = useState<number>(initialStudyData?.studyPersonNumber || 0);
+    // const [studyEndDate, setStudyEndDate] = useState<string>(initialStudyData?.studyEndDate || '');
+    // const [studyCategory1, setStudyCategory1] = useState<string>(initialStudyData?.studyCategory1 || '');
 
     //          event handler: 스터디 제목 변경 버튼 클릭 이벤트 처리          //
     const onChangenStudyTitleButtonClickHandler = () => {

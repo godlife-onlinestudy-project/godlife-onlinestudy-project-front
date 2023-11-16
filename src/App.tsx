@@ -43,13 +43,13 @@ function App() {
   return (
     <div>
       {/* <MyPage /> */}
-      <StudyCreate />
+      {/* <StudyCreate /> */}
       {/* <HostNoticeManageModal /> */}
       {/* <NoticeModal /> */}
       {/* <HostToDoListManageModal /> */}
       {/* <ToDoListModal /> */}
       {/* <StudyDateModal /> */}
-      {/* <StudyModifyModal studyListItem={studyItem} /> */}
+      <StudyModifyModal />
       {/* <ManinpagePriavateStudyRoomJoinModal/> */}
       {/* <Header onSearchMoveClickHandler={onSearchMoveClickHandler} />
       <Main ref={searchDivRef} />

@@ -1,5 +1,7 @@
-import PostStudyRequestDto from './patch-study.request.dto';
+import PostStudyRequestDto from './post-study.request.dto';
+import PatchStudyRequestDto from './patch-study.request.dto';
 
 export type {
-    PostStudyRequestDto
+    PostStudyRequestDto,
+    PatchStudyRequestDto
 };
