@@ -1,8 +1,7 @@
 export default interface PostStudyRequestDto {
-    // studyNumber: number;
     studyName: string;
-    studyStartDate: string;
-    studyEndDate: string;
+    studyStartDate: string | null;
+    studyEndDate: string | null;
     studyPersonal: number;
     studyCategory1: string;
     studyCategory2: string | null;
@@ -10,5 +9,4 @@ export default interface PostStudyRequestDto {
     studyPublicCheck: boolean;
     studyPrivatePassword: string | null;
     studyCoverImageUrl: string | null;
-    // createStudyUserEmail: string;
 }

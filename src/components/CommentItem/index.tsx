@@ -7,7 +7,6 @@ import { MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE } from 'constant';
 
 interface Props {
     commentItem: StudyMaterialCommentListItem;
-
 }
   
 export default function CommentItem({ commentItem }: Props) {

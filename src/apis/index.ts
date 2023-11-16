@@ -4,10 +4,10 @@ import { PostStudyResponseDto } from './response/study';
 import ResponseDto from './response';
 
 // description: Domain URL //
-const DOMAIN = 'http://localhost:4000/api';
+const DOMAIN = 'http://localhost:4000';
 
 // description: API Domain 주소 //
-const API_DOMAIN = `${DOMAIN}/api/`;
+const API_DOMAIN = `${DOMAIN}/api`;
 
 // description: Authorizaition Header //
 const authorization = (token: string) => { 
@@ -19,7 +19,7 @@ const authorization = (token: string) => {
 const POST_STUDY_URL = () => `${API_DOMAIN}/main/home`;
 
 // description: post study request //
-export const PostStudyRequest = async (requestBody: PostStudyRequestDto, token: string) => {
+export const postStudyRequest = async (requestBody: PostStudyRequestDto, token: string) => {
     const result = await axios.post(POST_STUDY_URL(), requestBody, authorization(token))
         .then(response => {
             const resposneBody: PostStudyResponseDto = response.data;
