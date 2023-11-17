@@ -1,4 +1,4 @@
-import React, { useRef, useState }  from 'react';
+import React, { useEffect, useRef, useState }  from 'react';
 import { Outlet, Route, Router, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './layouts/Header';
@@ -15,19 +15,15 @@ import StudyModifyModal from 'views/StudyModifyModal';
 import { studyListMock } from 'mocks';
 import MemberManageModal from 'views/MemberManageModal';
 import MyPage from 'views/MyPage';
+import { StudyModify } from 'types';
+import { getModifyStudyRequest } from 'apis';
 
 interface Props {
-  studyListItem: StudyListItem;
+  studyItem: StudyModify;
 }
 
 
 function App() {
-
-  const studyItem = studyListMock.find((item) => item.studyNumber === 1);
-
-  if (!studyItem) {
-    return null;
-  }
   
   // //        state: 현재 페이지 url 상태       //
   // const { pathname } = useLocation();
@@ -39,6 +35,20 @@ function App() {
   //   if (!searchDivRef.current) return;
   //   searchDivRef.current.scrollIntoView({ behavior: 'smooth' });
   // }
+
+
+  const [study, setStudy] = useState<StudyModify | null>(null);
+
+  const getModifyStudyResponse = (responseBody: any) => {
+
+    setStudy({...responseBody})
+
+  }
+
+
+  useEffect(() => {
+    getModifyStudyRequest(1).then(getModifyStudyResponse);
+  }, []);
   
   return (
     <div>
@@ -49,7 +59,7 @@ function App() {
       {/* <HostToDoListManageModal /> */}
       {/* <ToDoListModal /> */}
       {/* <StudyDateModal /> */}
-      <StudyModifyModal />
+      {study !== null && <StudyModifyModal studyItem={study}/>}
       {/* <ManinpagePriavateStudyRoomJoinModal/> */}
       {/* <Header onSearchMoveClickHandler={onSearchMoveClickHandler} />
       <Main ref={searchDivRef} />

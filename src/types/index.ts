@@ -1,6 +1,7 @@
 import User from "./user.interface";
 import LoginUser from "./login-user.interface";
 import MyToDoItem from "./my-to-do-list-item.interface";
+import StudyModify from "./study-modify-interface";
 import StudyListItem from "./study-list";
 import UserGradeList from "./user.grade.interface";
 import MaterialListItem from "./study-material-list.interface";
@@ -20,6 +21,7 @@ export type {
   User,
   LoginUser,
   MyToDoItem,
+  StudyModify,
   StudyListItem,
   UserGradeList,
   MaterialListItem,

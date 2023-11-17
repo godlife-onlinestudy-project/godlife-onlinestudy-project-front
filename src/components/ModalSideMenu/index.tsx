@@ -4,11 +4,11 @@ import StudyModifyModal from 'views/StudyModifyModal';
 import MemberManageModal from 'views/MemberManageModal';
 import StudyDate from 'views/StudyDateModal';
 import MaterialManageModal from 'views/MaterialManageModal';
-import { StudyListItem } from 'types';
+import { StudyListItem, StudyModify } from 'types';
 function ModalSideMenu() {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [studyListItem, setStudyListItem] = useState<StudyListItem | null>(null);
+  const [studyListItem, setStudyListItem] = useState<StudyModify | null>(null);
 
   const onMenuClickHandler = (event: string) => {
     setSelectedOption(event);
@@ -34,7 +34,7 @@ function ModalSideMenu() {
         <div className='menu-material-default' onClick={() => onMenuClickHandler('material')}>{'자료관리'}</div>
     }
 
-    {selectedOption === 'study' && studyListItem && <StudyModifyModal studyListItem={studyListItem} />}
+    {selectedOption === 'study' && studyListItem && <StudyModifyModal studyItem={studyListItem} />}
     {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler}/>}
     {selectedOption === 'studyDate' && <StudyDate />}
     {selectedOption === 'material' && <MaterialManageModal modalCloseHandler={modalCloseHandler}/>}
