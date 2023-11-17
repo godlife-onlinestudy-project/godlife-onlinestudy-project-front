@@ -93,13 +93,12 @@ export default function StudyCreate() {
         // const accessToken = cookies.accessToken;
         // if (!accessToken) return;
 
-        // const accessToken = cookies?.accessToken;
-
         // description : 스터디 제목 확인 //
         const checkedTitle = title.trim().length < 2;
         if (checkedTitle) {
             setTitleError(true);
             setTitleErrorMessage('최소 2글자 이상 입력해야 합니다.')
+            return;
         }
         
         setTitleError(false);
@@ -120,11 +119,12 @@ export default function StudyCreate() {
     const onClickPublicHandler = () => {
         setIsPublic(true);
         useStudyStore.setState({ isStudyPublic: true });
+        setStudyPrivatePassword(null);
     };
     const onClickPrivateHandler = () => {
-        setIsPublic(false);
         useStudyStore.setState({ isStudyPublic: false });
         const code = onGernerateRandomCode();
+        setIsPublic(false);
         setStudyPrivatePassword(code);
     };
     //          event handler: 사용자가 수정하면 코드 업데이트 이벤트 처리 / 8글자 까지만 적히게 처리         //

@@ -52,7 +52,7 @@ const useStudyStore = create<StudyStore>((set) => ({
     studyCategory3 : null,
 
     isStudyPublic : true,
-    studyPrivatePassword : '',                       
+    studyPrivatePassword : null,                       
     studyCoverImageUrl :'',
 
     studyNextStartDatetime : '',

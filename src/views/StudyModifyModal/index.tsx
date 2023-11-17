@@ -10,7 +10,7 @@ import { StudyListItem, StudyModify } from 'types';
 import { accessTokenMock, studyListMock } from 'mocks';
 import GetModifyStudyResponseDto from 'apis/response/study/get-modify-study-response.dto';
 import ResponseDto from 'apis/response';
-import { useUserStore } from 'stores';
+import { useStudyStore, useUserStore } from 'stores';
 
 //          interface: 스터디방 아이템 Props          //
 interface Props {
@@ -35,24 +35,12 @@ export default function StudyModifyModal({ studyItem }: Props) {
     const [studyNameLengthError, setStudyNameLenghtError] = useState<boolean>(false);
     //          state: 스터디 제목 변경 상태           //
     const [showChangeStudyName, setShowChangeStudyName] = useState<boolean>(false);
-
     //          state: 스터디 방 인원 에러 메세지 표시 상태          //
     const [showCountErrorMessage, setShowCountErrorMessage] = useState<boolean>(false);
 
     //          state:  이미지 input ref 상태           //
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    //          state : 공개방 선택 여부 상태       //
-    const [openRoomSelectionCheck, setOpenRoomSelectionCheck] = useState<boolean>(false);
-    //          state : 비공개방 선택 여부 상태       //
-    const [closeRoomSelectionCheck, setCloseRoomSelectionCheck] = useState<boolean>(false);
 
-   
-
-
-    // const initialStudyData: studyItem | undefined = studyListMock.find(
-    //     (study) => study.studyNumber === studyItem.studyNumber
-    // );
-    // // const [studyNumber, setStudyNumber] = useState<number>(initialStudyData?.studyNumber || 0);
     const [study, setStudy] = useState<StudyModify | null>(null);
     const [studyName, setStudyName] = useState<string>('');
     const [studyEndDate, setStudyEndDate] = useState<string>('');
@@ -60,8 +48,8 @@ export default function StudyModifyModal({ studyItem }: Props) {
     const [studyCategory1, setStudyCategory1] = useState<string>('');
     const [studyPublicCheck, setStudyPublicCheck] = useState<boolean>(true);
     const [studyPrivatePassword, setStudyPrivatePassword] = useState<string | null>('');
-     //          state : 스터디 커버 이미지 상태          //
-     const [studyCoverImageUrl, setStudyCoverImageUrl] = useState<string | null>('');
+    //          state : 스터디 커버 이미지 상태          //
+    const [studyCoverImageUrl, setStudyCoverImageUrl] = useState<string | null>('');
     const [isCreater, setIsCreater] = useState<boolean>(false);
 
     //          function: get modify study response 처리 함수          //
@@ -138,34 +126,28 @@ export default function StudyModifyModal({ studyItem }: Props) {
         return code;
     };
 
-    //          state: 코드 상태          //
-    const [code, setCode] = useState(onGernerateRandomCode());
+    // //          state: 코드 상태          //
+    // const [code, setCode] = useState(onGernerateRandomCode());
 
     //          event handler: 사용자가 수정하면 코드 업데이트 이벤트 처리 / 8글자 까지만 적히게 처리         //
     const onChangeCodeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const newCode = event.target.value;
         if (newCode.length <= 8) {
-            setCode(newCode);
+            setStudyPrivatePassword(newCode);
         }
     };
 
-    // event handler : 공개방 선택에 따른 비공개방 선택여부  처리 //
+    //          event handler: 공개방 선택에 따른 비공개방 선택여부 처리          //
     const onOpenRoomClickhandler = () => {
-        if (closeRoomSelectionCheck === true) {
-            setCloseRoomSelectionCheck(false);
-        }
-        setOpenRoomSelectionCheck(true);
-        return;
+        setStudyPublicCheck(true);
+        setStudyPrivatePassword(null);
     };
 
-    // event handler : 공개방 선택에 따른 비공개방 선택여부  처리 //
+    //          event handler: 비공개방 선택에 따른 공개방 선택여부 처리          //
     const onCloseRoomClickhandler = () => {
-        if (openRoomSelectionCheck === true) {
-            setOpenRoomSelectionCheck(false);
-        }
-        setCloseRoomSelectionCheck(true);
-        setCode(onGernerateRandomCode());
-        return;
+        setStudyPublicCheck(false);
+        const code = onGernerateRandomCode();
+        setStudyPrivatePassword(code);
     };
 
     //          event handler: 스터디 커버 이미지 클릭 이벤트 처리          //
@@ -183,7 +165,8 @@ export default function StudyModifyModal({ studyItem }: Props) {
 
     //           event handler: 아이콘 클릭 코드 복사 이벤트 처리           //
     const onClickCopyCodeHandler = () => {
-        navigator.clipboard.writeText(code);
+        if (studyPrivatePassword)
+        navigator.clipboard.writeText(studyPrivatePassword);
     };
     
     //           event handler: 스터디 종료일 이벤트 처리           //
@@ -203,23 +186,23 @@ export default function StudyModifyModal({ studyItem }: Props) {
 
     //           effect : 스터디 제목 길이 변경될때 마다 실행되는 함수           //
     useEffect(() => {
-        const length = studyName.length;
-
+        const length = studyName ? studyName.length : 0;
         if (length < 1) {
             setStudyNameLenghtError(false);
         }
-
+        
         if (length === 1) {
             setStudyNameLenghtError(true);
         }
-
+        
         if (length >= 2 && length <= 20) {
             setStudyNameLenghtError(false);
         }
-
+        
         setStudyNameCount(length);
     }, [studyName]);
-
+    
+    //           effect : studyItem이 바뀔 때마다 값 참조           //
     useEffect(() => {
         const { studyName, studyEndDate, studyPersonal, studyCategory1, studyPublicCheck, studyPrivatePassword, studyCoverImageUrl } = studyItem;
         setStudyName(studyName);
@@ -229,6 +212,7 @@ export default function StudyModifyModal({ studyItem }: Props) {
         setStudyPublicCheck(studyPublicCheck);
         setStudyPrivatePassword(studyPrivatePassword);
         setStudyCoverImageUrl(studyCoverImageUrl);
+        console.log(studyPublicCheck);
     }, [studyItem])
 
     //          render : 스터디 재설정 페이지 렌더링          //
@@ -268,20 +252,20 @@ export default function StudyModifyModal({ studyItem }: Props) {
                     </div>
                     <div className='study-open-container'>
                         <div className='study-open-title'>{'*스터디 공개방, 비공개방'}</div>
-                        {openRoomSelectionCheck ? (
+                        {studyPublicCheck ? (
                             <button className='study-open-select'>{'공개'}</button>
-                        ) : (
+                            ) : (
                             <button className='study-open' onClick={onOpenRoomClickhandler}>{'공개'}</button>
                         )}
                         <div className='study-close-box'>
-                            {closeRoomSelectionCheck ? (
+                            {!studyPublicCheck ? (
                                 <button className='study-close-select'>{'비공개'}</button>
-                            ) : (
+                                ) : (
                                 <button className='study-close' onClick={onCloseRoomClickhandler}>{'비공개'}</button>
                             )}
-                            {closeRoomSelectionCheck && (
+                            {!studyPublicCheck && studyPrivatePassword !== null && (
                                 <div className='study-close-password'>
-                                    <input className='study-close-password-write' type='text' value={code} onChange={onChangeCodeHandler} />
+                                    <input className='study-close-password-write' type='text' value={studyPrivatePassword} onChange={onChangeCodeHandler} />
                                     <div className='password-icon' onClick={onClickCopyCodeHandler}></div>
                                 </div>
                             )}

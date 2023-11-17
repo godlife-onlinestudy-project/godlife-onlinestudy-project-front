@@ -47,7 +47,7 @@ function App() {
 
 
   useEffect(() => {
-    getModifyStudyRequest(1).then(getModifyStudyResponse);
+    getModifyStudyRequest(4).then(getModifyStudyResponse);
   }, []);
   
   return (

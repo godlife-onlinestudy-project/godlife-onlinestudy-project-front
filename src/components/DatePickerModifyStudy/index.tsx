@@ -35,7 +35,7 @@ const DatePickerModifyStudyComponent  = ({value, onChange} : DatePickerModifyStu
     return (
     <div className='datepicker-modify-study-box'>
       <DatePicker className='modify-study-end-date' showPopperArrow={false} locale={ko} 
-      selected={endDate} onChange={endDateHandle} closeOnScroll={true} minDate={selectedDate} dateFormat='yyyy. MM. dd' value={value} />
+      selected={endDate} onChange={endDateHandle} closeOnScroll={true} minDate={selectedDate} dateFormat='yyyy. MM. dd' value={endDate?.toLocaleDateString('ko-KR')} />
     </div>
   );
 }
