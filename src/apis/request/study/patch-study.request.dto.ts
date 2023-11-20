@@ -4,6 +4,6 @@ export default interface PatchStudyRequestDto {
     studyPersonal: number;
     studyCategory1: string;
     studyPublicCheck: boolean;
-    studyPrivatePasword: string | null;
+    studyPrivatePassword: string | null;
     studyCoverImageUrl: string | null;
 }

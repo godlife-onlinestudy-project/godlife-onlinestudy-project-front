@@ -11,9 +11,6 @@ interface Props {
 //          component: DropDown 스터디 생성 카테고리 컴포넌트          //
 const DropDownStudyCreateCategory = ({ onCategoryChange }: Props) => {
 
-    //          state: useStudyStore 요소 전역 상태          //
-    const { studyCategory1, studyCategory2, studyCategory3 } = useStudyStore();
-
     //          state: 박스 상태          //
     const [isOpen, setIsOpen] = useState(false);
     //          state: 박스 선택 상태          //
@@ -25,20 +22,6 @@ const DropDownStudyCreateCategory = ({ onCategoryChange }: Props) => {
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-
-    // //          function: 카테고리1, 카테고리2, 카테고리3 처리 함수         //
-    // const getCategoryByIndex = (index: number) => {
-    //     switch (index) {
-    //         case 0:
-    //             return studyCategory1;
-    //         case 1:
-    //             return studyCategory2 || '';
-    //         case 2:
-    //             return studyCategory3 || '';
-    //         default:
-    //             return '';
-    //     }
-    // };
 
     //          effect: 박스가 아닌 다른 곳을 클릭하면 박스가 사라지게 하기          //
     useEffect(() => {

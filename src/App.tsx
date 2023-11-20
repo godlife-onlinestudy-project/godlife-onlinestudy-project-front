@@ -47,7 +47,7 @@ function App() {
 
 
   useEffect(() => {
-    getModifyStudyRequest(4).then(getModifyStudyResponse);
+    getModifyStudyRequest(3).then(getModifyStudyResponse);
   }, []);
   
   return (
@@ -59,7 +59,9 @@ function App() {
       {/* <HostToDoListManageModal /> */}
       {/* <ToDoListModal /> */}
       {/* <StudyDateModal /> */}
-      {study !== null && <StudyModifyModal studyItem={study}/>}
+      <Routes>
+        <Route path='/:studyNumber' element={<StudyModifyModal studyItem={study}/>}/>
+      </Routes>
       {/* <ManinpagePriavateStudyRoomJoinModal/> */}
       {/* <Header onSearchMoveClickHandler={onSearchMoveClickHandler} />
       <Main ref={searchDivRef} />

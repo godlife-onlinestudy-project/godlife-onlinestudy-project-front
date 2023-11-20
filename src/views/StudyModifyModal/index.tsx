@@ -11,10 +11,12 @@ import { accessTokenMock, studyListMock } from 'mocks';
 import GetModifyStudyResponseDto from 'apis/response/study/get-modify-study-response.dto';
 import ResponseDto from 'apis/response';
 import { useStudyStore, useUserStore } from 'stores';
+import { PatchStudyRequestDto } from 'apis/request/study';
+import { patchStudyRequest } from 'apis';
 
 //          interface: 스터디방 아이템 Props          //
 interface Props {
-    studyItem: StudyModify;
+    studyItem: StudyModify | null;
 }
 
 //          component : 스터디 방 재설정 모달 페이지          //
@@ -32,7 +34,7 @@ export default function StudyModifyModal({ studyItem }: Props) {
     //          state : 스터디 제목 글자 갯수          //
     const [studyNameCount, setStudyNameCount] = useState<number>(0);
     //          state : 스터디 제목 글자 길이 2에러          //
-    const [studyNameLengthError, setStudyNameLenghtError] = useState<boolean>(false);
+    const [studyNameLengthError, setStudyNameLengthError] = useState<boolean>(false);
     //          state: 스터디 제목 변경 상태           //
     const [showChangeStudyName, setShowChangeStudyName] = useState<boolean>(false);
     //          state: 스터디 방 인원 에러 메세지 표시 상태          //
@@ -44,18 +46,19 @@ export default function StudyModifyModal({ studyItem }: Props) {
     const [study, setStudy] = useState<StudyModify | null>(null);
     const [studyName, setStudyName] = useState<string>('');
     const [studyEndDate, setStudyEndDate] = useState<string>('');
-    const [studyPersonal, setStudyPerosnal] = useState<number>(0);
+    const [studyPersonal, setStudyPersonal] = useState<number>(0);
     const [studyCategory1, setStudyCategory1] = useState<string>('');
     const [studyPublicCheck, setStudyPublicCheck] = useState<boolean>(true);
     const [studyPrivatePassword, setStudyPrivatePassword] = useState<string | null>('');
     //          state : 스터디 커버 이미지 상태          //
     const [studyCoverImageUrl, setStudyCoverImageUrl] = useState<string | null>('');
     const [isCreater, setIsCreater] = useState<boolean>(false);
+    
 
     //          function: get modify study response 처리 함수          //
     const getStudyModifyResponse = (responseBody: GetModifyStudyResponseDto | ResponseDto) => {
         const { code } = responseBody;
-        if (code == 'NS') alert('존재하지 않는 스터디입니다.');
+        if (code === 'NS') alert('존재하지 않는 스터디입니다.');
         if (code === 'DBE') alert('데이터베이스 오류입니다.');
         if (code !== 'SU') {
             return;
@@ -69,9 +72,16 @@ export default function StudyModifyModal({ studyItem }: Props) {
         setIsCreater(isCreater);
     };
 
-    //          event handler: 스터디 제목 변경 버튼 클릭 이벤트 처리          //
-    const onChangenStudyNameButtonClickHandler = () => {
-        setShowChangeStudyName(!showChangeStudyName);
+    //          function: patch modify study response 처리 함수          //
+    const patchStudyModifyResponse = (code: string) => {
+        if (code === 'NS') alert('존재하지 않는 스터디입니다.');
+        if (code === 'DBE') alert('데이터베이스 오류입니다.');
+        if (code === 'NP') alert('권한이 없습니다.');
+        if (code !== 'SU') {
+            return;
+        }
+
+        if (!studyNumber) return;
     };
 
     //          event handler: 스터디 제목 변경 이벤트 처리          //
@@ -81,19 +91,27 @@ export default function StudyModifyModal({ studyItem }: Props) {
         if (length > 20) {
             return;
         }
-        if (length === 1) setStudyNameLenghtError(true);
-        setStudyName(studyName);
+        if (length === 1) setStudyNameLengthError(true);
+        setStudyName(title);
 
         setStudyNameCount(length);
     };
 
+    //          state: 초기에 설정된 스터디 인원 숫자 상태          //
+    const [initialStudyPersonal, setInitialStudyPersonal] = useState<number>(0);
+
+    //          effect: 초기에 설정된 스터디 인원 값 저장          //
+    useEffect(() => {
+        setInitialStudyPersonal(studyPersonal);
+    }, [])
+    
     //          event handler: 참여 인원 추가          //
     const onPlusCountHandler = () => {
         let count = studyPersonal;
 
         if (count < 20) {
             count++;
-            setStudyPerosnal(count);
+            setStudyPersonal(count);
         } else return;
 
         setShowCountErrorMessage(false);
@@ -101,17 +119,17 @@ export default function StudyModifyModal({ studyItem }: Props) {
 
     //          event handler: 참여 인원 감소 처리          //
     const onMinusCountHandler = () => {
-        const minValue = studyPersonal || 0;
+        const minValue = initialStudyPersonal;
     // description: 방참여 인원보다 내려가지 않도록 처리 //
         if (studyPersonal > minValue) {
             let count = studyPersonal;
             count--;
-            setStudyPerosnal(count);
-
+            setStudyPersonal(count);
+            
             setShowCountErrorMessage(false);
         } else {
             setShowCountErrorMessage(true);
-    }
+        }
     };
 
     //          event handler: 랜덤 코드 이벤트 처리          //
@@ -125,9 +143,6 @@ export default function StudyModifyModal({ studyItem }: Props) {
         }
         return code;
     };
-
-    // //          state: 코드 상태          //
-    // const [code, setCode] = useState(onGernerateRandomCode());
 
     //          event handler: 사용자가 수정하면 코드 업데이트 이벤트 처리 / 8글자 까지만 적히게 처리         //
     const onChangeCodeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -149,7 +164,7 @@ export default function StudyModifyModal({ studyItem }: Props) {
         const code = onGernerateRandomCode();
         setStudyPrivatePassword(code);
     };
-
+    
     //          event handler: 스터디 커버 이미지 클릭 이벤트 처리          //
     const onStudyCoverImageClickHandler = () => {
         if (!fileInputRef.current) return;
@@ -160,7 +175,7 @@ export default function StudyModifyModal({ studyItem }: Props) {
     const onStudyCoverImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files || !event.target.files.length) return;
         const imageUrl = URL.createObjectURL(event.target.files[0]);
-        setStudyCoverImageUrl(imageUrl); // 이미지 업데이트 추가
+        setStudyCoverImageUrl(imageUrl);
     };
 
     //           event handler: 아이콘 클릭 코드 복사 이벤트 처리           //
@@ -181,22 +196,34 @@ export default function StudyModifyModal({ studyItem }: Props) {
 
     //           event handler: 스터디 재설정 이벤트 처리           //
     const onSaveChangesClickHandler = () => {
-        alert('스터디 재설정 완료');
+        if (!studyNumber) return;
+        const checkedTitle = studyName.trim().length < 2;
+        if (checkedTitle) {
+            return;
+        }
+
+        const requestBody: PatchStudyRequestDto = {
+            studyName, studyEndDate, studyPersonal, studyCategory1, 
+            studyPublicCheck, studyPrivatePassword, studyCoverImageUrl
+        }
+        patchStudyRequest(requestBody, studyNumber, accessTokenMock).then(patchStudyModifyResponse);
+
+        alert('스터디 재설정 완료!');
     };
 
     //           effect : 스터디 제목 길이 변경될때 마다 실행되는 함수           //
     useEffect(() => {
         const length = studyName ? studyName.length : 0;
         if (length < 1) {
-            setStudyNameLenghtError(false);
+            setStudyNameLengthError(false);
         }
         
         if (length === 1) {
-            setStudyNameLenghtError(true);
+            setStudyNameLengthError(true);
         }
         
         if (length >= 2 && length <= 20) {
-            setStudyNameLenghtError(false);
+            setStudyNameLengthError(false);
         }
         
         setStudyNameCount(length);
@@ -204,16 +231,18 @@ export default function StudyModifyModal({ studyItem }: Props) {
     
     //           effect : studyItem이 바뀔 때마다 값 참조           //
     useEffect(() => {
+        if (!studyItem) return;
         const { studyName, studyEndDate, studyPersonal, studyCategory1, studyPublicCheck, studyPrivatePassword, studyCoverImageUrl } = studyItem;
         setStudyName(studyName);
         setStudyEndDate(studyEndDate);
-        setStudyPerosnal(studyPersonal);
+        setStudyPersonal(studyPersonal);
         setStudyCategory1(studyCategory1);
         setStudyPublicCheck(studyPublicCheck);
         setStudyPrivatePassword(studyPrivatePassword);
         setStudyCoverImageUrl(studyCoverImageUrl);
-        console.log(studyPublicCheck);
-    }, [studyItem])
+    }, [studyItem]);
+
+    if (!studyItem) return (<></>)
 
     //          render : 스터디 재설정 페이지 렌더링          //
     return (
