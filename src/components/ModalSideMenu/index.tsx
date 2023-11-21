@@ -35,7 +35,7 @@ function ModalSideMenu() {
     }
 
     {selectedOption === 'study' && studyListItem && <StudyModifyModal studyItem={studyListItem} />}
-    {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler}/>}
+    {/* {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler}/>} */}
     {selectedOption === 'studyDate' && <StudyDate />}
     {selectedOption === 'material' && <MaterialManageModal modalCloseHandler={modalCloseHandler}/>}
     </div>

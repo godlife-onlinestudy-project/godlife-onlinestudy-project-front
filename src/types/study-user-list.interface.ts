@@ -1,7 +1,5 @@
-export default interface StudyUserListItem{
-    studyNumber : number;
-    studyUserEmail : string;
+export default interface StudyUserListItem {
+    userProfileImageUrl : string | null;
+    userNickname : string;
     studyGrade : string;
-    studyProfileImageUrl : string | null;
-    studyNickName : string;
 }

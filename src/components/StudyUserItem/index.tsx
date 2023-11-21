@@ -10,7 +10,7 @@ interface Props {
 export default function UserListItem({userListItem}: Props){
   
     //          state: Properties                               //
-    const { studyNumber, studyUserEmail, studyGrade,studyProfileImageUrl,studyNickName} = userListItem;
+    const {studyGrade, userProfileImageUrl, userNickname} = userListItem;
 
 
 
@@ -36,9 +36,9 @@ export default function UserListItem({userListItem}: Props){
                 }
             </div>
             <div className="user-bottom-profile-box">
-             <div className='comment-list-profile-image' style={{ backgroundImage: `url(${studyProfileImageUrl ? studyProfileImageUrl : DefaultProfileImage})` }}></div>
+             <div className='comment-list-profile-image' style={{ backgroundImage: `url(${userProfileImageUrl? userProfileImageUrl: DefaultProfileImage})` }}></div>
             </div>
-            <div className="user-bottom-nickname">{studyNickName}</div>
+            <div className="user-bottom-nickname">{userNickname}</div>
         </div>
     </div>);
 }

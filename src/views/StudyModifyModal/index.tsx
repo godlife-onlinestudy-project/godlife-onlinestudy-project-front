@@ -8,7 +8,7 @@ import DatePickerModifyStudyComponent from 'components/DatePickerModifyStudy';
 import DropDownModifyStudyCategory from 'components/DropdownModifyStudyCategory';
 import { StudyListItem, StudyModify } from 'types';
 import { accessTokenMock, studyListMock } from 'mocks';
-import GetModifyStudyResponseDto from 'apis/response/study/get-modify-study-response.dto';
+import GetModifyStudyResponseDto from 'apis/response/study/get-modify-study.response.dto';
 import ResponseDto from 'apis/response';
 import { useStudyStore, useUserStore } from 'stores';
 import { PatchStudyRequestDto } from 'apis/request/study';
