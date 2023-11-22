@@ -38,38 +38,12 @@
 
 .menu-room:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-room.selectedOption {
+.selected-menu-room {
     background-color: rgba(24, 160, 251, 1);
-}
-
-.menu-room-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
-}
-
-.menu-room-default:hover {
-    cursor: pointer;
+    font-weight: 700;
 }
 
 .menu-member {
@@ -98,38 +72,12 @@
 
 .menu-member:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-member.selectedOption {
+.selected-menu-member {
     background-color: rgba(24, 160, 251, 1);
-}
-
-.menu-member-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
-}
-
-.menu-member-default:hover {
-    cursor: pointer;
+    font-weight: 700;
 }
 
 .menu-study {
@@ -158,34 +106,12 @@
 
 .menu-study:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-study.selectedOption {
+.selected-menu-study {
     background-color: rgba(24, 160, 251, 1);
-}
-
-.menu-study-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
+    font-weight: 700;
 }
 
 .menu-material {
@@ -210,43 +136,14 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.345px;
-
 }
 
 .menu-material:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-material.selectedOption {
+.selected-menu-material {
     background-color: rgba(24, 160, 251, 1);
-}
-
-
-.menu-material-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
-
-}
-
-.menu-material-default:hover {
-    cursor: pointer;
+    font-weight: 700;
 }

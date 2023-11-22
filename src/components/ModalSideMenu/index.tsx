@@ -39,15 +39,19 @@ function ModalSideMenu() {
         modalCloseHandler();
     };
 
+    const selectedMenuItemStyle = {
+        backgroundColor: 'rgba(24, 160, 251, 1);' // CSS와 동일한 색상으로 변경하세요
+    };
+
     //           render: 사이드 모달 메뉴 컴포넌트 렌더링           //
     return (
         <div id='menu-sidebar-container'>
 
             <div className='menu-sidebar'>
-                <div className='menu-room' onClick={() => onMenuClickHandler('study')}>{'방 설정'}</div>
-                <div className='menu-member' onClick={() => onMenuClickHandler('member')}>{'멤버 관리'}</div>
-                <div className='menu-study' onClick={() => onMenuClickHandler('studyDate')}>{'다음 스터디 설정'}</div>
-                <div className='menu-material' onClick={() => onMenuClickHandler('material')}>{'자료관리'}</div>
+                <div className={`menu-room ${selectedOption === 'study' ? 'selected-menu-room' : ''}`} onClick={() => onMenuClickHandler('study')}>{'방 설정'}</div>
+                <div className={`menu-member ${selectedOption === 'member' ? 'selected-menu-member' : ''}`} onClick={() => onMenuClickHandler('member')}>{'멤버 관리'}</div>
+                <div className={`menu-study ${selectedOption === 'studyDate' ? 'selected-menu-study' : ''}`} onClick={() => onMenuClickHandler('studyDate')}>{'다음 스터디 설정'}</div>
+                <div className={`menu-material ${selectedOption === 'material' ? 'selected-menu-material' : ''}`} onClick={() => onMenuClickHandler('material')}>{'자료관리'}</div>
             </div>
 
             <div className='menu-bar'>
