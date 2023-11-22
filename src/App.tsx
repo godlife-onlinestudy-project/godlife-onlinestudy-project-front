@@ -17,6 +17,7 @@ import MemberManageModal from 'views/MemberManageModal';
 import MyPage from 'views/MyPage';
 import { StudyModify, StudyUserListItem } from 'types';
 import { getModifyStudyRequest, getStudyUserListRequest } from 'apis';
+import ModalSideMenu from 'components/ModalSideMenu';
 
 interface Props {
   studyItem: StudyModify;
@@ -56,7 +57,7 @@ function App() {
       {/* <MyPage /> */}
       {/* <MemberManageModal modalCloseHandler={modalCloseHandler}/> */}
 
-      <MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} />
+      {/* <MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} /> */}
       {/* <Routes>
         <Route path='/:studyNumber/study-user-list' element={<MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber}/>} />
       </Routes> */}
@@ -65,7 +66,7 @@ function App() {
       {/* <NoticeModal /> */}
       {/* <HostToDoListManageModal /> */}
       {/* <ToDoListModal /> */}
-      {/* <StudyDateModal /> */}
+      <ModalSideMenu />
       {/* <Routes>
         <Route path='/:studyNumber' element={<StudyModifyModal studyItem={study}/>}/>
       </Routes> */}

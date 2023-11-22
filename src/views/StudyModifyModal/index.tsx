@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
 
-import ModalSideMenu from 'components/ModalSideMenu';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
 import DatePickerModifyStudyComponent from 'components/DatePickerModifyStudy';
@@ -253,7 +252,6 @@ export default function StudyModifyModal({ studyItem }: Props) {
     return (
         <div id='reset-wrapper'>
             <div className='reset-card'>
-                <ModalSideMenu />
                 <div className='reset-button-box'>
                     <button type='button' className='modal-close-button'>X</button>
                 </div>

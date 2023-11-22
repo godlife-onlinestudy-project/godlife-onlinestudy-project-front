@@ -1,10 +1,15 @@
-.menu-sidebar {
-    top: 58px;
-    left: -172px;
-    position: absolute;
+#menu-sidebar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    width: 170px;
-    height: 260px;
+    height: 100vh;
+}
+
+.menu-sidebar {
+    margin-top: -500px;
+    display: flex;
+    flex-direction: column;
 }
 
 .menu-room {
@@ -14,7 +19,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -35,6 +40,10 @@
     cursor: pointer;
 }
 
+.menu-room.selectedOption {
+    background-color: rgba(24, 160, 251, 1);
+}
+
 .menu-room-default {
     width: 170px;
     height: 65px;
@@ -42,7 +51,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(24, 160, 251, 1);
 
     display: flex;
     align-items: center;
@@ -70,7 +79,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -89,6 +98,10 @@
 
 .menu-member:hover {
     cursor: pointer;
+}
+
+.menu-member.selectedOption {
+    background-color: rgba(24, 160, 251, 1);
 }
 
 .menu-member-default {
@@ -126,7 +139,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -145,6 +158,10 @@
 
 .menu-study:hover {
     cursor: pointer;
+}
+
+.menu-study.selectedOption {
+    background-color: rgba(24, 160, 251, 1);
 }
 
 .menu-study-default {
@@ -178,8 +195,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
-    ;
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -199,6 +215,10 @@
 
 .menu-material:hover {
     cursor: pointer;
+}
+
+.menu-material.selectedOption {
+    background-color: rgba(24, 160, 251, 1);
 }
 
 
