@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PatchStudyRequestDto, PostStudyRequestDto } from './request/study';
-import { GetStudyUserListResponseDto, PatchStudyResponseDto, PostStudyResponseDto } from './response/study';
+import { DeleteStudyUserListResponseDto, GetStudyUserListResponseDto, PatchStudyResponseDto, PostStudyResponseDto } from './response/study';
 import ResponseDto from './response';
 import GetModifyStudyResponseDto from './response/study/get-modify-study.response.dto';
 
@@ -19,11 +19,14 @@ const authorization = (token: string) => {
 // description: get modify study API end point //
 const GET_STUDY_MODIFY_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}`;
 // description: get study user list API end point //
-const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}/study-user-list`
+const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}/study-user-list`;
 // description: post study API end point //
 const POST_STUDY_URL = () => `${API_DOMAIN}/main/home`;
 // description: patch study API end point //
 const PATCH_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}`;
+// description: delete study user list API end point //
+const DELETE_STUDY_USER_LIST_URL = (studyNumber: string | number, userEmail: string) => `${API_DOMAIN}/main/home/${studyNumber}/${userEmail}/study-user-list`;
+
 
 // description: get modify study request //
 export const getModifyStudyRequest = async (studyNumber: string | number) => {
@@ -40,8 +43,8 @@ export const getModifyStudyRequest = async (studyNumber: string | number) => {
 };
 
 // description: get study user list request //
-export const getStudyUserListRequest = async (studyNumber: string | number) => {
-    const result = await axios.get(GET_STUDY_USER_LIST_URL(studyNumber))
+export const getStudyUserListRequest = async (studyNumber: string | number, token: string) => {
+    const result = await axios.get(GET_STUDY_USER_LIST_URL(studyNumber), authorization(token))
     .then(response => {
         const responseBody: GetStudyUserListResponseDto = response.data;
         return responseBody;
@@ -72,8 +75,24 @@ export const postStudyRequest = async (requestBody: PostStudyRequestDto, token: 
 // description: patch study request //
 export const patchStudyRequest = async (requestBody: PatchStudyRequestDto, studyNumber: string | number, token: string) => {
     const result = await axios.patch(PATCH_STUDY_URL(studyNumber), requestBody, authorization(token))
+    .then(response => {
+        const responseBody: PatchStudyResponseDto = response.data;
+        const { code } = responseBody;
+        return code;
+    })
+    .catch(error => {
+        const responseBody: ResponseDto = error.response.data;
+        const { code } = responseBody;
+        return code;
+    });
+    return result;
+};
+
+// description: delete study user list request //
+export const deleteStudyUserListRequest = async (studyNumber: string | number, userEmail: string, token: string) => {
+    const result = await axios.delete(DELETE_STUDY_USER_LIST_URL(studyNumber, userEmail), authorization(token))
         .then(response => {
-            const responseBody: PatchStudyResponseDto = response.data;
+            const responseBody: DeleteStudyUserListResponseDto = response.data;
             const { code } = responseBody;
             return code;
         })
@@ -83,4 +102,4 @@ export const patchStudyRequest = async (requestBody: PatchStudyRequestDto, study
             return code;
         });
     return result;
-};
+}

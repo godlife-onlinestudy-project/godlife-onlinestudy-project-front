@@ -9,6 +9,7 @@ function ModalSideMenu() {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [studyListItem, setStudyListItem] = useState<StudyModify | null>(null);
+  const [studyNumber, setStudyNumber] = useState<string>('');
 
   const onMenuClickHandler = (event: string) => {
     setSelectedOption(event);
@@ -35,7 +36,7 @@ function ModalSideMenu() {
     }
 
     {selectedOption === 'study' && studyListItem && <StudyModifyModal studyItem={studyListItem} />}
-    {/* {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler}/>} */}
+    {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber}/>}
     {selectedOption === 'studyDate' && <StudyDate />}
     {selectedOption === 'material' && <MaterialManageModal modalCloseHandler={modalCloseHandler}/>}
     </div>

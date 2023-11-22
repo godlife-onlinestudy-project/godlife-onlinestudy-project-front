@@ -49,27 +49,17 @@ function App() {
   // });
   const [show, setShow] = useState<boolean>(false);
   const modalCloseHandler = () => setShow(false);
-
-  const { studyNumber } = useParams<{studyNumber: string }>();
-
-  const [studyUserList, setStudyUserList] = useState<StudyUserListItem[]>([]);
-  const getStudyUserListResponse = (responseBody: any) => {
-        setStudyUserList({...responseBody})
-    }
-    useEffect(() => {
-        if (studyNumber !== undefined) {
-        getStudyUserListRequest(studyNumber).then(getStudyUserListResponse);
-    }
-    }, [studyNumber]);
+  const [studyNumber, setStudyNumber] = useState<string>('4');
   
   return (
     <div>
       {/* <MyPage /> */}
       {/* <MemberManageModal modalCloseHandler={modalCloseHandler}/> */}
+
       <MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} />
-      <Routes>
+      {/* <Routes>
         <Route path='/:studyNumber/study-user-list' element={<MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber}/>} />
-      </Routes>
+      </Routes> */}
       {/* <StudyCreate /> */}
       {/* <HostNoticeManageModal /> */}
       {/* <NoticeModal /> */}

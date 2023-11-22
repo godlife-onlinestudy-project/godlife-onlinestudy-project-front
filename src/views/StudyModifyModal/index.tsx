@@ -35,25 +35,30 @@ export default function StudyModifyModal({ studyItem }: Props) {
     const [studyNameCount, setStudyNameCount] = useState<number>(0);
     //          state : 스터디 제목 글자 길이 2에러          //
     const [studyNameLengthError, setStudyNameLengthError] = useState<boolean>(false);
-    //          state: 스터디 제목 변경 상태           //
-    const [showChangeStudyName, setShowChangeStudyName] = useState<boolean>(false);
     //          state: 스터디 방 인원 에러 메세지 표시 상태          //
     const [showCountErrorMessage, setShowCountErrorMessage] = useState<boolean>(false);
 
     //          state:  이미지 input ref 상태           //
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-
+    
+    //          state:  스터디 방 상태           //
     const [study, setStudy] = useState<StudyModify | null>(null);
+    //          state:  스터디 이름 상태           //
     const [studyName, setStudyName] = useState<string>('');
+    //          state:  스터디 종료일 상태           //
     const [studyEndDate, setStudyEndDate] = useState<string>('');
+    //          state:  스터디 인원 설정 상태           //
     const [studyPersonal, setStudyPersonal] = useState<number>(0);
+    //          state:  스터디 카테고리 상태           //
     const [studyCategory1, setStudyCategory1] = useState<string>('');
+    //          state:  스터디 공개/비공개 여부 상태           //
     const [studyPublicCheck, setStudyPublicCheck] = useState<boolean>(true);
+    //          state:  스터디 비공개 비밀번호 상태           //
     const [studyPrivatePassword, setStudyPrivatePassword] = useState<string | null>('');
     //          state : 스터디 커버 이미지 상태          //
     const [studyCoverImageUrl, setStudyCoverImageUrl] = useState<string | null>('');
+    //          state : 스터디 만든 유저 상태          //
     const [isCreater, setIsCreater] = useState<boolean>(false);
-    
 
     //          function: get modify study response 처리 함수          //
     const getStudyModifyResponse = (responseBody: GetModifyStudyResponseDto | ResponseDto) => {

@@ -4,7 +4,7 @@ const userGradeListMock: UserGradeList[] = [
     {
         userNickname: '힘가둑12345',
         userProfileImageUrl: 'https://post-phinf.pstatic.net/MjAxODExMTZfMjY3/MDAxNTQyMzI4OTA4NDA0.rU5IsgGU93vruo75AJaQQPubrmEqWOEtsICOF050V_0g.XY7ATCDs20_h7QhP2SqHwBFGcRqpQeYirMaiFyxUt3Eg.JPEG/2-20181116-092159.jpg?type=w1200',
-        studyGrade: '방장'
+        studyGrade: '방장',
     },
     {
         userNickname: '힘가둑1',
