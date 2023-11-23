@@ -1,6 +1,6 @@
 import './style.css';
 import {  StudyMaterialCommentListItem } from 'types';
-import DefaultProfileImage from 'assets/default-profile-image.png';
+import DefaultProfileImage from 'assets/default-user-icon.png';
 import  dayjs from 'dayjs';
 import { ChangeEvent, useState, useRef, KeyboardEvent, useEffect } from 'react';
 import { MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE } from 'constant';

@@ -656,7 +656,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/king-icon.png);    
+    background-image: url(assets/crown-icon.png);    
     background-position: 50% 50%;
     background-size: 100% 100%;
 }
@@ -667,7 +667,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/normal-icon.png);
+    background-image: url(assets/sprout-icon.png);
     background-position: 50% 50%;
     background-size: 100% 100%;   
 }
@@ -1014,7 +1014,7 @@
     top: 5px;
     right: 5px;
 
-    background-image: url(assets/elimate-icon.png);
+    /* background-image: url(assets/elimate-icon.png); */
     background-position: 50% 50%;
     background-size: 100% 100%;
 }
@@ -1212,7 +1212,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/king-icon.png);    
+    background-image: url(assets/crown-icon.png);    
     background-position: 50% 50%;
     background-size: 100% 100%;
 }
@@ -1223,7 +1223,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/normal-icon.png);
+    background-image: url(assets/sprout-icon.png);
     background-position: 50% 50%;
     background-size: 100% 100%; 
 }

@@ -1,7 +1,7 @@
 
 import { StudyUserListItem } from 'types';
 import './style.css';
-import DefaultProfileImage from 'assets/default-profile-image.png';
+import DefaultProfileImage from 'assets/default-user-icon.png';
 
 interface Props {
     userListItem  : StudyUserListItem;

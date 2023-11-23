@@ -18,6 +18,8 @@ import MyPage from 'views/MyPage';
 import { StudyModify, StudyUserListItem } from 'types';
 import { getModifyStudyRequest, getStudyUserListRequest } from 'apis';
 import ModalSideMenu from 'components/ModalSideMenu';
+import Service from 'views/Service';
+import PeerJsComponent from 'components/PeerJs';
 
 interface Props {
   studyItem: StudyModify;
@@ -66,7 +68,7 @@ function App() {
       {/* <NoticeModal /> */}
       {/* <HostToDoListManageModal /> */}
       {/* <ToDoListModal /> */}
-      <ModalSideMenu />
+      {/* <ModalSideMenu /> */}
       {/* <Routes>
         <Route path='/:studyNumber' element={<StudyModifyModal studyItem={study}/>}/>
       </Routes> */}
@@ -74,6 +76,8 @@ function App() {
       {/* <Header onSearchMoveClickHandler={onSearchMoveClickHandler} />
       <Main ref={searchDivRef} />
       <Footer /> */}
+      {/* <Service /> */}
+      <PeerJsComponent />
     </div>
   );
 }
