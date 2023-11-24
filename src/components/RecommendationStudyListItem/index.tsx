@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './style.css';
-import { RecommendationStudyRoomItem } from "../../types";
+import { RecommendationStudyRoomItem, SearchStudyRoomItem } from "../../types";
 import DefaultStudyCoverImage from "../../assets/study-default-icon.png";
 import { useNavigate } from "react-router-dom";
 import { STUDYROOM_DETAIL_PATH } from "../../constant";
@@ -8,7 +8,7 @@ import ManinpagePublicStudyRoomJoinModal from "views/modal/MainpagePublicStudyRo
 
 //              interface: 추천 스터디 Top5 리스트 아이템 컴포넌트 Props               //
 interface Props {
-    recommendationStudyRoomItem: RecommendationStudyRoomItem;
+    recommendationStudyRoomItem: RecommendationStudyRoomItem
 }
 
 //              component: 추천 스터디 Top5 리스트 아이템 컴포넌트             //

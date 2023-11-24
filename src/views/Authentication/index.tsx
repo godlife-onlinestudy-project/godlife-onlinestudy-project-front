@@ -9,6 +9,8 @@ import ResponseDto from 'apis/response';
 import { MAIN_PATH } from 'constant';
 import { SignInEmailCheckRequestDto, SignInRequestDto, SignUpRequestDto } from 'apis/request/auth';
 import { signInEmailCheckRequest, signInRequest, signUpRequest } from 'apis';
+import DropDownModifyStudyCategory from 'components/DropdownModifyStudyCategory';
+import DropDownSignInCategory from 'components/DropdownSignUpCategory';
 
 export default function Authentication() {
 
@@ -698,7 +700,10 @@ export default function Authentication() {
                     setNicknameErrorMessage('');
                 }
         }
-
+        //           event handler: 스터디 카테고리 변경 이벤트 처리           //
+        const onStudyCategory1Change = (category: string) => {
+            setCategory(category);
+        };
 
         //          event handler: 이메일 인풋 버튼 아이콘 클릭 이벤트 처리          //
         const onEmailReWritingIconClickHandler = () => {
@@ -880,8 +885,8 @@ export default function Authentication() {
                         <div className='sing-up-category-inputbox-not-select'>
                             <div className='sing-up-category-inputbox-top'>
                                 <div className='sing-up-category-inputbox-title'>{'카테고리 선택*'}</div>
-                                {<DropDownFirstCategory/>}
                             </div>
+                            <DropDownSignInCategory value={category} onChange={onStudyCategory1Change} />
                             {categoryError && (<div className='category-error-message'>{categoryErrorMessage}</div>)}
                         </div>
                     </div>
