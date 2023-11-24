@@ -17,6 +17,7 @@ import { useStudyStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
+import PeerJsComponent from 'components/PeerJs';
 
 
 
@@ -111,12 +112,12 @@ export default function Service( ) {
 
     //          component: notice 카드 컴포넌트          //
     const NoticeCard = () =>{
-
+      
       // state  :       텍스트 상자 참조 상태         //
       const contentsTextAreaRef = useRef<HTMLTextAreaElement | null>(null);
       // state :  스터디 방 번호 //
       const { studyNumber} = useParams();
-
+      
       // state : 자료 코멘트 유저 글 상태           //
       const [materialCommentContent, setMaterialCommentContent] = useState<string>('');
       //        state: 조회하는 자료 번호 path variable 상태        //
@@ -129,8 +130,8 @@ export default function Service( ) {
       const [ count, setCount ] = useState<number>(0);
       //        state:  자료 댓글 상태        //
       const [materialComment, setMaterialComment] = useState<StudyMaterialCommentListItem[]>([]);
-
-
+      
+      
       //          event handler: 자료 댓글  변경 이벤트 처리          //
       const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if(!showComment) return;
@@ -141,9 +142,9 @@ export default function Service( ) {
         contentsTextAreaRef.current.focus();
         contentsTextAreaRef.current.style.height = 'auto';
         contentsTextAreaRef.current.style.height = `${contentsTextAreaRef.current.scrollHeight}px`;
- 
+        
       }
-
+      
       //          event handler: 자료 댓글  클릭 이벤트 처리          //
       const onContentsClickHandler = () => {
         setShowComment(!showComment);
@@ -485,6 +486,7 @@ export default function Service( ) {
         return(
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
+            <PeerJsComponent />
               <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 
