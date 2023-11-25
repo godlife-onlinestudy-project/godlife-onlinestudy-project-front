@@ -7,10 +7,10 @@ import DatePickerModifyStudyComponent from 'components/DatePickerModifyStudy';
 import DropDownModifyStudyCategory from 'components/DropdownModifyStudyCategory';
 import { StudyListItem, StudyModify } from 'types';
 import { accessTokenMock, studyListMock } from 'mocks';
-import GetModifyStudyResponseDto from 'apis/response/study/get-modify-study.response.dto';
-import ResponseDto from 'apis/response';
+import GetModifyStudyResponseDto from 'apis/dto/response/study/get-modify-study.response.dto';
+import ResponseDto from 'apis/dto/response';
 import { useStudyStore, useUserStore } from 'stores';
-import { PatchStudyRequestDto } from 'apis/request/study';
+import { PatchStudyRequestDto } from 'apis/dto/request/study';
 import { patchStudyRequest } from 'apis';
 
 //          interface: 스터디방 아이템 Props          //
@@ -68,7 +68,7 @@ export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
         setStudy(study);
 
         if (!user) return;
-        const isCreater = user.userEmail === study.createStudyUserEmail;
+        const isCreater = user.email === study.createStudyUserEmail;
         setIsCreater(isCreater);
     };
 

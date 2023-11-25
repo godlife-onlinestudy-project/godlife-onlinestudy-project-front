@@ -8,24 +8,23 @@ import ResponseDto from "./dto/response";
 import {
   PatchUserToDoListRequestDto,
   PostUserToDoListRequestDto,
-} from "./dto/request";
+} from "./dto/request/user";
 import PostUserToDoListResponseDto from "./dto/response/user/post-user-todolist.response.dto";
 import { GetTop5StudyListResponseDto } from "./dto/response/study";
-import { GetSignInUserResponseDto, GetUserResponseDto } from "./response/user";
+import { GetSignInUserResponseDto, GetUserResponseDto } from "./dto/response/user";
 import {
   SignInEmailCheckRequestDto,
   SignInRequestDto,
   SignUpRequestDto,
-} from "./request/auth";
+} from "./dto/request/auth";
 import {
   SignInEmailCheckResponseDto,
   SignInResponseDto,
   SignUpResponseDto,
-} from "./response/auth";
-import { PatchStudyRequestDto, PostStudyRequestDto } from './request/study';
-import { DeleteStudyUserListResponseDto, GetStudyUserListResponseDto, PatchStudyResponseDto, PostStudyResponseDto } from './response/study';
-import ResponseDto from './response';
-import GetModifyStudyResponseDto from './response/study/get-modify-study.response.dto';
+} from "./dto/response/auth";
+import { PatchStudyRequestDto, PostStudyRequestDto } from './dto/request/study';
+import { DeleteStudyUserListResponseDto, GetStudyUserListResponseDto, PatchStudyResponseDto, PostStudyResponseDto } from './dto/response/study';
+import GetModifyStudyResponseDto from './dto/response/study/get-modify-study.response.dto';
 
 //        description: Domain URL       //
 const DOMAIN = "http://localhost:4000";
@@ -46,15 +45,15 @@ const SIGN_IN_URL = () => `${API_DOMAIN}/sign-in`;
 const SIGN_UP_URL = () => `${API_DOMAIN}/sign-up`;
 
 // description: get modify study API end point //
-const GET_STUDY_MODIFY_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}`;
+const GET_STUDY_MODIFY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
 // description: get study user list API end point //
-const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}/study-user-list`;
+const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/study-user-list`;
 // description: post study API end point //
-const POST_STUDY_URL = () => `${API_DOMAIN}/main/home`;
+const POST_STUDY_URL = () => `${API_DOMAIN}/studycreate`;
 // description: patch study API end point //
-const PATCH_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/main/home/${studyNumber}`;
+const PATCH_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
 // description: delete study user list API end point //
-const DELETE_STUDY_USER_LIST_URL = (studyNumber: string | number, userEmail: string) => `${API_DOMAIN}/main/home/${studyNumber}/${userEmail}/study-user-list`;
+const DELETE_STUDY_USER_LIST_URL = (studyNumber: string | number, userEmail: string) => `${API_DOMAIN}/service/${studyNumber}/${userEmail}/study-user-list`;
 
 //        description: get user to do list API end point       //
 const GET_USER_TO_DO_LIST_URL = (userlistdatetime: string) =>

@@ -16,7 +16,7 @@ import ResponseDto from 'apis/dto/response';
 import { GetUserToDoListResponseDto } from 'apis/dto/response/user';
 import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest, getTop5StudyListRequest } from 'apis';
 import { accessTokenMock } from '../../mocks';
-import { PostUserToDoListRequestDto } from 'apis/dto/request';
+import { PostUserToDoListRequestDto } from 'apis/dto/request/user';
 import { GetTop5StudyListResponseDto } from 'apis/dto/response/study';
 
 //        component: 메인 페이지        //

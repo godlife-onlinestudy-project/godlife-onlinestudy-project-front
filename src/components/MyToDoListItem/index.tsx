@@ -6,7 +6,7 @@ import { accessTokenMock, myToDoListMock } from "../../mocks";
 import { PatchUserToDoListResponseDto } from "apis/dto/response/user";
 import ResponseDto from "apis/dto/response";
 import { patchUserToDoListRequest } from "apis";
-import { PatchUserToDoListRequestDto } from "apis/dto/request";
+import { PatchUserToDoListRequestDto } from "apis/dto/request/user";
 
 //        interface: 나의 투두 리스트 아이템 컴포넌트 Props       //
 interface Props {

@@ -6,7 +6,7 @@ import DropDownStudyCreateCategory from 'components/DropdownStudyCreateCategory'
 import DatePickerComponent from 'components/DatePicker';
 import MaterialManageModal from 'views/modal/MaterialManageModal';
 import { useStudyStore } from 'stores';
-import { PostStudyRequestDto } from 'apis/request/study';
+import { PostStudyRequestDto } from 'apis/dto/request/study';
 import { postStudyRequest } from 'apis';
 import { useCookies } from 'react-cookie';
 import { accessTokenMock } from 'mocks';

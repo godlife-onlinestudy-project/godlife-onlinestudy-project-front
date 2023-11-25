@@ -6,8 +6,8 @@ import StudyDate from 'views/modal/StudyDateModal';
 import MaterialManageModal from 'views/modal/MaterialManageModal';
 import { StudyListItem, StudyModify } from 'types';
 import { useModalSideManageStore } from 'stores';
-import { GetModifyStudyResponseDto } from 'apis/response/study';
-import ResponseDto from 'apis/response';
+import { GetModifyStudyResponseDto } from 'apis/dto/response/study';
+import ResponseDto from 'apis/dto/response';
 import StudyServiceMaterialManageModal from 'views/StudyServiceMaterialManageModal';
 import { getModifyStudyRequest } from 'apis';
 

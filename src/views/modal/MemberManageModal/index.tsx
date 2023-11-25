@@ -4,8 +4,8 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 import { StudyUserListItem, UserGradeList } from 'types';
 import ForceExitModal from 'components/ForceExitModal';
 import './style.css';
-import { GetStudyUserListResponseDto } from 'apis/response/study';
-import ResponseDto from 'apis/response';
+import { GetStudyUserListResponseDto } from 'apis/dto/response/study';
+import ResponseDto from 'apis/dto/response';
 import { deleteStudyUserListRequest, getStudyUserListRequest } from 'apis';
 
 //           component: 멤버 관리 리스트 컴포넌트           //

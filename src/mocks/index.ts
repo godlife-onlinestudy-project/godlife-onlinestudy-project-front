@@ -18,8 +18,6 @@ import StudyMaterialCommentListMock from "./study-material-comment-list.mock";
 import StudyMaterialListMock from "./study-material.mock";
 // import StudyUserListMock from "./study-user-list.mock";
 
-import accessTokenMock from "./access-token.mock";
-
 export {
   userMock,
   loginInfoMock,
