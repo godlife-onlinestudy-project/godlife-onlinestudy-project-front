@@ -30,24 +30,23 @@ export default function Service( ) {
 
     //          state:  스터디 이미지  상태           //
     // const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-
+    
+    //          state: 스터디방 번호 path variable 상태          //
+    const { studyNumber } = useParams();
+    //          state: 스터디방 상태          //
     const {resetService} =  useStudyStore(); 
 
-    //           state : 모달 상태                       //
-    const [modelOpen, setModalOpen] = useState(false);
+    //           state : 방장 모달 상태                       //
+    const [hostmodelOpen, setHostModalOpen] = useState<'host-notice-manage-modal'| 'host-study-todo-manage-modal'| 'host-study-material-manage-modal'
+    |'host-study-Modify-modal' | 'host-study-date-modal' | 'host-study-member-manage-modal'>();
+    
+
     // state : 모달 참조 상태  //
-    const modalBackground = useRef();  
+    const modalBackground = useRef();   
 
     //            function: 네비게이트 함수          //
     const navigate = useNavigate();
 
-    //           event handler: 모달 열기 이벤트 처리          //
-    const onModalOpenClickHandler = (event: MouseEvent<HTMLDivElement> ) =>{
-      if(event.target === modalBackground.current){
-        setModalOpen(false);
-      }
-    }
 
     //    event handler : 사이드바 메뉴 상태 변경 함수     //
     const onMenuClickHandler = () =>{
@@ -130,7 +129,9 @@ export default function Service( ) {
       const [ count, setCount ] = useState<number>(0);
       //        state:  자료 댓글 상태        //
       const [materialComment, setMaterialComment] = useState<StudyMaterialCommentListItem[]>([]);
-      
+
+      //           state : Host Notice 모달 상태                       //
+      const [hostNoticeModelOpen, setHostNoticeModelOpen] = useState(false);
       
       //          event handler: 자료 댓글  변경 이벤트 처리          //
       const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -145,6 +146,13 @@ export default function Service( ) {
         
       }
       
+      //          event handler: 공지사항 모달 출력 이벤트 처리          //
+      const onHostNoticeModelOpenClickHandler = (event: MouseEvent<HTMLDivElement> ) =>{
+        if(event.target === modalBackground.current){
+          setHostNoticeModelOpen(false);
+        }
+      }
+
       //          event handler: 자료 댓글  클릭 이벤트 처리          //
       const onContentsClickHandler = () => {
         setShowComment(!showComment);
@@ -197,7 +205,7 @@ export default function Service( ) {
               <div className="notice-icon"></div>
               <div className="notice-title">공지사항</div>
             </div>
-            <div className="notice-message">
+            <div className="notice-message" onClick={onHostNoticeModelOpenClickHandler}>
                 <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
                   {StudyNoticeMock.map((noticeListItem,index)=>
                     <NoticeItem  noticeItem = {noticeListItem}/>

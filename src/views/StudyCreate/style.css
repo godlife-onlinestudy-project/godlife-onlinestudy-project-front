@@ -53,7 +53,7 @@
     position: relative;
 }
 
-.input {
+.input-title-box {
     font-family: 'Spoqa Han Sans Neo';
     padding-left: 17px;
     width: 765px;
@@ -158,7 +158,7 @@
     background-size: 100% 100%;
 } */
 
-.study-category {
+.study-create-category {
     display: flex;
     flex-direction: row;
     align-items: baseline;

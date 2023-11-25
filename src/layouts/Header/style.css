@@ -57,38 +57,38 @@
   gap: 50px;
 }
 
-.study-search-button {
+.header-study-search-button {
   color: rgba(rgba(0,0,0,1));
 
   font-size: 30px;
   font-weight: 400;
 }
 
-.study-search-button:hover {
+.header-study-search-button:hover {
   cursor: pointer;
 
   font-weight: 700;
 }
 
-.study-create-button {
+.header-study-create-button {
   color: rgba(rgba(0,0,0,1));
 
   font-size: 30px;
 }
 
-.study-create-button:hover {
+.header-study-create-button:hover {
   cursor: pointer;
 
   font-weight: 700;
 }
 
-.study-mypage-button {
+.header-study-mypage-button {
   color: rgba(rgba(0,0,0,1));
 
   font-size: 30px;
 }
 
-.study-mypage-button:hover {
+.header-study-mypage-button:hover {
   cursor: pointer;
   
   font-weight: 700;

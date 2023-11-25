@@ -1,0 +1,241 @@
+#password-modify-modal-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-modify-modal-card{
+    width: 880px;
+    height: 680px;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 66px 20px 65px 20px;
+
+    position: relative;
+
+}
+
+.password-modify-modal-card-close-button-box{
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 10px;
+    right: 20px;
+
+}
+.password-modify-modal-card-close-button-icon{
+    width: 50px;
+    height: 50px;
+    
+    background-image: url(/src/assets/close_icon.png);
+    background-position: 50% 50%;
+    background-size: 100% 100%; 
+}
+
+.password-modify-modal-main{
+    width: 470px;
+    height: 635px;
+
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 85px;
+}
+.password-modify-modal-main-title{
+    text-align: center;
+
+    color: #000;
+
+    font-family: Spoqa Han Sans Neo;
+    font-size: 43px;
+    font-weight: 700;
+    line-height: 32.343px;
+}
+.password-modify-modal-main-middle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+}
+.password-modify-modal-main-modify-password{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+}
+.password-modify-input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.password-modify-input-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.password-modify-input-title{
+    text-align: center;
+
+    color: #000;
+
+    font-family: Spoqa Han Sans Neo;
+    font-size: 33px;
+    font-weight: 700;
+    line-height: 32.343px;
+}
+.password-security-gage-box{
+    width: 400px;   
+}
+.security-gage-default{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+}
+.gage1{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.gage2{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.gage3{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.gage4{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.gage5{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+
+.password-error-level1-gage1{
+    width: 70px;
+    height: 5px;
+    background-color: red;
+}
+.password-error-level1-gage2{
+    width: 70px;
+    height: 5px;
+    background-color: red;
+}
+.password-error-level1-gage3{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.password-error-level1-gage4{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.password-error-level1-gage5{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+
+.password-error-level2-gage1{
+    width: 70px;
+    height: 5px;
+    background-color: orangered;
+}
+.password-error-level2-gage2{
+    width: 70px;
+    height: 5px;
+    background-color: orangered;
+}
+.password-error-level2-gage3{
+    width: 70px;
+    height: 5px;
+    background-color: orangered;
+}
+.password-error-level2-gage4{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.password-error-level2-gage5{
+    width: 70px;
+    height: 5px;
+    background-color: #CCC;
+}
+.password-success-gage1{
+    width: 70px;
+    height: 5px;
+    background-color: #14AE5C;
+}
+
+.password-modify-check-input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.password-modify-check-input-title{
+    text-align: center;
+
+    color: #000;
+
+    font-family: Spoqa Han Sans Neo;
+    font-size: 33px;
+    font-weight: 700;
+    line-height: 32.343px;
+}
+
+.password-modify-modal-main-modify-password-complete-button-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.password-modify-modal-main-modify-password-complete-button{
+    width: 470px;
+    height: 65px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: rgba(24, 160, 251, 0.5);
+    border-radius: 5px;
+    
+    color: #FFF;
+    font-family: Spoqa Han Sans Neo;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 22px;
+}
+.password-modify-modal-main-modify-password-complete-button:hover{
+    cursor: pointer;
+    background-color: rgba(24, 160, 251, 1);
+}

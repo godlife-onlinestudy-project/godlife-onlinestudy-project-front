@@ -11,6 +11,7 @@ import searchStudyListMock from "./search-study-list.mock";
 import materialManageListMock from './material-manage-list.mock';
 import studyRoomInfoListMock from "./my-study-room-info-list.mock"
 import recommendationStudyListMock from "./recommendation-study-list.mock";
+import accessTokenMock from "./accessToken-mock";
 
 import StudyChatListMock from "./study-chat.mock";
 import StudyMaterialCommentListMock from "./study-material-comment-list.mock";

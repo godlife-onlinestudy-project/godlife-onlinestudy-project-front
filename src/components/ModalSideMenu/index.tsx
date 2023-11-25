@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-import StudyModifyModal from 'views/StudyModifyModal';
-import MemberManageModal from 'views/MemberManageModal';
-import StudyDate from 'views/StudyDateModal';
-import MaterialManageModal from 'views/MaterialManageModal';
+import StudyModifyModal from 'views/modal/StudyModifyModal';
+import MemberManageModal from 'views/modal/MemberManageModal';
+import StudyDate from 'views/modal/StudyDateModal';
+import MaterialManageModal from 'views/modal/MaterialManageModal';
 import { StudyListItem, StudyModify } from 'types';
 import { useModalSideManageStore } from 'stores';
 import { GetModifyStudyResponseDto } from 'apis/response/study';

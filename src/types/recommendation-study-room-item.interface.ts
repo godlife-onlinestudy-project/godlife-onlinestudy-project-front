@@ -1,7 +1,18 @@
 export default interface RecommendationStudyRoomItem {
   studyNumber: number;
   studyName: string;
+  studyStartDate: string;
   studyEndDate: string;
-  studyPersonnel: string;
-  studyCoverImageUrl: string | null;
+  studyPersonal: number;
+  studyCategory1: string;
+  studyCategory2: string;
+  studyCategory3: string;
+  studyPublicCheck: number;
+  studyPrivatePassword: string;
+  studyCoverImageUrl: string;
+  studyNextStartDatetime: string;
+  studyNextEndDatetime: string;
+  studyTotalDay: number;
+  createStudyUserEmail: string;
+  userCount: number;
 }

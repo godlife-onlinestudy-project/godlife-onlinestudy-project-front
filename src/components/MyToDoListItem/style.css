@@ -68,6 +68,22 @@
   text-overflow: ellipsis;
 }
 
+.main-top-down-todolist-detail-text-delete {
+  width: 90%;
+  padding: 0 10px 0 17px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 9px;
+  color: rgba(255,255,255,1);
+  background-color: rgba(251, 13, 13, 0.45);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .main-top-down-todolist-detail-textvalue {
   width: 100%;
   white-space: nowrap;

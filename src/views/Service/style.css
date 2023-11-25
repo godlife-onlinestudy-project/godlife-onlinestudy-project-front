@@ -458,6 +458,9 @@
 
     padding: 2px 2px;
 }
+.notice-message:hover{
+    cursor: pointer;
+}
 
 .list-box{
     width: 192px;
@@ -656,7 +659,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/crown-icon.png);    
+    background-image: url(../../assets/crown-icon.png);    
     background-position: 50% 50%;
     background-size: 100% 100%;
 }
@@ -667,7 +670,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/sprout-icon.png);
+    background-image: url(../../assets/sprout-icon.png);
     background-position: 50% 50%;
     background-size: 100% 100%;   
 }
@@ -1212,7 +1215,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/crown-icon.png);    
+    background-image: url(../../assets/crown-icon.png);    
     background-position: 50% 50%;
     background-size: 100% 100%;
 }
@@ -1223,7 +1226,7 @@
 
     border-radius: 50% 50%;
 
-    background-image: url(assets/sprout-icon.png);
+    background-image: url(../../assets/sprout-icon.png);
     background-position: 50% 50%;
     background-size: 100% 100%; 
 }

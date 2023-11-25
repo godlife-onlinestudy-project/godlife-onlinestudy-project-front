@@ -13,11 +13,11 @@ export default function JoinListItem({ joinStudyItem }: Props) {
   const { totalDays, joinDays, absentDays, lateDays } = joinStudyItem;
   //           render: 참여중인 스터디 리스트 아이템 컴포넌트 렌더링           //
   return (
-    <div className='study-list-box'>
+    <div className='join-component-study-list-box'>
       <div className='study-title-box'>
         <div className='study-title-text'>{title}</div>
       </div>
-      <div className='study-category-box'>
+      <div className='study-join-category-box'>
         <div className='study-category-text'>{category}</div>
       </div>
       <div className='study-authority-box'>

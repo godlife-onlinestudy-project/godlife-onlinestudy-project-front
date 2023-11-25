@@ -806,7 +806,6 @@
     cursor: pointer;
 
     color: rgba(255,255,255,1);
-    background-color: rgba(24,160,251,1);
 }
 
 .main-top-down-todolist-delete-button-text {
@@ -814,6 +813,32 @@
 
     font-size: 16px;
     font-weight: 500;
+}
+
+.main-top-down-todolist-delete-button-on {
+  height: 31px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(255,255,255,1);
+
+  box-shadow: 0 0 0 2px rgba(251, 13, 13, 0.45) inset;
+  border-radius: 5px;
+}
+
+.main-top-down-todolist-delete-button-on:hover {
+  cursor: pointer;
+
+  color: rgba(255,255,255,1);
+  background-color: rgba(251, 13, 13, 0.45);
+}
+
+.main-top-down-todolist-delete-button-on:hover .main-top-down-todolist-delete-button-text {
+  cursor: pointer;
+
+  color: rgba(255,255,255,1);
 }
 
 .main-top-down-todolist-detail-box {

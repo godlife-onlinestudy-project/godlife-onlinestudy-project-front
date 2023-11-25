@@ -9,7 +9,7 @@ import React, { ChangeEvent, useState, useRef, useEffect } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useParams } from 'react-router-dom';
 import useUserStore from 'stores/user.store';
-import MemberManageModal from 'views/MemberManageModal';
+import MemberManageModal from 'views/modal/MemberManageModal';
 import './style.css';
 
 //          component: 마이페이지           //
