@@ -151,6 +151,7 @@ export default function PeerJsComponent() {
     useEffect(() => {
         peer.on('open', function (id) {
             setId(id);
+            socket.emit('join', { roomId: 'room1', peerId: id }); // 사용자의 ID를 서버에 전송
             callUser();
         });
 
