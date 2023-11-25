@@ -76,8 +76,8 @@ function App() {
       {/* <Header onSearchMoveClickHandler={onSearchMoveClickHandler} />
       <Main ref={searchDivRef} />
       <Footer /> */}
-      <Service />
-      {/* <PeerJsComponent /> */}
+      {/* <Service /> */}
+      <PeerJsComponent />
     </div>
   );
 }

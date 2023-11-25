@@ -19,6 +19,7 @@ export default function PeerJsComponent() {
 
     const [peerId, setPeerId] = useState<string>('');
     const [id, setId] = useState<string>('');
+    const [remoteStreams, setRemoteStreams] = useState<MediaStream[]>([]);
 
     const peer = new Peer();
     let currentCall: MediaConnection | undefined;
@@ -115,6 +116,7 @@ export default function PeerJsComponent() {
                             remoteVideoRef.current.srcObject = remoteStream;
                             remoteVideoRef.current.play();
                         }
+                        setRemoteStreams((prevStreams) => [...prevStreams, remoteStream]);
                     });
                 })
                 .catch((err) => {
@@ -182,6 +184,27 @@ export default function PeerJsComponent() {
         };
     }, [peerId, RtcUUID, streamID, userNickname, userProfileImageUrl, userGrade]);
 
+    const onRtcUUIDChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setRtcUUID(value);
+    }
+    const onStreamIDChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setStreamID(value);
+    }
+    const onUserNickcnameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setUserNickname(value);
+    }
+    const onUserProfileImageUrlChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setUserProfileImageUrl(value);
+    }
+    const onUserGradeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setUserGrade(value);
+    }
+
     return (
         <>
             <div id='menu' ref={menuRef}>
@@ -191,7 +214,9 @@ export default function PeerJsComponent() {
                 <button onClick={callUser}>Connect</button> */}
             </div>
             <div id='live' ref={liveRef}>
-                <video ref={remoteVideoRef} id='remote-video' muted playsInline></video>
+                {remoteStreams.map((stream, index) => (
+                    <video key={index} ref={video => { if (video) video.srcObject = stream; }} muted playsInline autoPlay></video>
+                ))}
                 <video ref={localVideoRef} id='local-video' muted playsInline></video>
                 <button id='end-call' onClick={endCall}>
                     End Call
