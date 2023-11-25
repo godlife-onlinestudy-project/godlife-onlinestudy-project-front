@@ -16,15 +16,11 @@ import { patchStudyRequest } from 'apis';
 //          interface: 스터디방 아이템 Props          //
 interface Props {
     studyItem: StudyModify | null;
+    setStudyItem: (studyItem: StudyModify | null) => void;
 }
 
 //          component : 스터디 방 재설정 모달 페이지          //
-export default function StudyModifyModal({ studyItem }: Props) {
-
-    // //          state: Properties          //
-    // const { studyNumber, studyName, studyStartDate, studyPersonNumber, studyEndDate } = StudyListItem;
-    // const { studyCategory1, studyCategory2, studyCategory3, studyPublicCheck, studyPrivatePassword  } = StudyListItem;
-    // const { studyCoverImageUrl, studyNextStartTime, studyNextEndTime, studyTotalDay } = StudyListItem;
+export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
 
     //          state : 스터디 방 번호          //
     const { studyNumber } = useParams();

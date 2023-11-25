@@ -9,13 +9,14 @@ import { useModalSideManageStore } from 'stores';
 import { GetModifyStudyResponseDto } from 'apis/response/study';
 import ResponseDto from 'apis/response';
 import StudyServiceMaterialManageModal from 'views/StudyServiceMaterialManageModal';
+import { getModifyStudyRequest } from 'apis';
 
 //           component: 사이드 모달 메뉴 컴포넌트           //
 function ModalSideMenu() {
     //           state: SideMenu 방 선택 상태           //
     const { selectedOption, setSelectedOption } = useModalSideManageStore();
     //           state: StudyModify 방 상태           //
-    const [studyListItem, setStudyListItem] = useState<StudyModify>({
+    const [studyListItem, setStudyListItem] = useState<StudyModify | null>({
         studyNumber: 4,
         studyName: 'sadads',
         studyEndDate: '',
@@ -27,7 +28,23 @@ function ModalSideMenu() {
         createStudyUserEmail: '',
     });
     //           state: 방 번호 상태           //
-    const [studyNumber, setStudyNumber] = useState<string>('');
+    const [studyNumber, setStudyNumber] = useState<string>('4');
+
+    const [study, setStudy] = useState<StudyModify | null>(null);
+
+    const getModifyStudyResponse = (responseBody: any) => {
+
+          setStudy({...responseBody})
+      
+    }
+    useEffect(() => {
+        getModifyStudyRequest(4).then(getModifyStudyResponse);
+      }, [studyNumber]);
+      
+      // studyNumber 상태값 변경하는 예시
+      const changeStudyNumber = (number: string) => {
+        setStudyNumber(number);
+      }
 
     //           event handler: 사이드바 menu click 이벤트 처리           //
     const onMenuClickHandler = (event: string) => {
@@ -37,10 +54,6 @@ function ModalSideMenu() {
     //           event handler: modalCloseHandler를 가져와서 이벤트 처리           //
     const modalCloseHandler = () => {
         modalCloseHandler();
-    };
-
-    const selectedMenuItemStyle = {
-        backgroundColor: 'rgba(24, 160, 251, 1);' // CSS와 동일한 색상으로 변경하세요
     };
 
     //           render: 사이드 모달 메뉴 컴포넌트 렌더링           //
@@ -55,7 +68,7 @@ function ModalSideMenu() {
             </div>
 
             <div className='menu-bar'>
-                {selectedOption === 'study' && <StudyModifyModal studyItem={studyListItem} />}
+                {selectedOption === 'study' && <StudyModifyModal studyItem={studyListItem} setStudyItem={setStudyListItem} />}
                 {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} />}
                 {selectedOption === 'studyDate' && <StudyDate />}
                 {selectedOption === 'material' && <StudyServiceMaterialManageModal modalCloseHandler={modalCloseHandler} />}
