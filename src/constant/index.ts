@@ -1,7 +1,7 @@
 export const MAIN_PATH = '/main';
 export const AUTH_PATH = '/';
 export const SERVICE_PATH = (studyNumber: number | string) => `/service/${studyNumber}`;
-export const STUDY_CREATE_PATH = '/studtcreate'
+export const STUDY_CREATE_PATH = '/studycreate'
 export const MY_PAGE_PATH = '/mypage/:email';
 export const STUDYROOM_DETAIL_PATH = (studyNumber: number | string) => `/studyroom/detail/${studyNumber}`;
 export const SEND_EMAIL_PATH = (sendEmailAddress: string) => `/search/${sendEmailAddress}`;

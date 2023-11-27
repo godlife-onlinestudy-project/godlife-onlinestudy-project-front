@@ -438,7 +438,6 @@ export default function StudyDateModal() {
     return (
         <div id='notice-wrapper'>
             <div className='notice-card'>
-                <ModalSideMenu />
                 <div className='notice-button-box'>
                     <button type='button' className='modal-close-button'>
                         X

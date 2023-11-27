@@ -1,9 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import Scrollbars from 'react-custom-scrollbars-2';
+import { useStudyStore } from 'stores';
+
+//          interface: 스터디 선택 인터페이스 Props          //
+interface Props {
+    onCategoryChange: (categories: string[]) => void;
+}
 
 //          component: DropDown 스터디 생성 카테고리 컴포넌트          //
-const DropDownStudyCreateCategory = () => {
+const DropDownStudyCreateCategory = ({ onCategoryChange }: Props) => {
+
     //          state: 박스 상태          //
     const [isOpen, setIsOpen] = useState(false);
     //          state: 박스 선택 상태          //
@@ -36,6 +43,8 @@ const DropDownStudyCreateCategory = () => {
     const handleCategorySelect = (item: string) => {
         if (selectedItem.length < 3 && !selectedItem.includes(item)) {
             setSelectedItem([...selectedItem, item]);
+            onCategoryChange([...selectedItem, item]);
+
             setIsOpen(false);
         }
     };
@@ -44,6 +53,7 @@ const DropDownStudyCreateCategory = () => {
     const removeCategoryHandler = (item: string) => {
         const removeItems = selectedItem.filter((selected) => selected !== item);
         setSelectedItem(removeItems);
+        onCategoryChange(removeItems);
     }
 
     //          render: DropDown 스터디 생성 카테고리 렌더링          //
@@ -73,8 +83,8 @@ const DropDownStudyCreateCategory = () => {
             <div className='selected-category-box-list'>
                     <div className='selected-category-box'>
                         {selectedItem.map((item) => (
-                            <div className='selected-category'>
-                                <div className='selected-category-index' key={item}>{item}</div>                                
+                            <div className='selected-category' key={item}>
+                                <div className='selected-category-index' >{item}</div>                                
                                 <div className='X-button-icon-box'>
                                     <div className='X-button-icon' onClick={() => removeCategoryHandler(item)}></div>
                                 </div>

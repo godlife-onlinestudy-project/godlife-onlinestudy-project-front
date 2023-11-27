@@ -8,20 +8,23 @@ import ResponseDto from "./dto/response";
 import {
   PatchUserToDoListRequestDto,
   PostUserToDoListRequestDto,
-} from "./dto/request";
+} from "./dto/request/user";
 import PostUserToDoListResponseDto from "./dto/response/user/post-user-todolist.response.dto";
 import { GetTop5StudyListResponseDto } from "./dto/response/study";
-import { GetSignInUserResponseDto, GetUserResponseDto } from "./response/user";
+import { GetSignInUserResponseDto, GetUserResponseDto } from "./dto/response/user";
 import {
   SignInEmailCheckRequestDto,
   SignInRequestDto,
   SignUpRequestDto,
-} from "./request/auth";
+} from "./dto/request/auth";
 import {
   SignInEmailCheckResponseDto,
   SignInResponseDto,
   SignUpResponseDto,
-} from "./response/auth";
+} from "./dto/response/auth";
+import { PatchStudyRequestDto, PostStudyRequestDto } from './dto/request/study';
+import { DeleteStudyUserListResponseDto, GetStudyUserListResponseDto, PatchStudyResponseDto, PostStudyResponseDto } from './dto/response/study';
+import GetModifyStudyResponseDto from './dto/response/study/get-modify-study.response.dto';
 
 //        description: Domain URL       //
 const DOMAIN = "http://localhost:4000";
@@ -40,6 +43,17 @@ const SIGN_IN_EMAIL_CHECK_URL = () => `${API_DOMAIN}/auth/sign-in-email-check`;
 const SIGN_IN_URL = () => `${API_DOMAIN}/sign-in`;
 // description: sign up API end point //
 const SIGN_UP_URL = () => `${API_DOMAIN}/sign-up`;
+
+// description: get modify study API end point //
+const GET_STUDY_MODIFY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
+// description: get study user list API end point //
+const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/study-user-list`;
+// description: post study API end point //
+const POST_STUDY_URL = () => `${API_DOMAIN}/studycreate`;
+// description: patch study API end point //
+const PATCH_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
+// description: delete study user list API end point //
+const DELETE_STUDY_USER_LIST_URL = (studyNumber: string | number, userEmail: string) => `${API_DOMAIN}/service/${studyNumber}/${userEmail}/study-user-list`;
 
 //        description: get user to do list API end point       //
 const GET_USER_TO_DO_LIST_URL = (userlistdatetime: string) =>
@@ -111,6 +125,34 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
   return result;
 };
 
+// description: get modify study request //
+export const getModifyStudyRequest = async (studyNumber: string | number) => {
+  const result = await axios.get(GET_STUDY_MODIFY_URL(studyNumber))
+  .then(response => {
+      const responseBody: GetModifyStudyResponseDto = response.data;
+      return responseBody;
+  })
+  .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+  });
+  return result;
+};
+
+// description: get study user list request //
+export const getStudyUserListRequest = async (studyNumber: string | number, token: string) => {
+  const result = await axios.get(GET_STUDY_USER_LIST_URL(studyNumber), authorization(token))
+  .then(response => {
+      const responseBody: GetStudyUserListResponseDto = response.data;
+      return responseBody;
+  })
+  .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+  });
+  return result;
+};
+
 //        description: get user todolist request       //
 export const getUserToDoListRequest = async (
   userlistdatetime: string,
@@ -129,6 +171,58 @@ export const getUserToDoListRequest = async (
   return result;
 };
 
+// description: post study request //
+export const postStudyRequest = async (requestBody: PostStudyRequestDto, token: string) => {
+  const result = await axios.post(POST_STUDY_URL(), requestBody, authorization(token))
+  .then(response => {
+      const resposneBody: PostStudyResponseDto = response.data;
+      const { code } = resposneBody;
+      return code;
+  })
+  .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+  });
+  return result;
+};
+
+//        description: post user todolist request       //
+export const postUserToDoListRequest = async (
+  requestBody: PostUserToDoListRequestDto,
+  token: string
+) => {
+  const result = await axios
+    .post(POST_USER_TO_DO_LIST_URL(), requestBody, authorization(token))
+    .then((response) => {
+      const responseBody: PostUserToDoListResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
+  return result;
+};
+
+// description: patch study request //
+export const patchStudyRequest = async (requestBody: PatchStudyRequestDto, studyNumber: string | number, token: string) => {
+  const result = await axios.patch(PATCH_STUDY_URL(studyNumber), requestBody, authorization(token))
+  .then(response => {
+      const responseBody: PatchStudyResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+  })
+  .catch(error => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+  });
+  return result;
+};
+
 //        description: patch user todolist request        //
 export const patchUserToDoListRequest = async (
   requestBody: PatchUserToDoListRequestDto,
@@ -144,26 +238,6 @@ export const patchUserToDoListRequest = async (
     )
     .then((response) => {
       const responseBody: PatchUserToDoListResponseDto = response.data;
-      const { code } = responseBody;
-      return code;
-    })
-    .catch((error) => {
-      const responseBody: ResponseDto = error.response.data;
-      const { code } = responseBody;
-      return code;
-    });
-  return result;
-};
-
-//        description: post user todolist request       //
-export const postUserToDoListRequest = async (
-  requestBody: PostUserToDoListRequestDto,
-  token: string
-) => {
-  const result = await axios
-    .post(POST_USER_TO_DO_LIST_URL(), requestBody, authorization(token))
-    .then((response) => {
-      const responseBody: PostUserToDoListResponseDto = response.data;
       const { code } = responseBody;
       return code;
     })
@@ -194,6 +268,22 @@ export const deleteUserToDoListRequest = async (
     });
   return result;
 };
+
+// description: delete study user list request //
+export const deleteStudyUserListRequest = async (studyNumber: string | number, userEmail: string, token: string) => {
+  const result = await axios.delete(DELETE_STUDY_USER_LIST_URL(studyNumber, userEmail), authorization(token))
+      .then(response => {
+          const responseBody: DeleteStudyUserListResponseDto = response.data;
+          const { code } = responseBody;
+          return code;
+      })
+      .catch(error => {
+          const responseBody: ResponseDto = error.response.data;
+          const { code } = responseBody;
+          return code;
+      });
+  return result;
+}
 
 //        description: get top 5 study list request       //
 export const getTop5StudyListRequest = async (

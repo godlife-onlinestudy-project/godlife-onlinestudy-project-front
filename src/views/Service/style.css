@@ -1017,7 +1017,7 @@
     top: 5px;
     right: 5px;
 
-    background-image: url(assets/elimate-icon.png);
+    /* background-image: url(assets/elimate-icon.png); */
     background-position: 50% 50%;
     background-size: 100% 100%;
 }

@@ -2,8 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import './style.css';
 import Scrollbars from 'react-custom-scrollbars-2';
 
+interface Props {
+    onPeopleSetChange: (item: string) => void;
+}
+
 //          component: DropDown 스터디 인원 설정 컴포넌트          //
-const DropDownStudyPeopleSet = () => {
+const DropDownStudyPeopleSet = ({ onPeopleSetChange }: Props) => {
     //          state: 박스 상태          //
     const [isOpen, setIsOpen] = useState(false);
     //          state: 박스 선택 상태          //
@@ -20,6 +24,7 @@ const DropDownStudyPeopleSet = () => {
     const selectItem = (item: string) => {
         setSelectedItem(item);
         setIsOpen(false);
+        onPeopleSetChange(item);
     };
 
     //          effect: 박스가 아닌 다른 곳을 클릭하면 박스가 사라지게 하기          //

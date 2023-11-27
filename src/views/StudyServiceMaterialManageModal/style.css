@@ -1,18 +1,11 @@
-#material-manage-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+#study-service-material-manage-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(125, 127, 129, 0.8);
-    z-index: 1000;
     font-family: 'Spoqa Han Sans Neo';
 }
 
-.material-manage-card {
+.study-service-material-manage-card {
     width: 1300px;
     min-width: 1300px;
     height: 900px;
@@ -27,23 +20,23 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.material-manage-header-box {
+.study-service-material-manage-header-box {
     padding: 55px 0px 0px 55px;
     display: flex;
     justify-content: space-between;
 }
 
-.material-manage-title-text {
+.study-service-material-manage-title-text {
     font-size: 40px;
     font-weight: 700;
     line-height: 115%;
 }
 
-.material-manage-cancel-box {
+.study-service-material-manage-cancel-box {
     padding-right: 45px;
 }
 
-.material-manage-cancel-icon {
+.study-service-material-manage-cancel-icon {
     width: 40px;
     height: 40px;
 
@@ -52,11 +45,11 @@
     background-size: 100% 100%;
 }
 
-.material-manage-cancel-box:hover {
+.study-service-material-manage-cancel-box:hover {
     cursor: pointer;
 }
 
-.material-manage-list-box {
+.study-service-material-manage-list-box {
     padding-top: 60px;
 
     width: 100%;
@@ -69,13 +62,13 @@
     flex-direction: column;
 }
 
-.material-manage-box {
+.study-service-material-manage-box {
     width: 1100px;
     display: flex;
     flex-direction: column;
 }
 
-.material-manage-list-titles {
+.study-service-material-manage-list-titles {
     padding-bottom: 15px;
     display: grid;
     grid-template-columns: 1fr 5fr 18fr 9fr 9fr;
@@ -87,49 +80,49 @@
     line-height: 115%;
 }
 
-.material-select-blank-box {
+.study-service-material-select-blank-box {
     width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.material-serial-number {
+.study-service-material-serial-number {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.material-name {
+.study-service-material-name {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.material-upload-date {
+.study-service-material-upload-date {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.material-write-user {
+.study-service-material-write-user {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.material-manage-list-index {
+.study-service-material-manage-list-index {
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.material-button-list-box {
+.study-service-material-button-list-box {
     color: rgba(255, 255, 255, 1);
 
     padding: 0px 40px 70px 0px;
@@ -147,7 +140,7 @@
     line-height: 115%;
 }
 
-.material-delete-box {
+.study-service-material-delete-box {
     width: 150px;
     height: 50px;
 
@@ -159,12 +152,12 @@
     background-color: rgba(255, 175, 163, 1);
 }
 
-.material-delete-box:hover {
+.study-service-material-delete-box:hover {
     cursor: pointer;
     background-color: rgba(255, 0, 0, 0.7);
 }
 
-.material-download-box {
+.study-service-material-download-box {
     width: 150px;
     height: 50px;
 
@@ -176,12 +169,12 @@
     background-color: rgba(207, 207, 207, 1);
 }
 
-.material-download-box:hover {
+.study-service-material-download-box:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.material-upload-box {
+.study-service-material-upload-box {
     width: 150px;
     height: 50px;
 
@@ -193,12 +186,12 @@
     background-color: rgba(207, 207, 207, 1);
 }
 
-.material-upload-box:hover {
+.study-service-material-upload-box:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.material-manage-track-vertical {
+.study-service-material-manage-track-vertical {
     top: 2px;
     bottom: 2px;
     right: 9px;
@@ -206,7 +199,7 @@
     background: rgba(255, 255, 255, 0.111);
 }
 
-.material-manage-track-vertical .material-manage-thumb-vertical {
+.study-service-material-manage-track-vertical .study-service-material-manage-thumb-vertical {
     padding: 0 8px 0 0;
     position: relative;
     display: block;
