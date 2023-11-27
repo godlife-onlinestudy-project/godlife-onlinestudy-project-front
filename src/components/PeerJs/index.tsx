@@ -186,7 +186,7 @@ export default function PeerJsComponent() {
     }, [peerId, RtcUUID, streamID, userNickname, userProfileImageUrl, userGrade]);
 
     const onRtcUUIDChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      const value = event.target.value; 
       setRtcUUID(value);
     }
     const onStreamIDChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

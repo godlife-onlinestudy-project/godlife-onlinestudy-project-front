@@ -333,6 +333,8 @@ export default function Service( ) {
       //          component: 자료 이미지 내용 컴포넌트           //
       const MaterialContents = () =>{
 
+        const fileInputRef = useRef<HTMLInputElement | null>(null);
+
         //          state: 자료 이미지 상태                 //
         const {materialImageList,setMaterialImageList} = useImagePagination<MaterialListItem>();
 
@@ -340,14 +342,14 @@ export default function Service( ) {
         useEffect(() => {
           const imageMaterialList = StudyMaterialListMock.map(item => item.studyMaterialImageUrl);
           setMaterialImageList(imageMaterialList);
-        }, [materialImageList]);
+        }, []);
 
         //   render : 자료 이미지 내용 컴포넌트  렌더링       //
         return(
           <div className="study-image-material-box">
             <div className="study-image-material" >
-              {/* <input ref = {fileInputRef} type="file" src={materialImageList[currentPageNumber]} accept='image/*' style={{display : 'none'}}  /> */}
-              <img src={viewImage} alt=""className='study-image-material' />
+            {/* <input ref = {fileInputRef} type="file" src={materialImageList.} accept='image/*' style={{display : 'none'}}  /> */}
+            <img src={viewImage} alt=""className='study-image-material' />
             </div>
           </div>
         )
