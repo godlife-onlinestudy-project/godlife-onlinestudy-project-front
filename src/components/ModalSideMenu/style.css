@@ -1,10 +1,15 @@
-.menu-sidebar {
-    top: 58px;
-    left: -172px;
-    position: absolute;
+#menu-sidebar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    width: 170px;
-    height: 260px;
+    height: 100vh;
+}
+
+.menu-sidebar {
+    margin-top: -500px;
+    display: flex;
+    flex-direction: column;
 }
 
 .menu-room {
@@ -14,7 +19,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -33,34 +38,12 @@
 
 .menu-room:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-room-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
-}
-
-.menu-room-default:hover {
-    cursor: pointer;
+.selected-menu-room {
+    background-color: rgba(24, 160, 251, 1);
+    font-weight: 700;
 }
 
 .menu-member {
@@ -70,7 +53,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -89,34 +72,12 @@
 
 .menu-member:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-member-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
-}
-
-.menu-member-default:hover {
-    cursor: pointer;
+.selected-menu-member {
+    background-color: rgba(24, 160, 251, 1);
+    font-weight: 700;
 }
 
 .menu-study {
@@ -126,7 +87,7 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
 
     display: flex;
     align-items: center;
@@ -145,30 +106,12 @@
 
 .menu-study:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
 }
 
-.menu-study-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(255, 255, 255, 1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
+.selected-menu-study {
+    background-color: rgba(24, 160, 251, 1);
+    font-weight: 700;
 }
 
 .menu-material {
@@ -178,37 +121,6 @@
     border-top: 3px solid rgba(24, 160, 251, 1);
     border-bottom: 3px solid rgba(24, 160, 251, 1);
     border-left: 3px solid rgba(24, 160, 251, 1);
-    background-color: rgba(24, 160, 251, 1);
-    ;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: rgba(0, 0, 0, 1);
-
-    text-align: center;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.345px;
-
-}
-
-.menu-material:hover {
-    cursor: pointer;
-}
-
-
-.menu-material-default {
-    width: 170px;
-    height: 65px;
-    border-radius: 30px 0px 0px 30px;
-    border-top: 3px solid rgba(24, 160, 251, 1);
-    border-bottom: 3px solid rgba(24, 160, 251, 1);
-    border-left: 3px solid rgba(24, 160, 251, 1);
     background-color: rgba(255, 255, 255, 1);
 
     display: flex;
@@ -224,9 +136,14 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.345px;
-
 }
 
-.menu-material-default:hover {
+.menu-material:hover {
     cursor: pointer;
+    background-color: rgba(24, 160, 251, 0.7);
+}
+
+.selected-menu-material {
+    background-color: rgba(24, 160, 251, 1);
+    font-weight: 700;
 }

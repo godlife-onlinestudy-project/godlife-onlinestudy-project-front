@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import 'react-calendar/dist/Calendar.css';
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import './style.css';
@@ -36,7 +35,7 @@ const DatePickerModifyStudyComponent  = ({value, onChange} : DatePickerModifyStu
     return (
     <div className='datepicker-modify-study-box'>
       <DatePicker className='modify-study-end-date' showPopperArrow={false} locale={ko} 
-      selected={endDate} onChange={endDateHandle} closeOnScroll={true} minDate={selectedDate} dateFormat='yyyy. MM. dd' value={value} />
+      selected={endDate} onChange={endDateHandle} closeOnScroll={true} minDate={selectedDate} dateFormat='yyyy. MM. dd' value={endDate?.toLocaleDateString('ko-KR')} />
     </div>
   );
 }

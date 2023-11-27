@@ -1,0 +1,2 @@
+const accessTokenMock = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJpYXQiOjE1MTYyMzkwMjJ9.bl4gkj7LrLKHzwU3IQh7BeUVUF753DkrR8bI5ufewrs';
+export default accessTokenMock;

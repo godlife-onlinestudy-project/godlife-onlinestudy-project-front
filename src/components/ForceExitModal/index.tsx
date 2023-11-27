@@ -1,13 +1,17 @@
 import React from 'react';
 import './style.css';
 
+//          interface: 강제 퇴장 확인 모달 컴포넌트 Props          //
 interface ForceExitModalProps {
     onForceExit: () => void;
     onClose: () => void;
     userName: string;
 }
 
+//          component: 강제 퇴장 확인 모달 컴포넌트          //
 export default function ForceExitModal ({ onForceExit, onClose, userName }: ForceExitModalProps) {
+
+    //          render: 강제 퇴장 확인 모달 컴포넌트 렌더링          //
     return (
         <div className='force-exit-modal-card'>
             <div className='force-exit-modal-box'>

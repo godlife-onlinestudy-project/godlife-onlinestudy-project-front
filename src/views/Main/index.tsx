@@ -14,9 +14,10 @@ import SearchStudyListItem from '../../components/SearchStudyListItem';
 import { SERVICE_PATH } from 'constant';
 import ResponseDto from 'apis/dto/response';
 import { GetUserToDoListResponseDto } from 'apis/dto/response/user';
-import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest } from 'apis';
+import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest, getTop5StudyListRequest } from 'apis';
 import { accessTokenMock } from '../../mocks';
-import { PostUserToDoListRequestDto } from 'apis/dto/request';
+import { PostUserToDoListRequestDto } from 'apis/dto/request/user';
+import { GetTop5StudyListResponseDto } from 'apis/dto/response/study';
 
 //        component: 메인 페이지        //
 const Main = forwardRef<HTMLDivElement>((props, ref) => {
@@ -179,9 +180,6 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
       setTodoDeleteCheckList([]);
       
       setUserToDoListDeleteCheck('off');
-
-      // alert(todoDeleteCheckIndexList);
-      // alert(todoDeleteCheckList);
     }
 
     //        event handler: 나의 투두리스트 삭제 체크 버튼 클릭 이벤트 처리       //
@@ -427,10 +425,19 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
     //        state: 추천 스터디 top5 리스트 상태       //
     const [recommendationStudyList, setRecommendationStudyList] = useState<RecommendationStudyRoomItem[]>([]);
 
+    //        function: get top 5 study list response 처리 함수        //
+    const getTop5StudyListResponse = (responseBody: GetTop5StudyListResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'DBE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+
+      const { top5List } = responseBody as GetTop5StudyListResponseDto;
+      setRecommendationStudyList(top5List);
+    }
+
     //        effect: 컴포넌트 마운트 시 추천 스터디 top5 리스트 불러오기       //
     useEffect(() => {
-      // TODO: API 호출로 변경
-      setRecommendationStudyList(recommendationStudyListMock);
+      getTop5StudyListRequest('회화', accessTokenMock).then(getTop5StudyListResponse);
     }, []);
 
     //        render: 메인 중단 컴포넌트 렌더링       //

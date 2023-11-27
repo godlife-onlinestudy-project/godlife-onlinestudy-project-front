@@ -5,8 +5,8 @@ import StudyListItem from 'types/study-list';
 import StudyCreate from 'views/StudyCreate';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
-import GetSignInUserResponseDto from 'apis/response/user/get-sign-in-user.response.dto';
-import ResponseDto from 'apis/response';
+import GetSignInUserResponseDto from 'apis/dto/response/user/get-sign-in-user.response.dto';
+import ResponseDto from 'apis/dto/response';
 import { AUTH_PATH, MAIN_PATH, MY_PAGE_PATH, SERVICE_PATH, STUDYROOM_DETAIL_PATH, STUDY_CREATE_PATH } from 'constant';
 import { getSignInUserRequest } from 'apis';
 import Container from 'layouts/Container';
@@ -22,10 +22,6 @@ import StudyDateModal from 'views/modal/StudyDateModal';
 import StudyModifyModal from 'views/modal/StudyModifyModal';
 import ManinpagePriavateStudyRoomJoinModal from 'views/modal/MainpagePrivateStudyRoomjoinModal';
 import { studyListMock } from 'mocks';
-
-// interface Props {
-//   studyListItem: StudyListItem;
-// }
 
 function App() {
   
@@ -44,7 +40,7 @@ function App() {
     searchDivRef.current.scrollIntoView({ behavior: 'smooth' });
   }
 
-  //          function: get sign in user response 처리 함수 //
+  //          function: get sign in user response 처리 함수          //
   const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
     const { code } = responseBody;
     if (code !== 'SU') {
@@ -99,7 +95,6 @@ function App() {
     //   <Main ref={searchDivRef} />
     //   <Footer />
     // // </div>
-
   );
 }
 
