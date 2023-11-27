@@ -14,14 +14,6 @@ import Authentication from 'views/Authentication';
 import Main from 'views/Main';
 import Service from 'views/Service';
 import MyPage from 'views/MyPage';
-import HostNoticeManageModal from 'views/modal/HostNoticeManageModal';
-import NoticeModal from 'views/modal/NoticeModal';
-import HostToDoListManageModal from 'views/modal/HostToDoListManageModal';
-import ToDoListModal from 'views/modal/ToDoListModal';
-import StudyDateModal from 'views/modal/StudyDateModal';
-import StudyModifyModal from 'views/modal/StudyModifyModal';
-import ManinpagePriavateStudyRoomJoinModal from 'views/modal/MainpagePrivateStudyRoomjoinModal';
-import { studyListMock } from 'mocks';
 
 function App() {
   
