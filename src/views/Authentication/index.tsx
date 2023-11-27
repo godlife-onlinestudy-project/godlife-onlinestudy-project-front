@@ -7,8 +7,8 @@ import DropDownFirstCategory from '../../components/Dropdown1Category';
 import { SignInEmailCheckResponseDto, SignInResponseDto } from 'apis/dto/response/auth';
 import ResponseDto from 'apis/dto/response';
 import { MAIN_PATH } from 'constant';
-import { SignInEmailCheckRequestDto, SignInRequestDto, SignUpRequestDto } from 'apis/dto/request/auth';
-import { signInEmailCheckRequest, signInRequest, signUpRequest } from 'apis';
+import { SendAuthenticateCodeCheckRequestDto, SendAuthenticateCodeRequestDto, SignInEmailCheckRequestDto, SignInRequestDto, SignUpRequestDto } from 'apis/dto/request/auth';
+import { sendAuthenticateCodeCheckRequest, sendAuthenticationCodeRequest, signInEmailCheckRequest, signInRequest, signUpRequest } from 'apis';
 import DropDownModifyStudyCategory from 'components/DropdownModifyStudyCategory';
 import DropDownSignInCategory from 'components/DropdownSignUpCategory';
 
@@ -471,7 +471,14 @@ export default function Authentication() {
         //          state: 이메일 에러 상태          //
         const [sendEmailAddresserror, setSendEmailAddressError] = useState<boolean>(false);
         
-        
+        //          function: sign up send authentication code response 처리 함수          //
+        const sendAuthenticateCodeResponse = (code: string) => {
+            if (code === 'NU') alert('데이터베이스 오류입니다.');
+            if (code !== 'SU') return;
+      
+            setEmail('');
+            setView('sing-up-email-autentication-card');
+        }
 
         //          event handler: '이미 계정이 있습니까?' 버튼 클릭 이벤트 처리          //
         const onSignInLinkClickHandler = () => {
@@ -479,6 +486,9 @@ export default function Authentication() {
         }
         //          event handler: '가입' 버튼 클릭 이벤트 처리          //
         const onSingUpEmailAutenticationCardClickHandler = () => {
+            const requestBody : SendAuthenticateCodeRequestDto = {userEmail: email}
+            sendAuthenticationCodeRequest(requestBody).then(sendAuthenticateCodeResponse);
+
             setSendEmailAddressError(false);
 
             //          description: 이메일 패턴 확인           //
@@ -564,6 +574,16 @@ export default function Authentication() {
         //          state: 입력한 인증번호 에러 상태          //
         const [emailAutentificationError, setEmailAutentificationError] = useState<boolean>(false);
 
+        //          function: sign up send authentication code response 처리 함수          //
+        const sendAuthenticateCodeCheckResponse = (code: string) => {
+            if (code === 'NU') alert('데이터베이스 오류입니다.');
+            setEmailAutentificationError(true);
+            if (code !== 'SU') return;
+            
+            setEmailAutentification('');
+            setView('sing-up-information-card');
+    }
+
         //          event handler: input 값 변경 이벤트 처리          //
         const onEmailAutentificationChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
             const value = event.target.value;
@@ -571,6 +591,8 @@ export default function Authentication() {
         }
         //          event handler: '확인' 버튼 클릭 이벤트 처리          //
         const onInformationNavigatorButtonClickHandler = () => {
+            // const requestBody : SendAuthenticateCodeCheckRequestDto = {userEmail: passwordEmail, code: emailAutentification }
+            // sendAuthenticateCodeCheckRequest(requestBody).then(sendAuthenticateCodeCheckResponse);
             setView('sing-up-information-card');
         }
         //          event handler: 인증코드 인풋박스 ket down 이벤트 처리          //
@@ -757,7 +779,6 @@ export default function Authentication() {
         const onSingUpCompleteButtonClickHandler =() => {
             const requestBody : SignUpRequestDto = {userEmail: passwordEmail, userPassword: password, userNickname : nickname, userFavorite1 : category }
             signUpRequest(requestBody).then(signUpResponse);
-            console.log(12)
 
             setEmailError(false);
             setEmailErrorMessage('');
