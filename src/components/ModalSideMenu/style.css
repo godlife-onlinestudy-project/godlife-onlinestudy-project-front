@@ -3,10 +3,19 @@
     align-items: center;
     justify-content: center;
 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(125, 127, 129, 0.8);
+
     height: 100vh;
 }
 
 .menu-sidebar {
+    position: relative;
     margin-top: -500px;
     display: flex;
     flex-direction: column;
@@ -146,4 +155,8 @@
 .selected-menu-material {
     background-color: rgba(24, 160, 251, 1);
     font-weight: 700;
+}
+
+.menu-bar {
+    position: relative;
 }
