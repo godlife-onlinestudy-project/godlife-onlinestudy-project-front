@@ -1,8 +1,15 @@
 #studyroom-join-modal-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgba(125, 127, 129, 0.8);
+    z-index: 1000;
 }
 .studyroom-join-modal-card{
     display: flex;
