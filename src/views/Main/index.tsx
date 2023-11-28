@@ -4,7 +4,7 @@ import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import studyRoomInfoListMock from '../../mocks/my-study-room-info-list.mock';
 import { MyStudyRoomInfoItem, MyToDoItem, RecommendationStudyRoomItem, SearchStudyRoomItem } from '../../types';
-import { myToDoListMock, recommendationStudyListMock, searchStudyListMock } from '../../mocks';
+import { accessTokenMock, myToDoListMock, recommendationStudyListMock, searchStudyListMock } from '../../mocks';
 import RecommendationStudyListItem from '../../components/RecommendationStudyListItem';
 import ProgressBar from '../../components/ProgressBar';
 import MyToDoListItem from '../../components/MyToDoListItem';
@@ -15,7 +15,6 @@ import { SERVICE_PATH } from 'constant';
 import ResponseDto from 'apis/dto/response';
 import { GetUserToDoListResponseDto } from 'apis/dto/response/user';
 import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest, getTop5StudyListRequest } from 'apis';
-import { accessTokenMock } from '../../mocks';
 import { PostUserToDoListRequestDto } from 'apis/dto/request/user';
 import { GetTop5StudyListResponseDto } from 'apis/dto/response/study';
 

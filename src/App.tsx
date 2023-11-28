@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect }  from 'react';
-import { Outlet, Route, Router, Routes, useLocation } from 'react-router-dom';
+import { Outlet, Route, Router, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import StudyListItem from 'types/study-list';
 import StudyCreate from 'views/StudyCreate';
@@ -14,6 +14,7 @@ import Authentication from 'views/Authentication';
 import Main from 'views/Main';
 import Service from 'views/Service';
 import MyPage from 'views/MyPage';
+import OAuth from 'views/OAuth';
 
 function App() {
   
@@ -23,6 +24,8 @@ function App() {
   const { user, setUser } = useUserStore();
   //          state: cookie 상태          //
   const [cookies, setCookie] = useCookies();
+
+  const navigator = useNavigate();
 
   //        description: 검색 버튼 Ref        //
   const searchDivRef = useRef<HTMLDivElement | null>(null);
@@ -34,27 +37,24 @@ function App() {
 
   //          function: get sign in user response 처리 함수          //
   const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
-    const { code } = responseBody;
-    if (code !== 'SU') {
-      setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
-      setUser(null);
-      return;
-    }
+    // const { code } = responseBody;
+    // if (code !== 'SU') {
+    //   setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
+    //   setUser(null);
+    //   return;
+    // }
 
-    setUser({ ...responseBody as GetSignInUserResponseDto });
+    // setUser({ ...responseBody as GetSignInUserResponseDto });
   }
 
   //          effect: 현재 path가 변경될 때마다 실행될 함수          //
   useEffect(() => {
 
     const accessToken = cookies.accessToken;
-    if (!accessToken) {
-      setUser(null);
-      return;
-    }
+    if (!accessToken) setUser(null);
+    else getSignInUserRequest(accessToken).then(getSignInUserResponse);
 
-    getSignInUserRequest(accessToken).then(getSignInUserResponse);
-    
+    if (pathname === "/") navigator(AUTH_PATH);
   }, [pathname]);
   
   return (
@@ -65,9 +65,10 @@ function App() {
         
         <Route path={STUDY_CREATE_PATH} element ={<StudyCreate />} />
         <Route path={MY_PAGE_PATH} element={<MyPage />} />
-        <Route path='*' element={<h1>404 Not Found</h1>} />  
       </Route>
       <Route path={SERVICE_PATH(':studyNumber')} element={<Service />} /> 
+      <Route path='oauth/:token/:expirationTime' element={<OAuth />} />
+      <Route path='*' element={<h1>404 Not Found</h1>} />  
     </Routes>
 
     // <div>
