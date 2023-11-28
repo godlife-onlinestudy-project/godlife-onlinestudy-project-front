@@ -163,6 +163,7 @@ export const sendAuthenticateCodeCheckRequest = async (requestBody : SendAuthent
       const { code } = responseBody;
       return code;
     });
+  return result;
 };
 
 // description: get modify study request //

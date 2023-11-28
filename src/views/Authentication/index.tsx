@@ -591,8 +591,8 @@ export default function Authentication() {
         }
         //          event handler: '확인' 버튼 클릭 이벤트 처리          //
         const onInformationNavigatorButtonClickHandler = () => {
-            // const requestBody : SendAuthenticateCodeCheckRequestDto = {userEmail: passwordEmail, code: emailAutentification }
-            // sendAuthenticateCodeCheckRequest(requestBody).then(sendAuthenticateCodeCheckResponse);
+            const requestBody : SendAuthenticateCodeCheckRequestDto = {userEmail: passwordEmail, code: Number(emailAutentification) }
+            sendAuthenticateCodeCheckRequest(requestBody).then(sendAuthenticateCodeCheckResponse);
             setView('sing-up-information-card');
         }
         //          event handler: 인증코드 인풋박스 ket down 이벤트 처리          //
