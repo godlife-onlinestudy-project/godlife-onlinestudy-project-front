@@ -42,15 +42,15 @@ const authorization = (token: string) => {
 };
 
 // description: sigin in API end point //
-const SIGN_IN_URL = () => `${API_DOMAIN}/sign-in`;
+const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
 // description: sign in email check API end point //
 const SIGN_IN_EMAIL_CHECK_URL = () => `${API_DOMAIN}/auth/sign-in-email-check`;
 // description: sign up API end point //
-const SIGN_UP_URL = () => `${API_DOMAIN}/sign-up`;
+const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`;
 // description: sign up send authentication code API end point //
-const SIGN_UP_SEND_AUTHENTICATION_CODE_URL = () => `${API_DOMAIN}/send-authenticate-code`;
+const SIGN_UP_SEND_AUTHENTICATION_CODE_URL = () => `${API_DOMAIN}/auth/send-authenticate-code`;
 // description: sign up send authentication code API end point //
-const SIGN_UP_SEND_AUTHENTICATION_CODE_CHECK_URL = () => `${API_DOMAIN}/send-authenticate-code-check`;
+const SIGN_UP_SEND_AUTHENTICATION_CODE_CHECK_URL = () => `${API_DOMAIN}/auth/send-authenticate-code-check`;
 
 // description: get modify study API end point //
 const GET_STUDY_MODIFY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
