@@ -7,9 +7,13 @@ import './style.css';
 import { GetStudyUserListResponseDto } from 'apis/dto/response/study';
 import ResponseDto from 'apis/dto/response';
 import { deleteStudyUserListRequest, getStudyUserListRequest } from 'apis';
+import { useCookies } from 'react-cookie';
 
 //           component: 멤버 관리 리스트 컴포넌트           //
 export default function MemberManageModal({ modalCloseHandler, studyNumber }: {modalCloseHandler: () => void; studyNumber: string | number}) {
+
+    //          state: cookie 상태          //
+    const [cookies, setCookies] = useCookies();
 
     //           interface: 멤버 관리 리스트 아이템 컴포넌트 Props           //
     interface Props {
@@ -53,6 +57,9 @@ export default function MemberManageModal({ modalCloseHandler, studyNumber }: {m
 
         //          function: delete study user list reponse 처리 함수          //
         const deleteStudyUserListResponse = (code: string) => {
+            const accessToken = cookies.accessToken;
+            if (!accessToken) return;
+
             if (code === 'VF') alert('잘못된 접근입니다.');
             if (code === 'NU' || code === 'AF') {
                 return;
@@ -64,7 +71,7 @@ export default function MemberManageModal({ modalCloseHandler, studyNumber }: {m
 
             setShowModal(false);
             if (!studyNumber) return;
-            getStudyUserListRequest(studyNumber, accessTokenMock).then(getStudyUserListResponse);
+            getStudyUserListRequest(studyNumber, accessToken).then(getStudyUserListResponse);
         };
 
         //           event handler: 강제퇴장을 눌렀을 때의 강제퇴장 모달 창 띄우기 이벤트 처리           //
@@ -77,8 +84,11 @@ export default function MemberManageModal({ modalCloseHandler, studyNumber }: {m
 
         //           event handler: 강제퇴장 이벤트 처리           //
         const onForceExitHandler = () => {
+            const accessToken = cookies.accessToken;
+            if (!accessToken) return;
+
             if (!studyNumber) return;
-            deleteStudyUserListRequest(studyNumber, userEmail, accessTokenMock).then(deleteStudyUserListResponse);
+            deleteStudyUserListRequest(studyNumber, userEmail, accessToken).then(deleteStudyUserListResponse);
         }
 
         //           event handler: 취소를 눌렀을 때에 강제퇴장 모달 창 지우기 이벤트 처리           //
@@ -143,8 +153,11 @@ export default function MemberManageModal({ modalCloseHandler, studyNumber }: {m
 
     //           effect: 스터디 방 확인           //
     useEffect(() => {
+        const accessToken = cookies.accessToken;
+        if (!accessToken) return;
         if (!studyNumber) return;
-        getStudyUserListRequest(studyNumber, accessTokenMock).then(getStudyUserListResponse);
+        
+        getStudyUserListRequest(studyNumber, accessToken).then(getStudyUserListResponse);
     }, [studyNumber]);
 
     //           render: 멤버 관리 리스트 컴포넌트 렌더링           //

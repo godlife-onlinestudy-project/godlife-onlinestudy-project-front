@@ -18,6 +18,7 @@ import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
 import PeerJsComponent from 'components/PeerJs';
+import ModalSideMenu from 'components/ModalSideMenu';
 
 
 
@@ -80,6 +81,12 @@ export default function Service( ) {
 
       //           state : 스터디 방이름 상태            //
       const {studyName, setStudyName} = useStudyStore();
+      //          state: 모달 창 상태          //
+      const [show, setShow] = useState<boolean>(false);
+
+      //          event handler: 모달 Open, Close 이벤트 처리          //
+      const modalCloseHandler = () => setShow(false);
+      const modalOpenHandler = () => setShow(true);
 
     //     render: 헤더 컴포넌트 렌더링          //
      return(
@@ -97,7 +104,8 @@ export default function Service( ) {
           <div className="header-end">
             <div className="header-setting">
               <div className="header-settings-icon"></div>
-              <div className="header-setting-contents">설정</div>
+              <div className="header-setting-contents" onClick={modalOpenHandler}>설정</div>
+              {show && <ModalSideMenu modalCloseHandler={modalCloseHandler} />}
             </div>
             <div className="header-exit">
               <div className="header-exit-icon"></div>
@@ -420,8 +428,6 @@ export default function Service( ) {
         //          event handler: 자료 이미지 닫기 버튼 클릭 이벤트 처리          //
         const onMaterialImageCloseHandler = ( deleteIndex: number )=>{
           if(!imageRef.current) return;
-
-
         }      
 
         // effect : 컴포넌트 마운트 시 마다 자료 정보 리스트 불러오기 // 
@@ -496,8 +502,8 @@ export default function Service( ) {
         return(
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
-            <PeerJsComponent />
-              <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+            {/* <PeerJsComponent /> */}
+              {/* <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 
                 <div className='user-wrapper'>
@@ -529,7 +535,7 @@ export default function Service( ) {
                   </div>
                 </div>
               )}                
-              </Scrollbars>
+              </Scrollbars> */}
             </div>
           </div>
         )

@@ -219,9 +219,7 @@ export default function PeerJsComponent() {
                     <video key={index} ref={video => { if (video) video.srcObject = stream; }} muted playsInline autoPlay></video>
                 ))}
                 <video ref={localVideoRef} id='local-video' muted playsInline></video>
-                <button id='end-call' onClick={endCall}>
-                    End Call
-                </button>
+                <button id='end-call' onClick={endCall}></button>
             </div>
         </>
     );

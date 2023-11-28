@@ -167,8 +167,8 @@ export const sendAuthenticateCodeCheckRequest = async (requestBody : SendAuthent
 };
 
 // description: get modify study request //
-export const getModifyStudyRequest = async (studyNumber: string | number) => {
-  const result = await axios.get(GET_STUDY_MODIFY_URL(studyNumber))
+export const getModifyStudyRequest = async (studyNumber: string | number, token: string) => {
+  const result = await axios.get(GET_STUDY_MODIFY_URL(studyNumber), authorization(token))
   .then(response => {
       const responseBody: GetModifyStudyResponseDto = response.data;
       return responseBody;

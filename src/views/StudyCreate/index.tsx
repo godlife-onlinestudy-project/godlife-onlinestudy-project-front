@@ -8,7 +8,7 @@ import MaterialManageModal from 'views/modal/MaterialManageModal';
 import { useStudyStore } from 'stores';
 import { PostStudyRequestDto } from 'apis/dto/request/study';
 import { postStudyRequest } from 'apis';
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 import { accessTokenMock } from 'mocks';
 
 //          event handler: 랜덤 코드 이벤트 처리          //
@@ -33,7 +33,7 @@ export default function StudyCreate() {
     const { isStudyPublic, studyPrivatePassword, studyCoverImageUrl, resetService, setStudyPrivatePassword, setStudyCoverImageUrl } = useStudyStore();
 
     //          state: cookie 상태          //
-    // const [cookies, setCookies] = useCookies();
+    const [cookies, setCookies] = useCookies();
 
     //          state: 스터디 생성 오류 상태          //
     const[error, setError] = useState<boolean>(false);
@@ -90,8 +90,8 @@ export default function StudyCreate() {
     //          event handler: 스터디 만들기 클릭 이벤트 처리          //
     const onClickCreateStudyRoomHandler = async () => {
 
-        // const accessToken = cookies.accessToken;
-        // if (!accessToken) return;
+        const accessToken = cookies.accessToken;
+        if (!accessToken) return;
 
         // description : 스터디 제목 확인 //
         const checkedTitle = title.trim().length < 2;
@@ -112,7 +112,7 @@ export default function StudyCreate() {
         const requestBody: PostStudyRequestDto = {
             studyName, studyStartDate: strStudyStartDate, studyEndDate: strStudyEndDate, studyPersonal, studyCategory1, studyCategory2, studyCategory3,
             studyPublicCheck: isStudyPublic, studyPrivatePassword, studyCoverImageUrl }
-        postStudyRequest(requestBody, accessTokenMock).then(postStudyResponse);
+        postStudyRequest(requestBody, accessToken).then(postStudyResponse);
         alert('방 생성 완료!');
     };
     //          event handler: 공개방 / 비공개방 이벤트 처리          //
