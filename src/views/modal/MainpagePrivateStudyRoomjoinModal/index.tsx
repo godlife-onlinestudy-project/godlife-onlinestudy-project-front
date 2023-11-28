@@ -1,14 +1,19 @@
 import { tab } from '@testing-library/user-event/dist/tab';
 import ProgressBar from '../../../components/ProgressBar';
 import './style.css';
-import { useEffect, useState,KeyboardEvent } from 'react';
+import { useEffect, useState,KeyboardEvent, Dispatch, SetStateAction } from 'react';
 import { StudyNoticeMock, studyRoomInfoListMock } from '../../../mocks';
-import { MyStudyRoomInfoItem } from '../../../types';
+import { MyStudyRoomInfoItem, SearchStudyRoomItem } from '../../../types';
 import Scrollbars from 'react-custom-scrollbars-2';
 import InputBox from '../../../components/InputBox';
 import RoomJoinModalNoticeItem from '../../../components/RoomJoinMoadalNoticeItem';
 
-export default function ManinpagePriavateStudyRoomJoinModal() {
+interface Props {
+    item: SearchStudyRoomItem,
+    setShowModal: Dispatch<SetStateAction<boolean>>,
+}
+
+export default function ManinpagePriavateStudyRoomJoinModal({ item, setShowModal }: Props) {
 
     //        state: 참여한 스터디 방 정보        //
     const [ studyRoomInfoList, setStudyRoomInfoList ] = useState<MyStudyRoomInfoItem[]>(studyRoomInfoListMock);
@@ -59,13 +64,15 @@ export default function ManinpagePriavateStudyRoomJoinModal() {
         onPrivateRoomJoinClickHandler();
     }
 
+ 
+
 
     //        render : 계정인증 메인 랜더링        //
     return(
-        <div id='studyroom-join-modal-wrapper'>
+        <div id='studyroom-join-modal-wrapper' >
             <div className='studyroom-join-modal-card'>
                 <div className='studyroom-join-modal-card-close-button-box'>
-                    <div className='studyroom-join-modal-card-close-button'></div>
+                    <div className='studyroom-join-modal-card-close-button' ></div>
                 </div>
                 <div className='studyroom-join-modal-header'>
                     <div className='studyroom-image-box'>

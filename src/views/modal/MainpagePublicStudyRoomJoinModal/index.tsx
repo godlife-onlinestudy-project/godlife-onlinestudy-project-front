@@ -3,7 +3,7 @@ import ProgressBar from '../../../components/ProgressBar';
 import './style.css';
 import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { StudyNoticeMock, studyRoomInfoListMock } from '../../../mocks';
-import { MyStudyRoomInfoItem, RecommendationStudyRoomItem } from '../../../types';
+import { MyStudyRoomInfoItem, RecommendationStudyRoomItem, SearchStudyRoomItem } from '../../../types';
 import Scrollbars from 'react-custom-scrollbars-2';
 import NoticeItem from '../../../components/RoomJoinMoadalNoticeItem';
 import RoomJoinModalNoticeItem from '../../../components/RoomJoinMoadalNoticeItem';
@@ -12,7 +12,7 @@ import { SERVICE_PATH } from 'constant';
 
 
 interface Props {
-    item: RecommendationStudyRoomItem,
+    item: SearchStudyRoomItem | RecommendationStudyRoomItem,
     setShowModal: Dispatch<SetStateAction<boolean>>,
 }
 
