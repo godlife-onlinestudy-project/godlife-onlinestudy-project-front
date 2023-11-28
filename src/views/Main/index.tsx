@@ -14,10 +14,12 @@ import SearchStudyListItem from '../../components/SearchStudyListItem';
 import { SERVICE_PATH } from 'constant';
 import ResponseDto from 'apis/dto/response';
 import { GetUserToDoListResponseDto } from 'apis/dto/response/user';
-import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest, getTop5StudyListRequest } from 'apis';
+import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest, getTop5StudyListRequest, getSearchStudyListRequest, getSearchWordStudyListRequest } from 'apis';
 import { accessTokenMock } from '../../mocks';
 import { PostUserToDoListRequestDto } from 'apis/dto/request/user';
 import { GetTop5StudyListResponseDto } from 'apis/dto/response/study';
+import GetSearchStudyListResponseDto from 'apis/dto/response/study/get-search-study-list.response.dto';
+import GetSearchWordStudyListResponseDto from 'apis/dto/response/study/get-search-word-study-list.response.dto';
 
 //        component: 메인 페이지        //
 const Main = forwardRef<HTMLDivElement>((props, ref) => {
@@ -462,6 +464,8 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
     const [selectedStudyPublicCheckCategory, setSelectedStudyPublicCheckCategory] = useState<string>('전체');
     //        state: 검색 값 상태       //
     const [searchValue, setSearchValue] = useState<string>('');
+    //        state: 스터디 리스트 원본 상태       //
+    const [originalSearchStudyList, setOriginalSearchStudyList] = useState<SearchStudyRoomItem[]>([]);
     //        state: 스터디 리스트 상태       //
     const [searchStudyList, setSearchStudyList] = useState<SearchStudyRoomItem[]>([]);
     //        state: 총 스터디 개수 상태        //
@@ -469,16 +473,53 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
     //        state: 검색 후 스터디 방 보여지는 개수 상태       //
     const [visibleItems, setVisibleItems] = useState(15);
 
+    //        function: get search study list response 처리 함수        //
+    const getSearchStudyListResponse = (responseBody: GetSearchStudyListResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'DBE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+      const { searchList } = responseBody as GetSearchStudyListResponseDto;
+      setSearchStudyList(searchList);
+      setTotalStudySum(searchList.length);
+      setOriginalSearchStudyList(searchList);
+    }
+
+    //        function: get search word study list response 처리 함수        //
+    const getSearchWordStudyListResponse = (responseBody: GetSearchWordStudyListResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'DBE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') return;
+      const { searchWordList } = responseBody as GetSearchWordStudyListResponseDto;
+      setSearchStudyList(searchWordList);
+      setTotalStudySum(searchWordList.length);
+      setOriginalSearchStudyList(searchWordList);
+    }
+
     //        effect: 컴포넌트 마운트 시 스터디 리스트 불러오기       //
     useEffect(() => {
-      // TODO: API 호출로 변경
-      setSearchStudyList(searchStudyListMock);
-    }, [selectedStudyCategory, selectedStudyPublicCheckCategory]);
+      getSearchStudyListRequest(accessTokenMock).then(getSearchStudyListResponse);
+    }, []);
 
-    //        effect: 검색을 할 때 마다 실행할 함수       //
+    //        effect: 스터디 리스트가 변경될 때 방의 갯수 불러오기       //
     useEffect(() => {
       setTotalStudySum(searchStudyList.length);
     }, [searchStudyList]);
+
+    //        effect: 스터디 카테고리, 스터디 공개여부 버튼 클릭 시 리스트 불러오기       //
+    useEffect(() => {
+
+      const filterPublicCategory = selectedStudyPublicCheckCategory === '전체' ? [0, 1] : selectedStudyPublicCheckCategory === '공개' ? 1 : 0;
+      const filterStudyCategory = selectedStudyCategory === '전체' ? ['자격증', '학교', '취업', '회화', '어학', '기타'] : selectedStudyCategory;
+    
+      setSearchStudyList(originalSearchStudyList.filter(item => {
+        if (Array.isArray(filterStudyCategory)) {
+          return filterStudyCategory.includes(item.studyCategory1) && (Array.isArray(filterPublicCategory) ? filterPublicCategory.includes(item.studyPublicCheck) : item.studyPublicCheck === filterPublicCategory);
+        } else {
+          return item.studyCategory1 === filterStudyCategory && (Array.isArray(filterPublicCategory) ? filterPublicCategory.includes(item.studyPublicCheck) : item.studyPublicCheck === filterPublicCategory);
+        }
+      }));
+
+    }, [selectedStudyPublicCheckCategory, selectedStudyCategory]);
 
     //        event handler: 검색 값 변경 이벤트 처리       //
     const onInputValueChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -489,12 +530,20 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
     //        event handler: 검색 인풋 Enter key down 이벤트 처리       //
     const onSearchEnterKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== 'Enter') return;
-      alert('검색완료');
+      if (!searchValue) {
+        getSearchStudyListRequest(accessTokenMock).then(getSearchStudyListResponse);
+        return;
+      }
+      getSearchWordStudyListRequest(searchValue, accessTokenMock).then(getSearchWordStudyListResponse);
     }
 
     //        event handler: 검색 버튼 클릭 이벤트 처리       //
     const onSearchButtonClickHandler = () => {
-      alert('검색완료');
+      if (!searchValue) {
+        getSearchStudyListRequest(accessTokenMock).then(getSearchStudyListResponse);
+        return;
+      }
+      getSearchWordStudyListRequest(searchValue, accessTokenMock).then(getSearchWordStudyListResponse);
     }
 
     //        event handler: 스터디 카테고리 버튼 클릭 이벤트 처리        //
@@ -533,6 +582,8 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
                 onClick={() => onStudyCategoryButtonClickHandler('학교')}>{'학교'}</div>
               <div className={selectedStudyCategory === '취업' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
                 onClick={() => onStudyCategoryButtonClickHandler('취업')}>{'취업'}</div>
+              <div className={selectedStudyCategory === '어학' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
+                onClick={() => onStudyCategoryButtonClickHandler('어학')}>{'어학'}</div>
               <div className={selectedStudyCategory === '회화' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
                 onClick={() => onStudyCategoryButtonClickHandler('회화')}>{'회화'}</div>
               <div className={selectedStudyCategory === '기타' ? 'main-bottom-box-studyroom-category-button-selected' : 'main-bottom-box-studyroom-category-button'} 
@@ -548,10 +599,13 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
                 onClick={() => onStudyPublicCheckCategoryButtonClickHandler('비공개')}>{'비공개'}</div>
             </div>
             <div className='main-bottom-box-studyroom'>
-              <div className='main-bottom-box-studyroom-line'>
-                {searchStudyList.slice(0, visibleItems).map(SearchStudyRoomItem => <SearchStudyListItem searchStudyRoomItem={SearchStudyRoomItem} />)}
-              </div>
-              {searchStudyList.length > 15 && visibleItems < searchStudyList.length && (
+                {searchStudyList && searchStudyList.length > 0 && (
+                  <div className='main-bottom-box-studyroom-line'>
+                    {searchStudyList.slice(0, visibleItems).map(SearchStudyRoomItem => <SearchStudyListItem searchStudyRoomItem={SearchStudyRoomItem} />)}
+                  </div>
+                )}
+
+              {searchStudyList && searchStudyList.length > 15 && visibleItems < searchStudyList.length && (
                 <div className='main-bottom-box-studyroom-more-detail-button' onClick={onMoreDetailButtonClickHandler}>{'더보기'}</div>
               )}
             </div>
