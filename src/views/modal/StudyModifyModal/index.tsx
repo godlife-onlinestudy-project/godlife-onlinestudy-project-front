@@ -307,7 +307,7 @@ export default function StudyModifyModal({ studyItem, setStudyItem, modalCloseHa
                             )}
                         </div>
                     </div>
-                    <div className='study-cover-image-box'>
+                    <div className='study-cover-modify-image-box'>
                         <div className='study-cover-image-title'>{'스터디 커버 이미지'}</div>
                         <div className='study-cover-image-contents' onChange={onStudyCoverImageChangeHandler}>
                             <input ref={fileInputRef} type='file' accept='image/*' style={{ display: 'none' }} />

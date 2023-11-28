@@ -14,7 +14,7 @@ export default function OAuth() {
     //          function: 네비게이트 함수          //
     const navigator = useNavigate();
 
-    //          effect: token이변경될 때마다 실행될 함수          //
+    //          effect: token이 변경될 때마다 실행될 함수          //
     useEffect(() => {
 
         if (!token || !expirationTime) return;

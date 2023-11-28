@@ -78,7 +78,6 @@ export default function Service( ) {
       //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
       useEffect(()=>{
         const accessToken = cookies.accessToken;
-        alert(accessToken);
         // if (!accessToken) {
         //   alert('로그인이 필요합니다.');
         //   return;
@@ -143,10 +142,15 @@ export default function Service( ) {
       const modalCloseHandler = () => setShow(false);
       const modalOpenHandler = () => setShow(true);
 
+      //        event handler: 로고 클릭 이벤트 처리        //
+      const onLogoClickHandler = () => {
+        navigator('/main');
+      }
+
     //     render: 헤더 컴포넌트 렌더링          //
      return(
         <div className="service-header">
-          <div className="logo-box">
+          <div className="logo-box" onClick={onLogoClickHandler}>
             <div className="logo-icon-box"></div>
             <div className="logo-title">갓생살기</div>
           </div>
@@ -158,7 +162,7 @@ export default function Service( ) {
           </div>
           <div className="header-end">
             <div className="header-setting">
-              <div className="header-settings-icon"></div>
+              <div className="header-settings-icon" onClick={modalOpenHandler}></div>
               <div className="header-setting-contents" onClick={modalOpenHandler}>설정</div>
               {show && <ModalSideMenu modalCloseHandler={modalCloseHandler} />}
             </div>

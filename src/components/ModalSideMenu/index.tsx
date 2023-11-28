@@ -8,7 +8,7 @@ import { StudyListItem, StudyModify } from 'types';
 import { useModalSideManageStore } from 'stores';
 import { GetModifyStudyResponseDto } from 'apis/dto/response/study';
 import ResponseDto from 'apis/dto/response';
-import StudyServiceMaterialManageModal from 'views/StudyServiceMaterialManageModal';
+import StudyServiceMaterialManageModal from 'views/modal/StudyServiceMaterialManageModal';
 import { getModifyStudyRequest } from 'apis';
 import { accessTokenMock } from 'mocks';
 import { useCookies } from 'react-cookie';
@@ -22,17 +22,7 @@ function ModalSideMenu({modalCloseHandler}: {modalCloseHandler: () => void}) {
     //           state: SideMenu 방 선택 상태           //
     const { selectedOption, setSelectedOption } = useModalSideManageStore();
     //           state: StudyModify 방 상태           //
-    const [studyListItem, setStudyListItem] = useState<StudyModify | null>(null
-        // studyNumber: 4,
-        // studyName: 'sadads',
-        // studyEndDate: '',
-        // studyPersonal: 0,
-        // studyCategory1: '',
-        // studyPublicCheck: false,
-        // studyPrivatePassword: null,
-        // studyCoverImageUrl: null,
-        // createStudyUserEmail: '',
-    );
+    const [studyListItem, setStudyListItem] = useState<StudyModify | null>(null);
     //           state: 방 번호 상태           //
     const [studyNumber, setStudyNumber] = useState<string>('4');
 

@@ -33,6 +33,10 @@
     gap: 10px;
 }
 
+.logo-box:hover {
+    cursor: pointer;
+}
+
 .logo-icon-box{
 
     width: 30px;
