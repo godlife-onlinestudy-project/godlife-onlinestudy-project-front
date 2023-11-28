@@ -33,7 +33,7 @@ export default function StudyCreate() {
     const { isStudyPublic, studyPrivatePassword, studyCoverImageUrl, resetService, setStudyPrivatePassword, setStudyCoverImageUrl } = useStudyStore();
 
     //          state: cookie 상태          //
-    const [cookies, setCookies] = useCookies();
+    // const [cookies, setCookies] = useCookies();
 
     //          state: 스터디 생성 오류 상태          //
     const[error, setError] = useState<boolean>(false);

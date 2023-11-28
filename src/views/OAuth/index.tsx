@@ -15,8 +15,10 @@ export default function OAuth() {
         if (!token || !expirationTime) return;
 
         const now = new Date().getTime();
-        const expires = new Date(now + Number(expirationTime) * 1000);
-        setCookie('accessToken', token, { expires, path: MAIN_PATH });
+        const expires = new Date(now + Number(expirationTime) * 1000 + 32400000);
+        console.log(expires);
+        setCookie('accessToken', token, { expires, path: '/' });
+        navigator(MAIN_PATH);
     }, [token]);
 
   return (
