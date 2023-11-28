@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect }  from 'react';
 import { Outlet, Route, Router, Routes, useLocation } from 'react-router-dom';
 import './App.css';
-import StudyListItem from 'types/study-list';
+import StudyListItem from 'types/study-list.inteface';
 import StudyCreate from 'views/StudyCreate';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';

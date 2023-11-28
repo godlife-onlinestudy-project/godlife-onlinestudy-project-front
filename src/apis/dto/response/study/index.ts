@@ -4,8 +4,10 @@ import GetModifyStudyResponseDto from './get-modify-study.response.dto';
 import GetTop5StudyListResponseDto from "./get-top-3-study-list.response.dto";
 import GetStudyUserListResponseDto from './get-study-user-list.response.dto';
 import DeleteStudyUserListResponseDto from './delete-study-user-list.response.dto';
+import GetStudyResponseDto from './get-study.response.dto';
 
 export type {
+    GetStudyResponseDto,
     PostStudyResponseDto,
     PatchStudyResponseDto,
     GetModifyStudyResponseDto,
