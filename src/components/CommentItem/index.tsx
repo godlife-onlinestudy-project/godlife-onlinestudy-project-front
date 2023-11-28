@@ -14,15 +14,15 @@ export default function CommentItem({ commentItem }: Props) {
 
     //          state: Properties          //
     const {studyNumber , studyMaterialNumber ,commentUserEmail,userProfileImageUrl} = commentItem;
-    const { userGrade , userNickName ,materialComment } =  commentItem;
-    const { writeDatetime} = commentItem;   
+    const { studyGrade , userNickName ,studyMaterialCommentContent } =  commentItem;
+    const { studyMaterialCommentDatetime} = commentItem;   
 
     //          state : 자료 코멘트 박스 보여주기 상태               //
     const [showCommentBox,setShowCommentBox] = useState<boolean>(false);
     //          state : 자료 코멘트 박스 색상 변경 상태  //
     const [backgroundColor,setBackgroundColor] = useState<string>('white');
     //          state: 댓글 상태              //
-    const [comment, setComment] = useState<string>(materialComment);
+    const [comment, setComment] = useState<string>(studyMaterialCommentContent);
     //          state: 댓글 textarea 참조 상태          //
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     //          state: 댓글 박스 상태         //
@@ -36,7 +36,7 @@ export default function CommentItem({ commentItem }: Props) {
     //      function : 작성일 경과 시간 함수           //
     const getElapsedTime = () =>{
         const now = dayjs().add(9, 'hour');
-        const writeTime = dayjs(writeDatetime);
+        const writeTime = dayjs(studyMaterialCommentDatetime);
         
         const gap = now.diff(writeTime, 's');
         if(gap < 60) return `${gap}초 전`;
@@ -114,7 +114,7 @@ export default function CommentItem({ commentItem }: Props) {
             <div className='comment-list-item-top'>
                 <div className='comment-list-class-image-box'>
                     
-                    { userGrade === '방장' ? (
+                    { studyGrade === '방장' ? (
                         <div className='comment-list-class-king-image'></div>
                         )
                         :(

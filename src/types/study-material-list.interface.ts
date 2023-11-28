@@ -1,8 +1,8 @@
 export default interface MaterialListItem{
-    studyNumber : number;
     studyMaterialNumber : number;
+    studyNumber : number;
     studyMaterialName : string;
     studyMaterialImageUrl :string;
     studyMaterialWriter : string;
-    studyMaterialDate : string;
+    studyMaterialDatetime : string;
 }

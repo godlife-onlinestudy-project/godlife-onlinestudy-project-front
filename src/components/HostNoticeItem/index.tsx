@@ -11,11 +11,11 @@ interface Props {
 export default function HostNoticeItem({noticeItem} : Props){
 
   //          state: Properties          //
-  const {studyNumber, studyNoticeNumber,studyNoticeContents} = noticeItem;
+  const {studyNumber, studyNoticeNumber,studyNoticeContent} = noticeItem;
   //          state: 공지사항 리스트 textarea 참조 상태          //
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   //          state: 공지사항 리스트 상태              //
-  const [notice, setNotice] = useState<string>(studyNoticeContents);
+  const [notice, setNotice] = useState<string>(studyNoticeContent);
   //          state: 공지사항 textarea 수정 상태          //
   const [textareaEdit, setTextareaEdit] = useState<boolean>(false);
 

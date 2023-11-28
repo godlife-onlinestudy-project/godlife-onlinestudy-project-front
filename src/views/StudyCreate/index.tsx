@@ -4,7 +4,7 @@ import DropDownStudyPeopleSet from 'components/DropdownStudyPeopleSet';
 import DropDownFirstCategory from 'components/Dropdown1Category';
 import DropDownStudyCreateCategory from 'components/DropdownStudyCreateCategory';
 import DatePickerComponent from 'components/DatePicker';
-import { Modal } from 'react-bootstrap';
+
 import MaterialManageModal from 'views/MaterialManageModal';
 
 //          component: 스터디 생성 페이지          //

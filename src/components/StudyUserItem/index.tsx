@@ -1,4 +1,5 @@
 
+import { StudyUserListItem } from 'types';
 import './style.css';
 import DefaultProfileImage from 'assets/default-profile-image.png';
 
@@ -9,7 +10,7 @@ interface Props {
 export default function UserListItem({userListItem}: Props){
   
     //          state: Properties                               //
-    const { studyNumber, userEmail, studyGrade,studyProfileImageUrl,studyNickName} = userListItem;
+    const { studyNumber, userEmail, studyGrade,userProfileImageUrl,studyNickName} = userListItem;
 
 
 
@@ -35,7 +36,7 @@ export default function UserListItem({userListItem}: Props){
                 }
             </div>
             <div className="user-bottom-profile-box">
-             <div className='comment-list-profile-image' style={{ backgroundImage: `url(${studyProfileImageUrl ? studyProfileImageUrl : DefaultProfileImage})` }}></div>
+             <div className='comment-list-profile-image' style={{ backgroundImage: `url(${userProfileImageUrl ? userProfileImageUrl : DefaultProfileImage})` }}></div>
             </div>
             <div className="user-bottom-nickname">{studyNickName}</div>
         </div>

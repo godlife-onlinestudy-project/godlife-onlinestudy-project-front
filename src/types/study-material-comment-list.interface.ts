@@ -3,8 +3,8 @@ export default interface StudyMaterialCommentListItem {
     studyMaterialNumber : number;
     commentUserEmail: string;
     userProfileImageUrl : string;
-    userGrade : string;
+    studyGrade : string;
     userNickName : string;
-    materialComment : string;
-    writeDatetime: string;
+    studyMaterialCommentContent : string;
+    studyMaterialCommentDatetime: string;
 }

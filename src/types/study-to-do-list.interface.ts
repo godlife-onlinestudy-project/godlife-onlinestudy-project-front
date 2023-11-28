@@ -1,6 +1,6 @@
 export default interface StudyTodoListItem{
     studyListNumber : number;
     studyNumber : number;
-    studyListContents : string;
+    studyListContent : string;
     studyListCheck: boolean;
 }

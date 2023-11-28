@@ -1,4 +1,5 @@
-import StudyChatListItem from "types/study-chat-list";
+import { StudyChatListItem } from "types";
+
 
 const StudyChatListMock : StudyChatListItem[]=[
 
