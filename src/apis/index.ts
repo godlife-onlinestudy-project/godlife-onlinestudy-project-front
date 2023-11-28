@@ -22,6 +22,9 @@ import {
   SignInResponseDto,
   SignUpResponseDto,
 } from "./response/auth";
+import GetSearchStudyListResponseDto from "./dto/response/study/get-search-study-list.response.dto";
+import GetSearchWordStudyListResponseDto from "./dto/response/study/get-search-word-study-list.response.dto";
+import { error } from "console";
 
 //        description: Domain URL       //
 const DOMAIN = "http://localhost:4000";
@@ -61,6 +64,13 @@ const DELETE_USER_TO_DO_LIST_URL = (userlistnumber: number[]) =>
 //        description: get top 5 study list API end point       //
 const GET_TOP_5_STUDY_LIST_URL = (studyCategory1: string) =>
   `${API_DOMAIN}/study/top-5/${studyCategory1}`;
+
+//        description: get search study list API end point        //
+const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/study/search`;
+
+//        description: get search word study list API end point       //
+const GET_SEARCH_WORD_STUDY_LIST_URL = (studyName: string) =>
+  `${API_DOMAIN}/study/search/${studyName}`;
 
 // description: sign in email chesck request //
 export const signInEmailCheckRequest = async (
@@ -204,6 +214,39 @@ export const getTop5StudyListRequest = async (
     .get(GET_TOP_5_STUDY_LIST_URL(studyCategory1), authorization(token))
     .then((response) => {
       const responseBody: GetTop5StudyListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+//        description: get search study list request        //
+export const getSearchStudyListRequest = async (token: string) => {
+  const result = await axios
+    .get(GET_SEARCH_STUDY_LIST_URL(), authorization(token))
+    .then((response) => {
+      const responseBody: GetSearchStudyListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+//        description: get search word study list request       //
+export const getSearchWordStudyListRequest = async (
+  studyName: string,
+  token: string
+) => {
+  const result = await axios
+    .get(GET_SEARCH_WORD_STUDY_LIST_URL(studyName), authorization(token))
+    .then((response) => {
+      const responseBody: GetSearchWordStudyListResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {
