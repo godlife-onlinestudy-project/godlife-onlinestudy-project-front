@@ -10,8 +10,11 @@ import {
   PostUserToDoListRequestDto,
 } from "./dto/request/user";
 import PostUserToDoListResponseDto from "./dto/response/user/post-user-todolist.response.dto";
-import { GetTop5StudyListResponseDto } from "./dto/response/study";
-import { GetSignInUserResponseDto, GetUserResponseDto } from "./dto/response/user";
+import { GetStudyResponseDto, GetTop5StudyListResponseDto } from "./dto/response/study";
+import {
+  GetSignInUserResponseDto,
+  GetUserResponseDto,
+} from "./dto/response/user";
 import {
   SendAuthenticateCodeCheckRequestDto,
   SendAuthenticateCodeRequestDto,
@@ -26,9 +29,16 @@ import {
   SignInResponseDto,
   SignUpResponseDto,
 } from "./dto/response/auth";
-import { PatchStudyRequestDto, PostStudyRequestDto } from './dto/request/study';
-import { DeleteStudyUserListResponseDto, GetStudyUserListResponseDto, PatchStudyResponseDto, PostStudyResponseDto } from './dto/response/study';
-import GetModifyStudyResponseDto from './dto/response/study/get-modify-study.response.dto';
+import GetSearchStudyListResponseDto from "./dto/response/study/get-search-study-list.response.dto";
+import GetSearchWordStudyListResponseDto from "./dto/response/study/get-search-word-study-list.response.dto";
+import { PatchStudyRequestDto, PostStudyRequestDto } from "./dto/request/study";
+import {
+  DeleteStudyUserListResponseDto,
+  GetStudyUserListResponseDto,
+  PatchStudyResponseDto,
+  PostStudyResponseDto,
+} from "./dto/response/study";
+import GetModifyStudyResponseDto from "./dto/response/study/get-modify-study.response.dto";
 
 //        description: Domain URL       //
 const DOMAIN = "http://localhost:4000";
@@ -53,15 +63,21 @@ const SIGN_UP_SEND_AUTHENTICATION_CODE_URL = () => `${API_DOMAIN}/auth/send-auth
 const SIGN_UP_SEND_AUTHENTICATION_CODE_CHECK_URL = () => `${API_DOMAIN}/auth/send-authenticate-code-check`;
 
 // description: get modify study API end point //
-const GET_STUDY_MODIFY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
+const GET_STUDY_MODIFY_URL = (studyNumber: string | number) =>
+  `${API_DOMAIN}/service/${studyNumber}/modify-study`;
 // description: get study user list API end point //
-const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/study-user-list`;
+const GET_STUDY_USER_LIST_URL = (studyNumber: string | number) =>
+  `${API_DOMAIN}/service/${studyNumber}/study-user-list`;
 // description: post study API end point //
 const POST_STUDY_URL = () => `${API_DOMAIN}/studycreate`;
 // description: patch study API end point //
-const PATCH_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/modify-study`;
+const PATCH_STUDY_URL = (studyNumber: string | number) =>
+  `${API_DOMAIN}/service/${studyNumber}/modify-study`;
 // description: delete study user list API end point //
-const DELETE_STUDY_USER_LIST_URL = (studyNumber: string | number, userEmail: string) => `${API_DOMAIN}/service/${studyNumber}/${userEmail}/study-user-list`;
+const DELETE_STUDY_USER_LIST_URL = (
+  studyNumber: string | number,
+  userEmail: string
+) => `${API_DOMAIN}/service/${studyNumber}/${userEmail}/study-user-list`;
 
 //        description: get user to do list API end point       //
 const GET_USER_TO_DO_LIST_URL = (userlistdatetime: string) =>
@@ -83,6 +99,13 @@ const DELETE_USER_TO_DO_LIST_URL = (userlistnumber: number[]) =>
 //        description: get top 5 study list API end point       //
 const GET_TOP_5_STUDY_LIST_URL = (studyCategory1: string) =>
   `${API_DOMAIN}/study/top-5/${studyCategory1}`;
+
+//        description: get search study list API end point        //
+const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/study/search`;
+
+//        description: get search word study list API end point       //
+const GET_SEARCH_WORD_STUDY_LIST_URL = (studyName: string) =>
+  `${API_DOMAIN}/study/search/${studyName}`;
 
 // description: sign in email chesck request //
 export const signInEmailCheckRequest = async (
@@ -172,25 +195,29 @@ export const getModifyStudyRequest = async (studyNumber: string | number, token:
   .then(response => {
       const responseBody: GetModifyStudyResponseDto = response.data;
       return responseBody;
-  })
-  .catch(error => {
+    })
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
-  });
+    });
   return result;
 };
 
 // description: get study user list request //
-export const getStudyUserListRequest = async (studyNumber: string | number, token: string) => {
-  const result = await axios.get(GET_STUDY_USER_LIST_URL(studyNumber), authorization(token))
-  .then(response => {
+export const getStudyUserListRequest = async (
+  studyNumber: string | number,
+  token: string
+) => {
+  const result = await axios
+    .get(GET_STUDY_USER_LIST_URL(studyNumber), authorization(token))
+    .then((response) => {
       const responseBody: GetStudyUserListResponseDto = response.data;
       return responseBody;
-  })
-  .catch(error => {
+    })
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       return responseBody;
-  });
+    });
   return result;
 };
 
@@ -213,18 +240,22 @@ export const getUserToDoListRequest = async (
 };
 
 // description: post study request //
-export const postStudyRequest = async (requestBody: PostStudyRequestDto, token: string) => {
-  const result = await axios.post(POST_STUDY_URL(), requestBody, authorization(token))
-  .then(response => {
+export const postStudyRequest = async (
+  requestBody: PostStudyRequestDto,
+  token: string
+) => {
+  const result = await axios
+    .post(POST_STUDY_URL(), requestBody, authorization(token))
+    .then((response) => {
       const resposneBody: PostStudyResponseDto = response.data;
       const { code } = resposneBody;
       return code;
-  })
-  .catch(error => {
+    })
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       const { code } = responseBody;
       return code;
-  });
+    });
   return result;
 };
 
@@ -249,18 +280,23 @@ export const postUserToDoListRequest = async (
 };
 
 // description: patch study request //
-export const patchStudyRequest = async (requestBody: PatchStudyRequestDto, studyNumber: string | number, token: string) => {
-  const result = await axios.patch(PATCH_STUDY_URL(studyNumber), requestBody, authorization(token))
-  .then(response => {
+export const patchStudyRequest = async (
+  requestBody: PatchStudyRequestDto,
+  studyNumber: string | number,
+  token: string
+) => {
+  const result = await axios
+    .patch(PATCH_STUDY_URL(studyNumber), requestBody, authorization(token))
+    .then((response) => {
       const responseBody: PatchStudyResponseDto = response.data;
       const { code } = responseBody;
       return code;
-  })
-  .catch(error => {
+    })
+    .catch((error) => {
       const responseBody: ResponseDto = error.response.data;
       const { code } = responseBody;
       return code;
-  });
+    });
   return result;
 };
 
@@ -311,20 +347,28 @@ export const deleteUserToDoListRequest = async (
 };
 
 // description: delete study user list request //
-export const deleteStudyUserListRequest = async (studyNumber: string | number, userEmail: string, token: string) => {
-  const result = await axios.delete(DELETE_STUDY_USER_LIST_URL(studyNumber, userEmail), authorization(token))
-      .then(response => {
-          const responseBody: DeleteStudyUserListResponseDto = response.data;
-          const { code } = responseBody;
-          return code;
-      })
-      .catch(error => {
-          const responseBody: ResponseDto = error.response.data;
-          const { code } = responseBody;
-          return code;
-      });
+export const deleteStudyUserListRequest = async (
+  studyNumber: string | number,
+  userEmail: string,
+  token: string
+) => {
+  const result = await axios
+    .delete(
+      DELETE_STUDY_USER_LIST_URL(studyNumber, userEmail),
+      authorization(token)
+    )
+    .then((response) => {
+      const responseBody: DeleteStudyUserListResponseDto = response.data;
+      const { code } = responseBody;
+      return code;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      const { code } = responseBody;
+      return code;
+    });
   return result;
-}
+};
 
 //        description: get top 5 study list request       //
 export const getTop5StudyListRequest = async (
@@ -343,6 +387,58 @@ export const getTop5StudyListRequest = async (
     });
   return result;
 };
+
+//        description: get search study list request        //
+export const getSearchStudyListRequest = async (token: string) => {
+  const result = await axios
+    .get(GET_SEARCH_STUDY_LIST_URL(), authorization(token))
+    .then((response) => {
+      const responseBody: GetSearchStudyListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+//        description: get search word study list request       //
+export const getSearchWordStudyListRequest = async (
+  studyName: string,
+  token: string
+) => {
+  const result = await axios
+    .get(GET_SEARCH_WORD_STUDY_LIST_URL(studyName), authorization(token))
+    .then((response) => {
+      const responseBody: GetSearchWordStudyListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+
+//        description: get study  API end point        //
+const GET_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}`;
+
+export const getStudyRequest  =  async  ( studyNumber : string | number, token: string ) =>{
+    const result = await axios.get(GET_STUDY_URL(studyNumber),authorization(token))
+    .then(response =>{
+        const responseBody : GetStudyResponseDto = response.data;
+        return responseBody;
+    })
+    .catch(error =>{
+        const responseBody : ResponseDto = error.response.data;
+        return responseBody;        
+    })
+    return result;
+};
+
+
 
 // description: get sign in user API end point //
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;

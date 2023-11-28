@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState, MouseEvent } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ATTEND_CHECK_COMPLETE_MESSAGE, CHAT_INPUT_COMPLETE_MESSAGE, MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE, MATERIAL_COMMENT_INPUT_COMPLETE_MESSAGE, SECTION_FIRST_MESSAGE, SECTION_LAST_MESSAGE } from 'constant';
+import { ATTEND_CHECK_COMPLETE_MESSAGE, CHAT_INPUT_COMPLETE_MESSAGE, MAIN_PATH, MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE, MATERIAL_COMMENT_INPUT_COMPLETE_MESSAGE, SECTION_FIRST_MESSAGE, SECTION_LAST_MESSAGE } from 'constant';
 import DefaultProfileImage from 'assets/default-user-icon.png';
 import { MaterialListItem, StudyMaterialCommentListItem } from 'types';
 import { StudyMaterialCommentListMock, StudyNoticeMock, StudyToDoListMock, StudyMaterialListMock} from 'mocks';
@@ -18,6 +18,10 @@ import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
 import PeerJsComponent from 'components/PeerJs';
+import { getStudyRequest } from 'apis';
+import { GetStudyResponseDto } from 'apis/dto/response/study';
+import { useCookies } from 'react-cookie';
+import ResponseDto from 'apis/dto/response';
 import ModalSideMenu from 'components/ModalSideMenu';
 
 
@@ -32,8 +36,7 @@ export default function Service( ) {
     //          state:  스터디 이미지  상태           //
     // const fileInputRef = useRef<HTMLInputElement | null>(null);
     
-    //          state: 스터디방 번호 path variable 상태          //
-    const { studyNumber } = useParams();
+
     //          state: 스터디방 상태          //
     const {resetService} =  useStudyStore(); 
 
@@ -41,13 +44,20 @@ export default function Service( ) {
     const [hostmodelOpen, setHostModalOpen] = useState<'host-notice-manage-modal'| 'host-study-todo-manage-modal'| 'host-study-material-manage-modal'
     |'host-study-Modify-modal' | 'host-study-date-modal' | 'host-study-member-manage-modal'>();
     
+    //          state : 스터디 등급                                //
+    const [studyGrade, setStudyGrade] = useState<string>('방장');
 
+    //          state : 스터디 이름         //
+    const [studyName, setStudyName] = useState<string>('asda');
     // state : 모달 참조 상태  //
     const modalBackground = useRef();   
 
+    //          state: 스터디 번호 path variable 상태          //
+    const { studyNumber } = useParams();
     //            function: 네비게이트 함수          //
-    const navigate = useNavigate();
-
+    const navigator   = useNavigate();
+    //          state: cookie 상태          //
+    const [cookies, setCookie]  = useCookies();  
 
     //    event handler : 사이드바 메뉴 상태 변경 함수     //
     const onMenuClickHandler = () =>{
@@ -59,6 +69,51 @@ export default function Service( ) {
         setMenu('notice');  
       }
     }
+
+    //          effect: 마운트 시 실행할 함수          //
+    useEffect(() => {
+      resetService();
+    }, []);
+
+      //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
+      useEffect(()=>{
+        const accessToken = cookies.accessToken;
+        alert(accessToken);
+        // if (!accessToken) {
+        //   alert('로그인이 필요합니다.');
+        //   return;
+        // }
+
+        if(!studyNumber){
+          alert('잘못된 접근입니다.');
+          navigator(MAIN_PATH);
+          return;
+        }
+
+        // getStudyRequest(studyNumber).then(getStudyResponse);
+        // getStudyNoticeListRequest(studyNumber ,accessToken);
+        // getStudyToDoListRequest(studyNumber ,accessToken).then(getStudyToDoListResponse);
+        getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
+        // getStudyUserListRequest(studyNumber, accessToken).then(getStudyUserListResponse);            
+
+        // getStudyMaterialCommentListRequest(studyNumber,accessToken).then(getStudyUserListResponse);
+      },[]);   
+      
+      
+    //           function: get study  response 처리 함수          //
+    const getStudyResponse = (responseBody : GetStudyResponseDto | ResponseDto) =>{
+      const { code } = responseBody;
+      // if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'DBE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU'){ 
+        navigator(MAIN_PATH);
+        return;
+      }
+      const { studyName  } = responseBody as GetStudyResponseDto;
+      setStudyName(studyName);
+  
+      
+    }        
 
     //          effect: 마운트 시 실행할 함수          //
     useEffect(() => {
