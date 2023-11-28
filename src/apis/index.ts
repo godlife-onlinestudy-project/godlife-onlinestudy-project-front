@@ -10,7 +10,7 @@ import {
   PostUserToDoListRequestDto,
 } from "./dto/request/user";
 import PostUserToDoListResponseDto from "./dto/response/user/post-user-todolist.response.dto";
-import { GetTop5StudyListResponseDto } from "./dto/response/study";
+import { GetStudyResponseDto, GetTop5StudyListResponseDto } from "./dto/response/study";
 import {
   GetSignInUserResponseDto,
   GetUserResponseDto,
@@ -421,6 +421,25 @@ export const getSearchWordStudyListRequest = async (
     });
   return result;
 };
+
+
+//        description: get study  API end point        //
+const GET_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}`;
+
+export const getStudyRequest  =  async  ( studyNumber : string | number, token: string ) =>{
+    const result = await axios.get(GET_STUDY_URL(studyNumber),authorization(token))
+    .then(response =>{
+        const responseBody : GetStudyResponseDto = response.data;
+        return responseBody;
+    })
+    .catch(error =>{
+        const responseBody : ResponseDto = error.response.data;
+        return responseBody;        
+    })
+    return result;
+};
+
+
 
 // description: get sign in user API end point //
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
