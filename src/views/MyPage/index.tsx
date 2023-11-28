@@ -170,7 +170,7 @@ export default function MyPage() {
                                 <div className='user-grade-standard-box' onClick={modalOpenHandler}>
                                     <div className='user-grade-standard-box-text'>{'등급기준 보러가기'}</div>
                                 </div>
-                                {show && <MemberManageModal modalCloseHandler={modalCloseHandler} />}
+                                {/* {show && <MemberManageModal modalCloseHandler={modalCloseHandler} />} */}
                             </div>
                         </div>
                     </div>

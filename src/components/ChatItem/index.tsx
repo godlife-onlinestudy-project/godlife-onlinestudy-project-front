@@ -1,4 +1,4 @@
-import DefaultProfileImage from 'assets/default-profile-image.png';
+import DefaultProfileImage from 'assets/default-user-icon.png';
 import './style.css';
 import  dayjs from 'dayjs';
 import { StudyChatListItem } from 'types';

@@ -16,7 +16,7 @@ import ResponseDto from 'apis/dto/response';
 import { GetUserToDoListResponseDto } from 'apis/dto/response/user';
 import { deleteUserToDoListRequest, getUserToDoListRequest, postUserToDoListRequest, getTop5StudyListRequest, getSearchStudyListRequest, getSearchWordStudyListRequest } from 'apis';
 import { accessTokenMock } from '../../mocks';
-import { PostUserToDoListRequestDto } from 'apis/dto/request';
+import { PostUserToDoListRequestDto } from 'apis/dto/request/user';
 import { GetTop5StudyListResponseDto } from 'apis/dto/response/study';
 import GetSearchStudyListResponseDto from 'apis/dto/response/study/get-search-study-list.response.dto';
 import GetSearchWordStudyListResponseDto from 'apis/dto/response/study/get-search-word-study-list.response.dto';

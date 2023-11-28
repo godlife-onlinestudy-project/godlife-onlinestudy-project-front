@@ -36,19 +36,24 @@ const DropDownModifyStudyCategory = ({value, onChange}: DropDownModifyStudyCateg
                 setIsOpen(false);
             }
         }
-
+        
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+    
+    //          effect: value 값이 바뀔 때마다 업데이트          //
+    useEffect(() => {
+        setSelectedItem(value);
+    }, [value]);
 
     const items = ['자격증', '취업', '어학', '회화', '학교', '기타'];
 
     //          render: DropDown 1관심 카테고리 렌더링          //
     return (
-        <div ref={dropdownRef} className='dropdown-modify-study-category-box'>
-            <div className='dropdown-modify-study-category-header' onClick={toggleDropdown}>
+        <div ref={dropdownRef} className='dropdown-modify-study-category-box' onClick={toggleDropdown}>
+            <div className='dropdown-modify-study-category-header'>
                 {selectedItem && <div className='selected-item'>{selectedItem}</div>}
             </div>
             <div className='dropdown-modify-down-icon-box'>

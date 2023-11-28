@@ -2,9 +2,9 @@ import { ChangeEvent, useEffect, useRef, useState, MouseEvent } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ATTEND_CHECK_COMPLETE_MESSAGE, CHAT_INPUT_COMPLETE_MESSAGE, MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE, MATERIAL_COMMENT_INPUT_COMPLETE_MESSAGE, SECTION_FIRST_MESSAGE, SECTION_LAST_MESSAGE } from 'constant';
-import DefaultProfileImage from 'assets/default-profile-image.png';
+import DefaultProfileImage from 'assets/default-user-icon.png';
 import { MaterialListItem, StudyMaterialCommentListItem } from 'types';
-import { StudyMaterialCommentListMock, StudyNoticeMock, StudyToDoListMock, StudyMaterialListMock ,StudyUserListMock} from 'mocks';
+import { StudyMaterialCommentListMock, StudyNoticeMock, StudyToDoListMock, StudyMaterialListMock} from 'mocks';
 
 import CommentItem from 'components/CommentItem';
 
@@ -16,6 +16,8 @@ import StudyChatListMock from 'mocks/study-chat.mock';
 import { useStudyStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
+import StudyUserListMock from 'mocks/study-user-list.mock';
+import PeerJsComponent from 'components/PeerJs';
 
 
 
@@ -23,7 +25,6 @@ import { useImagePagination } from 'hooks';
 // TODO  사용자 권한, 코멘트유저 접속 유저 일치에 따른 수정아이콘 show  상태 , 코멘트 다중 삭제 가능, 손흔들기(유저 비교)
 
 export default function Service( ) {
-
     //    state: 사이드 바 상태     //
     const [menu,setMenu] = useState<'notice'|'chat'>('chat');
 
@@ -110,12 +111,12 @@ export default function Service( ) {
 
     //          component: notice 카드 컴포넌트          //
     const NoticeCard = () =>{
-
+      
       // state  :       텍스트 상자 참조 상태         //
       const contentsTextAreaRef = useRef<HTMLTextAreaElement | null>(null);
       // state :  스터디 방 번호 //
       const { studyNumber} = useParams();
-
+      
       // state : 자료 코멘트 유저 글 상태           //
       const [materialCommentContent, setMaterialCommentContent] = useState<string>('');
       //        state: 조회하는 자료 번호 path variable 상태        //
@@ -131,8 +132,7 @@ export default function Service( ) {
 
       //           state : Host Notice 모달 상태                       //
       const [hostNoticeModelOpen, setHostNoticeModelOpen] = useState(false);
-
-
+      
       //          event handler: 자료 댓글  변경 이벤트 처리          //
       const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if(!showComment) return;
@@ -143,8 +143,9 @@ export default function Service( ) {
         contentsTextAreaRef.current.focus();
         contentsTextAreaRef.current.style.height = 'auto';
         contentsTextAreaRef.current.style.height = `${contentsTextAreaRef.current.scrollHeight}px`;
- 
+        
       }
+      
       //          event handler: 공지사항 모달 출력 이벤트 처리          //
       const onHostNoticeModelOpenClickHandler = (event: MouseEvent<HTMLDivElement> ) =>{
         if(event.target === modalBackground.current){
@@ -332,6 +333,8 @@ export default function Service( ) {
       //          component: 자료 이미지 내용 컴포넌트           //
       const MaterialContents = () =>{
 
+        const fileInputRef = useRef<HTMLInputElement | null>(null);
+
         //          state: 자료 이미지 상태                 //
         const {materialImageList,setMaterialImageList} = useImagePagination<MaterialListItem>();
 
@@ -339,14 +342,14 @@ export default function Service( ) {
         useEffect(() => {
           const imageMaterialList = StudyMaterialListMock.map(item => item.studyMaterialImageUrl);
           setMaterialImageList(imageMaterialList);
-        }, [materialImageList]);
+        }, []);
 
         //   render : 자료 이미지 내용 컴포넌트  렌더링       //
         return(
           <div className="study-image-material-box">
             <div className="study-image-material" >
-              {/* <input ref = {fileInputRef} type="file" src={materialImageList[currentPageNumber]} accept='image/*' style={{display : 'none'}}  /> */}
-              <img src={viewImage} alt=""className='study-image-material' />
+            {/* <input ref = {fileInputRef} type="file" src={materialImageList.} accept='image/*' style={{display : 'none'}}  /> */}
+            <img src={viewImage} alt=""className='study-image-material' />
             </div>
           </div>
         )
@@ -493,6 +496,7 @@ export default function Service( ) {
         return(
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
+            <PeerJsComponent />
               <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 
@@ -519,9 +523,9 @@ export default function Service( ) {
                       }
                     </div>
                     <div className='user-bottom-profile-box'>
-                        <div className='comment-list-profile-image' style={{ backgroundImage: `url(${studyUserListItem.studyProfileImageUrl ? studyUserListItem.studyProfileImageUrl : DefaultProfileImage})` }}></div>
+                        <div className='comment-list-profile-image' style={{ backgroundImage: `url(${studyUserListItem.userProfileImageUrl ? studyUserListItem.userProfileImageUrl : DefaultProfileImage})` }}></div>
                     </div>
-                    <div className="user-bottom-nickname">{studyUserListItem.studyNickName}</div>
+                    <div className="user-bottom-nickname">{studyUserListItem.userNickname}</div>
                   </div>
                 </div>
               )}                
