@@ -42,14 +42,14 @@ function App() {
 
   //          function: get sign in user response 처리 함수          //
   const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
-    const { code } = responseBody;
-    if (code !== 'SU') {
-      setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
-      setUser(null);
-      return;
-    }
+    // const { code } = responseBody;
+    // if (code !== 'SU') {
+    //   setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
+    //   setUser(null);
+    //   return;
+    // }
 
-    setUser({ ...responseBody as GetSignInUserResponseDto });
+    // setUser({ ...responseBody as GetSignInUserResponseDto });
   }
 
   //          effect: 현재 path가 변경될 때마다 실행될 함수          //
