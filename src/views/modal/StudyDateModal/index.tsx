@@ -1,5 +1,4 @@
 import './style.css';
-import dayjs from 'dayjs';
 
 import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import ModalSideMenu from 'components/ModalSideMenu';
@@ -450,7 +449,7 @@ export default function StudyDateModal() {
                         <div className='room-date-control'></div>
                         <div className='room-date-contents'>
                             <div className='next-study-date'>{'다음스터디 날짜'}</div>
-                            <div className='study-date-box'>
+                            <div className='study-date-modal-box'>
                                 {
                                     <CalendarCard />
                                     // <StudyAlertCard/>

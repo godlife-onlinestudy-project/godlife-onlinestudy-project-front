@@ -79,7 +79,7 @@ export default function Authentication() {
             const now = new Date().getTime();
             const expires = new Date(now + expirationTime * 1000);
       
-            setCookie('accessToken', token, { expires, path: MAIN_PATH });
+            setCookie('accessToken', token, { expires, path: '/' });
             navigator(MAIN_PATH);
       
           }
@@ -153,6 +153,10 @@ export default function Authentication() {
             if (signInLevel === 2 && passwordRef.current) passwordRef.current.focus();
         }, [signInLevel])
 
+        const onNaverOauthButtonClickHandler = (provider: string) => {
+            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
+        }
+
         //        render : 로그인 페이지 랜더링        //
         return (
             <div className='sign-in-card'>
@@ -209,7 +213,7 @@ export default function Authentication() {
                             <div className='kakao-logo-image'></div>
                             <div className='kakao-logo-name'>Kakao</div>
                         </div>
-                        <div className='naver-sign-in-box'>
+                        <div className='naver-sign-in-box' onClick={() => onNaverOauthButtonClickHandler('naver')}>
                             <div className='naver-logo-image'></div>
                             <div className='naver-logo-name'>Naver</div>
                         </div>

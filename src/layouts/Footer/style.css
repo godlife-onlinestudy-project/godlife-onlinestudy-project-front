@@ -32,9 +32,17 @@
   font-weight: 400;
 }
 
+.footer-provision:hover {
+  cursor: pointer;
+}
+
 .footer-privacy-policy {
   font-size: 15px;
   font-weight: 400;
+}
+
+.footer-privacy-policy:hover {
+  cursor: pointer;
 }
 
 .footer-copyright {
@@ -64,6 +72,10 @@
   background-size: 100% 100%;
 }
 
+.notion-logo-icon:hover {
+  cursor: pointer;
+}
+
 .kakao-logo-icon {
   width: 100%;
   height: 100%;
@@ -73,6 +85,10 @@
   background-size: 100% 100%;
 }
 
+.kakao-logo-icon:hover {
+  cursor: pointer;
+}
+
 .naver-logo-icon {
   width: 100%;
   height: 100%;
@@ -80,4 +96,8 @@
   background-image: url(../../assets/naver-logo-icon.png);
   background-position: 50% 50%;
   background-size: 100% 100%;
+}
+
+.naver-logo-icon:hover {
+  cursor: pointer;
 }
