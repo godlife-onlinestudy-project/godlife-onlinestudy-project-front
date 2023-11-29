@@ -17,7 +17,7 @@ import { useStudyStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
-import PeerJsComponent from 'components/PeerJs';
+// import PeerJsComponent from 'components/PeerJs';
 import { getStudyRequest } from 'apis';
 import { GetStudyResponseDto } from 'apis/dto/response/study';
 import { useCookies } from 'react-cookie';
@@ -54,10 +54,12 @@ export default function Service( ) {
 
     //          state: 스터디 번호 path variable 상태          //
     const { studyNumber } = useParams();
-    //            function: 네비게이트 함수          //
-    const navigator   = useNavigate();
+
     //          state: cookie 상태          //
     const [cookies, setCookie]  = useCookies();  
+
+    //            function: 네비게이트 함수          //
+    const navigator   = useNavigate();
 
     //    event handler : 사이드바 메뉴 상태 변경 함수     //
     const onMenuClickHandler = () =>{
@@ -89,20 +91,15 @@ export default function Service( ) {
           return;
         }
 
-        // getStudyRequest(studyNumber).then(getStudyResponse);
-        // getStudyNoticeListRequest(studyNumber ,accessToken);
-        // getStudyToDoListRequest(studyNumber ,accessToken).then(getStudyToDoListResponse);
         getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
-        // getStudyUserListRequest(studyNumber, accessToken).then(getStudyUserListResponse);            
 
-        // getStudyMaterialCommentListRequest(studyNumber,accessToken).then(getStudyUserListResponse);
       },[]);   
       
       
     //           function: get study  response 처리 함수          //
     const getStudyResponse = (responseBody : GetStudyResponseDto | ResponseDto) =>{
       const { code } = responseBody;
-      // if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'NU') alert('존재하지 않는 유저입니다.');
       if(code === 'DBE') alert('데이터베이스 오류입니다.');
       if (code !== 'SU'){ 
         navigator(MAIN_PATH);
@@ -111,8 +108,8 @@ export default function Service( ) {
       const { studyName  } = responseBody as GetStudyResponseDto;
       setStudyName(studyName);
   
-      
     }        
+      
 
     //          effect: 마운트 시 실행할 함수          //
     useEffect(() => {
@@ -147,6 +144,11 @@ export default function Service( ) {
         navigator('/main');
       }
 
+      //           event handler : 방 나가기 클릭 이벤트 처리          //
+      const onExitClickHandler = () =>{
+        navigator(MAIN_PATH);
+      }
+
     //     render: 헤더 컴포넌트 렌더링          //
      return(
         <div className="service-header">
@@ -168,8 +170,7 @@ export default function Service( ) {
             </div>
             <div className="header-exit">
               <div className="header-exit-icon"></div>
-              {/* <button className={"header-exit-contents"} >나가기</button> */}
-              <div className="header-exit-contents">나가기</div>
+              <div className="header-exit-contents" onClick={onExitClickHandler}>나가기</div>
             </div>
           </div>
         </div>
@@ -181,8 +182,7 @@ export default function Service( ) {
       
       // state  :       텍스트 상자 참조 상태         //
       const contentsTextAreaRef = useRef<HTMLTextAreaElement | null>(null);
-      // state :  스터디 방 번호 //
-      const { studyNumber} = useParams();
+
       
       // state : 자료 코멘트 유저 글 상태           //
       const [materialCommentContent, setMaterialCommentContent] = useState<string>('');
@@ -562,7 +562,8 @@ export default function Service( ) {
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
             {/* <PeerJsComponent /> */}
-              {/* <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+              <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 
                 <div className='user-wrapper'>
