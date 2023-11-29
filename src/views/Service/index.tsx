@@ -17,7 +17,7 @@ import { useStudyStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
-import PeerJsComponent from 'components/PeerJs';
+// import PeerJsComponent from 'components/PeerJs';
 import { getStudyRequest } from 'apis';
 import { GetStudyResponseDto } from 'apis/dto/response/study';
 import { useCookies } from 'react-cookie';
@@ -52,11 +52,13 @@ export default function Service( ) {
     const modalBackground = useRef();   
 
     //          state: 스터디 번호 path variable 상태          //
+
     const { studyNumber } = useParams();
-    //            function: 네비게이트 함수          //
-    const navigator   = useNavigate();
     //          state: cookie 상태          //
     const [cookies, setCookie]  = useCookies();  
+
+    //            function: 네비게이트 함수          //
+    const navigator   = useNavigate();
 
     //    event handler : 사이드바 메뉴 상태 변경 함수     //
     const onMenuClickHandler = () =>{
@@ -90,7 +92,7 @@ export default function Service( ) {
         }
 
         // getStudyRequest(studyNumber).then(getStudyResponse);
-        // getStudyNoticeListRequest(studyNumber ,accessToken);
+        // getStudyNoticeListRequest(studyNumber ,accessToken).then(getStudyNoticeListResponse);
         // getStudyToDoListRequest(studyNumber ,accessToken).then(getStudyToDoListResponse);
         getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
         // getStudyUserListRequest(studyNumber, accessToken).then(getStudyUserListResponse);            
@@ -102,7 +104,7 @@ export default function Service( ) {
     //           function: get study  response 처리 함수          //
     const getStudyResponse = (responseBody : GetStudyResponseDto | ResponseDto) =>{
       const { code } = responseBody;
-      // if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'NU') alert('존재하지 않는 유저입니다.');
       if(code === 'DBE') alert('데이터베이스 오류입니다.');
       if (code !== 'SU'){ 
         navigator(MAIN_PATH);
@@ -111,8 +113,12 @@ export default function Service( ) {
       const { studyName  } = responseBody as GetStudyResponseDto;
       setStudyName(studyName);
   
-      
     }        
+      
+    //           function: get study notice response 처리 함수          //
+    const getStudyNoticeListResponse = () =>{
+
+    }
 
     //          effect: 마운트 시 실행할 함수          //
     useEffect(() => {
@@ -136,6 +142,11 @@ export default function Service( ) {
       //           state : 스터디 방이름 상태            //
       const {studyName, setStudyName} = useStudyStore();
 
+      //           event handler : 방 나가기 클릭 이벤트 처리          //
+      const onExitClickHandler = () =>{
+        navigator(MAIN_PATH);
+      }
+
     //     render: 헤더 컴포넌트 렌더링          //
      return(
         <div className="service-header">
@@ -156,8 +167,7 @@ export default function Service( ) {
             </div>
             <div className="header-exit">
               <div className="header-exit-icon"></div>
-              {/* <button className={"header-exit-contents"} >나가기</button> */}
-              <div className="header-exit-contents">나가기</div>
+              <div className="header-exit-contents" onClick={onExitClickHandler}>나가기</div>
             </div>
           </div>
         </div>
@@ -551,7 +561,7 @@ export default function Service( ) {
         return(
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
-            <PeerJsComponent />
+            {/* <PeerJsComponent /> */}
               <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 
