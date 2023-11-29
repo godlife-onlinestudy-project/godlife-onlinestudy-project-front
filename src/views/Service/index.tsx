@@ -52,8 +52,8 @@ export default function Service( ) {
     const modalBackground = useRef();   
 
     //          state: 스터디 번호 path variable 상태          //
-
     const { studyNumber } = useParams();
+
     //          state: cookie 상태          //
     const [cookies, setCookie]  = useCookies();  
 
@@ -91,13 +91,8 @@ export default function Service( ) {
           return;
         }
 
-        // getStudyRequest(studyNumber).then(getStudyResponse);
-        // getStudyNoticeListRequest(studyNumber ,accessToken).then(getStudyNoticeListResponse);
-        // getStudyToDoListRequest(studyNumber ,accessToken).then(getStudyToDoListResponse);
         getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
-        // getStudyUserListRequest(studyNumber, accessToken).then(getStudyUserListResponse);            
 
-        // getStudyMaterialCommentListRequest(studyNumber,accessToken).then(getStudyUserListResponse);
       },[]);   
       
       
@@ -115,10 +110,6 @@ export default function Service( ) {
   
     }        
       
-    //           function: get study notice response 처리 함수          //
-    const getStudyNoticeListResponse = () =>{
-
-    }
 
     //          effect: 마운트 시 실행할 함수          //
     useEffect(() => {
@@ -179,8 +170,7 @@ export default function Service( ) {
       
       // state  :       텍스트 상자 참조 상태         //
       const contentsTextAreaRef = useRef<HTMLTextAreaElement | null>(null);
-      // state :  스터디 방 번호 //
-      const { studyNumber} = useParams();
+
       
       // state : 자료 코멘트 유저 글 상태           //
       const [materialCommentContent, setMaterialCommentContent] = useState<string>('');
