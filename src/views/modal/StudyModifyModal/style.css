@@ -435,19 +435,17 @@
     cursor: pointer;
 }
 
-.study-cover-image-box {
+.study-cover-modify-image-box {
     width: 347px;
     height: 170px;
 
     display: flex;
     flex-direction: row;
     gap: 7px;
+    background: none;
 }
 
 .study-cover-image-title {
-    width: 170px;
-    height: 170px;
-
     color: rgba(0, 0, 0, 1);
 
     font-size: 20px;
@@ -462,7 +460,7 @@
 .study-cover-image-contents {
     width: 170px;
     height: 170px;
-
+    
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     border: 0.5px solid rgba(24, 160, 251, 1);

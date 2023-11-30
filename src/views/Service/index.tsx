@@ -17,11 +17,12 @@ import { useStudyStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
-// import PeerJsComponent from 'components/PeerJs';
+import PeerJsComponent from 'components/PeerJs';
 import { getStudyRequest } from 'apis';
 import { GetStudyResponseDto } from 'apis/dto/response/study';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'apis/dto/response';
+import ModalSideMenu from 'components/ModalSideMenu';
 
 
 
@@ -79,13 +80,13 @@ export default function Service( ) {
       resetService();
     }, []);
 
-    //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
-    useEffect(()=>{
-      const accessToken = cookies.accessToken;
-      // if (!accessToken) {
-      //   alert('로그인이 필요합니다.');
-      //   return;
-      // }
+      //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
+      useEffect(()=>{
+        const accessToken = cookies.accessToken;
+        // if (!accessToken) {
+        //   alert('로그인이 필요합니다.');
+        //   return;
+        // }
 
       if(!studyNumber){
         alert('잘못된 접근입니다.');
@@ -132,7 +133,19 @@ export default function Service( ) {
     //          component: 헤더 카드 컴포넌트          //
     const Header = () =>{
 
+      //           state : 스터디 방이름 상태            //
+      const {studyName, setStudyName} = useStudyStore();
+      //          state: 모달 창 상태          //
+      const [show, setShow] = useState<boolean>(false);
 
+      //          event handler: 모달 Open, Close 이벤트 처리          //
+      const modalCloseHandler = () => setShow(false);
+      const modalOpenHandler = () => setShow(true);
+
+      //        event handler: 로고 클릭 이벤트 처리        //
+      const onLogoClickHandler = () => {
+        navigator('/main');
+      }
 
       //           event handler : 방 나가기 클릭 이벤트 처리          //
       const onExitClickHandler = () =>{
@@ -142,7 +155,7 @@ export default function Service( ) {
     //     render: 헤더 컴포넌트 렌더링          //
      return(
         <div className="service-header">
-          <div className="logo-box">
+          <div className="logo-box" onClick={onLogoClickHandler}>
             <div className="logo-icon-box"></div>
             <div className="logo-title">갓생살기</div>
           </div>
@@ -154,8 +167,9 @@ export default function Service( ) {
           </div>
           <div className="header-end">
             <div className="header-setting">
-              <div className="header-settings-icon"></div>
-              <div className="header-setting-contents">설정</div>
+              <div className="header-settings-icon" onClick={modalOpenHandler}></div>
+              <div className="header-setting-contents" onClick={modalOpenHandler}>설정</div>
+              {show && <ModalSideMenu modalCloseHandler={modalCloseHandler} />}
             </div>
             <div className="header-exit">
               <div className="header-exit-icon"></div>
@@ -473,11 +487,9 @@ export default function Service( ) {
         }
 
         //          event handler: 자료 이미지 닫기 버튼 클릭 이벤트 처리          //
-      
-       
-
-
-          
+        const onMaterialImageCloseHandler = ( deleteIndex: number )=>{
+          if(!imageRef.current) return;
+        }      
 
         // effect : 컴포넌트 마운트 시 마다 자료 정보 리스트 불러오기 // 
         useEffect(() => {
@@ -551,8 +563,9 @@ export default function Service( ) {
         return(
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
-            {/* <PeerJsComponent /> */}
-              <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+            <PeerJsComponent />
+              {/* <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 
                 <div className='user-wrapper'>
@@ -584,7 +597,7 @@ export default function Service( ) {
                   </div>
                 </div>
               )}                
-              </Scrollbars>
+              </Scrollbars> */}
             </div>
           </div>
         )

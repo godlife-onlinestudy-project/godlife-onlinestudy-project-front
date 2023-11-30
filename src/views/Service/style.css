@@ -33,6 +33,10 @@
     gap: 10px;
 }
 
+.logo-box:hover {
+    cursor: pointer;
+}
+
 .logo-icon-box{
 
     width: 30px;
@@ -1124,7 +1128,6 @@
     border-radius: 15px;
     border: 3.5px solid rgba(24, 160, 251, 0.50);
 
-
     background-color: rgba(232,241,255,1);
     
     padding-left: 30px;
@@ -1133,6 +1136,8 @@
 .study-info-memeber-info{
     width: 195px;
     height: 715px;
+
+    position: relative;
 
     display: flex;
     align-items: center;

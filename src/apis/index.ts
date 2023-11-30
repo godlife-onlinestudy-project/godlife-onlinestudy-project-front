@@ -98,14 +98,14 @@ const DELETE_USER_TO_DO_LIST_URL = (userlistnumber: number[]) =>
 
 //        description: get top 5 study list API end point       //
 const GET_TOP_5_STUDY_LIST_URL = (studyCategory1: string) =>
-  `${API_DOMAIN}/study/top-5/${studyCategory1}`;
+  `${API_DOMAIN}/main/top-5/${studyCategory1}`;
 
 //        description: get search study list API end point        //
-const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/study/search`;
+const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/main/search`;
 
 //        description: get search word study list API end point       //
 const GET_SEARCH_WORD_STUDY_LIST_URL = (studyName: string) =>
-  `${API_DOMAIN}/study/search/${studyName}`;
+  `${API_DOMAIN}/main/search/${studyName}`;
 
 // description: sign in email chesck request //
 export const signInEmailCheckRequest = async (
@@ -190,10 +190,9 @@ export const sendAuthenticateCodeCheckRequest = async (requestBody : SendAuthent
 };
 
 // description: get modify study request //
-export const getModifyStudyRequest = async (studyNumber: string | number) => {
-  const result = await axios
-    .get(GET_STUDY_MODIFY_URL(studyNumber))
-    .then((response) => {
+export const getModifyStudyRequest = async (studyNumber: string | number, token: string) => {
+  const result = await axios.get(GET_STUDY_MODIFY_URL(studyNumber), authorization(token))
+  .then(response => {
       const responseBody: GetModifyStudyResponseDto = response.data;
       return responseBody;
     })

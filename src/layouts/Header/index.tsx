@@ -16,12 +16,12 @@ export default function Header({ onSearchMoveClickHandler }: HeaderProps) {
 
   //        event handler: 로고 클릭 이벤트 처리        //
   const onLogoClickHandler = () => {
-    navigator('/');
+    navigator('/main');
   }
   
   //        event handler: 로고 클릭 이벤트 처리        //
   const onStudyCreateNavigatorHandler = () => {
-    navigator('/studtcreate');
+    navigator('/studycreate');
   }
   //        event handler: 로고 클릭 이벤트 처리        //
   const onMypageNavigatorHandler = () => {

@@ -8,8 +8,10 @@ import MaterialManageModal from 'views/modal/MaterialManageModal';
 import { useStudyStore } from 'stores';
 import { PostStudyRequestDto } from 'apis/dto/request/study';
 import { postStudyRequest } from 'apis';
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 import { accessTokenMock } from 'mocks';
+import { MAIN_PATH } from 'constant';
+import { useNavigate } from 'react-router-dom';
 
 //          event handler: 랜덤 코드 이벤트 처리          //
 const onGernerateRandomCode = () => {
@@ -56,8 +58,11 @@ export default function StudyCreate() {
     const [coverImage, setCoverImage] = useState<string | null>('');
     //          state: 모달 창 상태          //
     const [show, setShow] = useState<boolean>(false);
-
+    //          state: 선택한 카테고리 상태          //
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+    //          function: navigator 함수          //
+    const createNavigator = useNavigate();
  
 
     //          function: post study response 처리 함수          //
@@ -83,15 +88,11 @@ export default function StudyCreate() {
         setStudyName(value);
     };
     
-    
-    //          state: 코드 상태          //
-    // const [code, setCode] = useState<string>('');
-
     //          event handler: 스터디 만들기 클릭 이벤트 처리          //
     const onClickCreateStudyRoomHandler = async () => {
 
-        // const accessToken = cookies.accessToken;
-        // if (!accessToken) return;
+        const accessToken = cookies.accessToken;
+        if (!accessToken) return;
 
         // description : 스터디 제목 확인 //
         const checkedTitle = title.trim().length < 2;
@@ -112,8 +113,9 @@ export default function StudyCreate() {
         const requestBody: PostStudyRequestDto = {
             studyName, studyStartDate: strStudyStartDate, studyEndDate: strStudyEndDate, studyPersonal, studyCategory1, studyCategory2, studyCategory3,
             studyPublicCheck: isStudyPublic, studyPrivatePassword, studyCoverImageUrl }
-        postStudyRequest(requestBody, accessTokenMock).then(postStudyResponse);
+        postStudyRequest(requestBody, accessToken).then(postStudyResponse);
         alert('방 생성 완료!');
+        createNavigator(MAIN_PATH);
     };
     //          event handler: 공개방 / 비공개방 이벤트 처리          //
     const onClickPublicHandler = () => {

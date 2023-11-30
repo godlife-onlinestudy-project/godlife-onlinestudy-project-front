@@ -11,21 +11,26 @@ import GetModifyStudyResponseDto from 'apis/dto/response/study/get-modify-study.
 import ResponseDto from 'apis/dto/response';
 import { useStudyStore, useUserStore } from 'stores';
 import { PatchStudyRequestDto } from 'apis/dto/request/study';
-import { patchStudyRequest } from 'apis';
+import { getModifyStudyRequest, patchStudyRequest } from 'apis';
+import { Cookies, useCookies } from 'react-cookie';
 
 //          interface: 스터디방 아이템 Props          //
 interface Props {
     studyItem: StudyModify | null;
     setStudyItem: (studyItem: StudyModify | null) => void;
+    modalCloseHandler: () => void;
+    studyNumber: string | number;
 }
 
 //          component : 스터디 방 재설정 모달 페이지          //
-export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
+export default function StudyModifyModal({ studyItem, setStudyItem, modalCloseHandler }: Props) {
 
     //          state : 스터디 방 번호          //
     const { studyNumber } = useParams();
     //          state: 로그인 유저 상태          //
     const { user } = useUserStore();
+    //          state: cookie 상태          //
+    const [cookies, setCookies] = useCookies();
     //          state : 스터디 제목 글자 갯수          //
     const [studyNameCount, setStudyNameCount] = useState<number>(0);
     //          state : 스터디 제목 글자 길이 2에러          //
@@ -65,7 +70,6 @@ export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
         }
 
         const study: StudyModify = { ...responseBody as GetModifyStudyResponseDto };
-        setStudy(study);
 
         if (!user) return;
         const isCreater = user.email === study.createStudyUserEmail;
@@ -197,6 +201,10 @@ export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
     //           event handler: 스터디 재설정 이벤트 처리           //
     const onSaveChangesClickHandler = () => {
         if (!studyNumber) return;
+
+        const accessToken = cookies.accessToken;
+        if (!accessToken) return;
+
         const checkedTitle = studyName.trim().length < 2;
         if (checkedTitle) {
             return;
@@ -206,7 +214,7 @@ export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
             studyName, studyEndDate, studyPersonal, studyCategory1, 
             studyPublicCheck, studyPrivatePassword, studyCoverImageUrl
         }
-        patchStudyRequest(requestBody, studyNumber, accessTokenMock).then(patchStudyModifyResponse);
+        patchStudyRequest(requestBody, studyNumber, accessToken).then(patchStudyModifyResponse);
 
         alert('스터디 재설정 완료!');
     };
@@ -249,7 +257,7 @@ export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
         <div id='reset-wrapper'>
             <div className='reset-card'>
                 <div className='reset-button-box'>
-                    <button type='button' className='modal-close-button'>X</button>
+                    <button type='button' className='modal-close-button' onClick={modalCloseHandler}>X</button>
                 </div>
                 <div className='reset-control-box'>
                     <div className='study-title-container'>
@@ -299,7 +307,7 @@ export default function StudyModifyModal({ studyItem, setStudyItem }: Props) {
                             )}
                         </div>
                     </div>
-                    <div className='study-cover-image-box'>
+                    <div className='study-cover-modify-image-box'>
                         <div className='study-cover-image-title'>{'스터디 커버 이미지'}</div>
                         <div className='study-cover-image-contents' onChange={onStudyCoverImageChangeHandler}>
                             <input ref={fileInputRef} type='file' accept='image/*' style={{ display: 'none' }} />

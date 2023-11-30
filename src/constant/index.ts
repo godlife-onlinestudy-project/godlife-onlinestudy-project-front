@@ -1,5 +1,5 @@
 export const MAIN_PATH = '/main';
-export const AUTH_PATH = '/';
+export const AUTH_PATH = '/auth';
 export const SERVICE_PATH = (studyNumber: number | string) => `/service/${studyNumber}`;
 export const STUDY_CREATE_PATH = '/studycreate'
 export const MY_PAGE_PATH = '/mypage/:email';
