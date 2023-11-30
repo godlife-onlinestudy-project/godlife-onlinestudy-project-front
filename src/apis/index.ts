@@ -430,10 +430,12 @@ export const getStudyRequest  =  async  ( studyNumber : string | number, token: 
     const result = await axios.get(GET_STUDY_URL(studyNumber),authorization(token))
     .then(response =>{
         const responseBody : GetStudyResponseDto = response.data;
+        console.log(responseBody);
         return responseBody;
     })
     .catch(error =>{
         const responseBody : ResponseDto = error.response.data;
+        console.log(responseBody);
         return responseBody;        
     })
     return result;

@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
 import DatePickerModifyStudyComponent from 'components/DatePickerModifyStudy';
 import DropDownModifyStudyCategory from 'components/DropdownModifyStudyCategory';
-import { StudyListItem, StudyModify } from 'types';
+import { Study, StudyModify } from 'types';
 import { accessTokenMock, studyListMock } from 'mocks';
 import GetModifyStudyResponseDto from 'apis/dto/response/study/get-modify-study.response.dto';
 import ResponseDto from 'apis/dto/response';

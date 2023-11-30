@@ -1,9 +1,9 @@
-export default interface StudyListItem {
+export default interface Study{
     studyNumber: number;
     studyName: string;
     studyStartDate: string;
-    studyPersonNumber: number;
     studyEndDate: string;
+    studyPersonal: number;
     studyCategory1: string;
     studyCategory2: string | null;
     studyCategory3: string | null;
@@ -13,4 +13,5 @@ export default interface StudyListItem {
     studyNextStartTime: string | null;
     studyNextEndTime: string | null;
     studyTotalDay: number;
+    createStudyUserEmail : string;
 }

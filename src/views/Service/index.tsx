@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState, MouseEvent } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ATTEND_CHECK_COMPLETE_MESSAGE, CHAT_INPUT_COMPLETE_MESSAGE, MAIN_PATH, MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE, MATERIAL_COMMENT_INPUT_COMPLETE_MESSAGE, SECTION_FIRST_MESSAGE, SECTION_LAST_MESSAGE } from 'constant';
+import { ATTEND_CHECK_COMPLETE_MESSAGE, CHAT_INPUT_COMPLETE_MESSAGE, MAIN_PATH,  MATERIAL_COMMENT_INPUT_COMPLETE_MESSAGE, SECTION_FIRST_MESSAGE, SECTION_LAST_MESSAGE } from 'constant';
 import DefaultProfileImage from 'assets/default-user-icon.png';
 import { MaterialListItem, StudyMaterialCommentListItem } from 'types';
 import { StudyMaterialCommentListMock, StudyNoticeMock, StudyToDoListMock, StudyMaterialListMock} from 'mocks';
@@ -47,7 +47,7 @@ export default function Service( ) {
     const [studyGrade, setStudyGrade] = useState<string>('방장');
 
     //          state : 스터디 이름         //
-    const [studyName, setStudyName] = useState<string>('asda');
+    // const [studyName, setStudyName] = useState<string>('asda');
     // state : 모달 참조 상태  //
     const modalBackground = useRef();   
 
@@ -56,6 +56,9 @@ export default function Service( ) {
 
     //          state: cookie 상태          //
     const [cookies, setCookie]  = useCookies();  
+
+    //           state : 스터디 방이름 상태            //
+    const {studyName, setStudyName} = useStudyStore();
 
     //            function: 네비게이트 함수          //
     const navigator   = useNavigate();
@@ -76,24 +79,23 @@ export default function Service( ) {
       resetService();
     }, []);
 
-      //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
-      useEffect(()=>{
-        const accessToken = cookies.accessToken;
-        alert(accessToken);
-        // if (!accessToken) {
-        //   alert('로그인이 필요합니다.');
-        //   return;
-        // }
+    //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
+    useEffect(()=>{
+      const accessToken = cookies.accessToken;
+      // if (!accessToken) {
+      //   alert('로그인이 필요합니다.');
+      //   return;
+      // }
 
-        if(!studyNumber){
-          alert('잘못된 접근입니다.');
-          navigator(MAIN_PATH);
-          return;
-        }
+      if(!studyNumber){
+        alert('잘못된 접근입니다.');
+        navigator(MAIN_PATH);
+        return;
+      }
 
-        getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
+      getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
 
-      },[]);   
+    },[]);   
       
       
     //           function: get study  response 처리 함수          //
@@ -130,8 +132,7 @@ export default function Service( ) {
     //          component: 헤더 카드 컴포넌트          //
     const Header = () =>{
 
-      //           state : 스터디 방이름 상태            //
-      const {studyName, setStudyName} = useStudyStore();
+
 
       //           event handler : 방 나가기 클릭 이벤트 처리          //
       const onExitClickHandler = () =>{
@@ -388,7 +389,6 @@ export default function Service( ) {
       //          component: 자료 이미지 내용 컴포넌트           //
       const MaterialContents = () =>{
 
-        const fileInputRef = useRef<HTMLInputElement | null>(null);
 
         //          state: 자료 이미지 상태                 //
         const {materialImageList,setMaterialImageList} = useImagePagination<MaterialListItem>();
@@ -397,7 +397,7 @@ export default function Service( ) {
         useEffect(() => {
           const imageMaterialList = StudyMaterialListMock.map(item => item.studyMaterialImageUrl);
           setMaterialImageList(imageMaterialList);
-        }, []);
+        }, [setMaterialImageList]);
 
         //   render : 자료 이미지 내용 컴포넌트  렌더링       //
         return(
@@ -473,17 +473,17 @@ export default function Service( ) {
         }
 
         //          event handler: 자료 이미지 닫기 버튼 클릭 이벤트 처리          //
-        const onMaterialImageCloseHandler = ( deleteIndex: number )=>{
-          if(!imageRef.current) return;
+      
+       
 
 
-        }      
+          
 
         // effect : 컴포넌트 마운트 시 마다 자료 정보 리스트 불러오기 // 
         useEffect(() => {
           const imageMaterialList = StudyMaterialListMock.map(item => item.studyMaterialImageUrl);
           setMaterialImageList(imageMaterialList);
-        }, [materialImageList[currentPageNumber]]);
+        }, [setMaterialImageList]);
 
         //  effect : 임시 데이터를 렌더링할 때마다 studyimageUrl 상태 변수의 값을 업데이트 //
         useEffect(()=>{

@@ -4,6 +4,7 @@ import DefaultProfileImage from 'assets/default-user-icon.png';
 import  dayjs from 'dayjs';
 import { ChangeEvent, useState, useRef, KeyboardEvent, useEffect } from 'react';
 import { MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE } from 'constant';
+import { useUserStore } from 'stores';
 
 interface Props {
     commentItem: StudyMaterialCommentListItem;
@@ -31,6 +32,8 @@ export default function CommentItem({ commentItem }: Props) {
     //          state :         수정 여부    상태        //
     const [isModified, setIsModified] = useState(false);
 
+    //          state: 로그인 유저 상태          //
+    const { user } = useUserStore();    
       
     //      function : 작성일 경과 시간 함수           //
     const getElapsedTime = () =>{

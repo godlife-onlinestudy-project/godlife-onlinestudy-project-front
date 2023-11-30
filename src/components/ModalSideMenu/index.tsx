@@ -4,7 +4,7 @@ import StudyModifyModal from 'views/modal/StudyModifyModal';
 import MemberManageModal from 'views/modal/MemberManageModal';
 import StudyDate from 'views/modal/StudyDateModal';
 import MaterialManageModal from 'views/modal/MaterialManageModal';
-import { StudyListItem, StudyModify } from 'types';
+import { Study, StudyModify } from 'types';
 import { useModalSideManageStore } from 'stores';
 import { GetModifyStudyResponseDto } from 'apis/dto/response/study';
 import ResponseDto from 'apis/dto/response';
