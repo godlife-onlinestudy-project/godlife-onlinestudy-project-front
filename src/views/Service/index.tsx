@@ -17,7 +17,7 @@ import { useStudyStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
 import StudyUserListMock from 'mocks/study-user-list.mock';
-// import PeerJsComponent from 'components/PeerJs';
+import PeerJsComponent from 'components/PeerJs';
 import { getStudyRequest } from 'apis';
 import { GetStudyResponseDto } from 'apis/dto/response/study';
 import { useCookies } from 'react-cookie';
@@ -561,8 +561,8 @@ export default function Service( ) {
         return(
           <div className="study-info-memeber-info-box">
             <div className="study-info-memeber-info">
-            {/* <PeerJsComponent /> */}
-              <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+            <PeerJsComponent />
+              {/* <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
 
               {StudyUserListMock.map((studyUserListItem, index) =>
                 // <UserListItem userListItem = {studyUserListItem} /> 

@@ -101,7 +101,7 @@ const GET_TOP_5_STUDY_LIST_URL = (studyCategory1: string) =>
   `${API_DOMAIN}/main/top-5/${studyCategory1}`;
 
 //        description: get search study list API end point        //
-const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/study/search`;
+const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/main/search`;
 
 //        description: get search word study list API end point       //
 const GET_SEARCH_WORD_STUDY_LIST_URL = (studyName: string) =>
