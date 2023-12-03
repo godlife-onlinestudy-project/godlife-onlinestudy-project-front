@@ -1,7 +1,7 @@
 export default interface StudyMaterialCommentListItem {
     studyNumber : number;
     studyMaterialNumber : number;
-    commentUserEmail: string;
+    userEmail: string;
     userProfileImageUrl : string;
     userGrade : string;
     userNickName : string;

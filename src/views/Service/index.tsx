@@ -2,27 +2,30 @@ import { ChangeEvent, useEffect, useRef, useState, MouseEvent } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ATTEND_CHECK_COMPLETE_MESSAGE, CHAT_INPUT_COMPLETE_MESSAGE, MAIN_PATH,  MATERIAL_COMMENT_INPUT_COMPLETE_MESSAGE, SECTION_FIRST_MESSAGE, SECTION_LAST_MESSAGE } from 'constant';
-import DefaultProfileImage from 'assets/default-user-icon.png';
-import { MaterialListItem, StudyMaterialCommentListItem } from 'types';
+// import DefaultProfileImage from 'assets/default-user-icon.png';
+import { MaterialListItem, Study, StudyMaterialCommentListItem, StudyNoticeListItem, StudyTodoListItem, StudyUserListItem } from 'types';
 import { StudyMaterialCommentListMock, StudyNoticeMock, StudyToDoListMock, StudyMaterialListMock} from 'mocks';
 
 import CommentItem from 'components/CommentItem';
 
-import ToDoItem from 'components/ServiceToDoListItem';
-import NoticeItem from 'components/ServiceNoticeItem';
+import ServiceToDoItem from 'components/ServiceToDoListItem';
+import ServiceNoticeItem from 'components/ServiceNoticeItem';
 
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import StudyChatListMock from 'mocks/study-chat.mock';
-import { useStudyStore } from 'stores';
+import { useStudyStore, useUserStore } from 'stores';
 import StudyChatItem from 'components/ChatItem';
 import { useImagePagination } from 'hooks';
-import StudyUserListMock from 'mocks/study-user-list.mock';
+// import StudyUserListMock from 'mocks/study-user-list.mock';
 import PeerJsComponent from 'components/PeerJs';
-import { getStudyRequest } from 'apis';
-import { GetStudyResponseDto } from 'apis/dto/response/study';
+import { getStudyNoticeListRequest, getStudyRequest, getStudyUserListRequest } from 'apis';
+import { GetStudyResponseDto, GetStudyUserListResponseDto } from 'apis/dto/response/study';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'apis/dto/response';
 import ModalSideMenu from 'components/ModalSideMenu';
+import { GetStudyNoticeListResponseDto } from 'apis/dto/response/studyService';
+import HostNoticeManageModal from 'views/modal/HostNoticeManageModal';
+import NoticeModal from 'views/modal/NoticeModal';
 
 
 
@@ -30,34 +33,33 @@ import ModalSideMenu from 'components/ModalSideMenu';
 // TODO  사용자 권한, 코멘트유저 접속 유저 일치에 따른 수정아이콘 show  상태 , 코멘트 다중 삭제 가능, 손흔들기(유저 비교)
 
 export default function Service( ) {
-    //    state: 사이드 바 상태     //
-    const [menu,setMenu] = useState<'notice'|'chat'>('chat');
 
+    //    state: 사이드 바 상태     //
+    const [menu,setMenu] = useState<'notice'|'chat'>('notice');
     //          state:  스터디 이미지  상태           //
     // const fileInputRef = useRef<HTMLInputElement | null>(null);
-    
-
     //          state: 스터디방 상태          //
     const {resetService} =  useStudyStore(); 
-
     //           state : 방장 모달 상태                       //
-    const [hostmodelOpen, setHostModalOpen] = useState<'host-notice-manage-modal'| 'host-study-todo-manage-modal'| 'host-study-material-manage-modal'
-    |'host-study-Modify-modal' | 'host-study-date-modal' | 'host-study-member-manage-modal'>();
+    // const [hostmodelOpen, setHostModalOpen] = useState<'host-notice-manage-modal'| 'host-study-todo-manage-modal'| 'host-study-material-manage-modal'
+    // |'host-study-Modify-modal' | 'host-study-date-modal' | 'host-study-member-manage-modal'>();
     
-    //          state : 스터디 등급                                //
-    const [studyGrade, setStudyGrade] = useState<string>('방장');
-
-    //          state : 스터디 이름         //
-    // const [studyName, setStudyName] = useState<string>('asda');
     // state : 모달 참조 상태  //
     const modalBackground = useRef();   
-
     //          state: 스터디 번호 path variable 상태          //
     const { studyNumber } = useParams();
-
     //          state: cookie 상태          //
     const [cookies, setCookie]  = useCookies();  
-
+    //           state : 스터디 유저 리스트 상태            //
+    const [studyUserList, setStudyUserList ] = useState<StudyUserListItem[]>([]);
+    //          state: 로그인 유저 상태          //
+    const { user } = useUserStore();
+    //          state : 접속한 유저의 스터디 등급                                //
+    const [studyGrade, setStudyGrade] = useState<string>('');
+    //          state: 스터디  상태          //
+    const [study, setStudy] = useState<Study | null>(null); 
+    //           state : 스터디 방 호스트 여부 상태            //
+    const [isHost, setIsHost] = useState<boolean>(false);
     //           state : 스터디 방이름 상태            //
     const {studyName, setStudyName} = useStudyStore();
 
@@ -75,30 +77,34 @@ export default function Service( ) {
       }
     }
 
-    //          effect: 마운트 시 실행할 함수          //
-    useEffect(() => {
-      resetService();
-    }, []);
-
-      //           effect : 방 번호  path variable이 바뀔때 마다 스터디방 불러오기             //
-      useEffect(()=>{
-        const accessToken = cookies.accessToken;
-        // if (!accessToken) {
-        //   alert('로그인이 필요합니다.');
-        //   return;
-        // }
-
-      if(!studyNumber){
-        alert('잘못된 접근입니다.');
+    //           function: get study user response 처리 함수          //
+    const getStudyUserResponse = (responseBody : GetStudyUserListResponseDto | ResponseDto) =>{
+      const { code } = responseBody;
+      if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      if(code === 'DBE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU'){ 
         navigator(MAIN_PATH);
         return;
       }
-
-      getStudyRequest(studyNumber ,accessToken).then(getStudyResponse);
-
-    },[]);   
       
+      if(!user) return;
+
+      const { studyUserList } =  responseBody as GetStudyUserListResponseDto;
+      setStudyUserList(studyUserList);
       
+      // 스터디 유저리스트에 접속한 유저의 이메일과 일치한 이메일 있는 지 확인
+      const matchedUser = studyUserList.find(studyUser => studyUser.userEmail === user.userEmail && studyUser.studyNumber === studyNumber);
+      if(!matchedUser){   
+        navigator(MAIN_PATH);
+      }
+      // 스터디 유저리스트에 접속한 유저의 이메일과 일치한 이메일을 찾아 등급을 가져오기 
+      studyUserList.forEach((studyUser)=>{
+        if(studyUser.userEmail === user.userEmail){
+          setStudyGrade(studyUser.studyGrade);
+        }
+      })
+    }   
+
     //           function: get study  response 처리 함수          //
     const getStudyResponse = (responseBody : GetStudyResponseDto | ResponseDto) =>{
       const { code } = responseBody;
@@ -108,12 +114,37 @@ export default function Service( ) {
         navigator(MAIN_PATH);
         return;
       }
-      const { studyName  } = responseBody as GetStudyResponseDto;
-      setStudyName(studyName);
-  
-    }        
-      
 
+      const study : Study = responseBody as GetStudyResponseDto;
+      setStudy(study);
+
+      const studyName = study.studyName;
+      setStudyName(studyName);
+
+      if(!user) return;
+
+      const isHost = user.userEmail === study.createStudyUserEmail;
+      setIsHost(isHost);
+    }     
+
+    //           effect : 방 번호  path variable이 바뀔때 마다 스터디 유저 리스트및 스터디 방 정보  불러오기             //
+    useEffect(()=>{
+      const accessToken = cookies.accessToken;
+      if (!accessToken) {
+        alert('존재하지 않는 유저입니다.');
+        return;
+      }
+
+      if(!studyNumber){
+        alert('잘못된 접근입니다.');
+        navigator(MAIN_PATH);
+        return;
+      }
+
+      getStudyRequest(studyNumber,accessToken).then(getStudyResponse);
+      getStudyUserListRequest(studyNumber,accessToken).then(getStudyUserResponse);
+    },[studyNumber]);             
+       
     //          effect: 마운트 시 실행할 함수          //
     useEffect(() => {
       resetService();
@@ -128,29 +159,38 @@ export default function Service( ) {
           <div className='progress-time'>{`진행 시간: ${'00:00:00'}`}</div>
         </div>
       )
-
     }
+
     //          component: 헤더 카드 컴포넌트          //
     const Header = () =>{
 
-      //           state : 스터디 방이름 상태            //
-      const {studyName, setStudyName} = useStudyStore();
+
       //          state: 모달 창 상태          //
       const [show, setShow] = useState<boolean>(false);
 
-      //          event handler: 모달 Open, Close 이벤트 처리          //
-      const modalCloseHandler = () => setShow(false);
-      const modalOpenHandler = () => setShow(true);
 
-      //        event handler: 로고 클릭 이벤트 처리        //
+      
+      //          event handler: 모달 Open, Close 이벤트 처리          //
+      const modalCloseHandler = () => {
+        setShow(false)
+      };
+      
+      const modalOpenHandler = () =>{
+        if(!isHost) return;
+        setShow(true)
+      };
+
+      //          event handler: 로고 클릭 이벤트 처리          //
       const onLogoClickHandler = () => {
-        navigator('/main');
+        navigator(MAIN_PATH);
       }
 
       //           event handler : 방 나가기 클릭 이벤트 처리          //
       const onExitClickHandler = () =>{
         navigator(MAIN_PATH);
       }
+
+     
 
     //     render: 헤더 컴포넌트 렌더링          //
      return(
@@ -183,26 +223,33 @@ export default function Service( ) {
     //          component: notice 카드 컴포넌트          //
     const NoticeCard = () =>{
       
-      // state  :       텍스트 상자 참조 상태         //
+      //          state  :  텍스트 상자 참조 상태          //
       const contentsTextAreaRef = useRef<HTMLTextAreaElement | null>(null);
-
       
-      // state : 자료 코멘트 유저 글 상태           //
+      //          state : 자료 코멘트 유저 글 상태           //
       const [materialCommentContent, setMaterialCommentContent] = useState<string>('');
-      //        state: 조회하는 자료 번호 path variable 상태        //
+      //          state: 조회하는 자료 번호 path variable 상태        //
       const [ materialNumber , setMaterialNumber ] = useState<number>(0);
-      // state : 자료번호에     댓글 상태 //
+      //          state : 자료번호     댓글 상태          //
       const [materialNumberList, setMaterialNumberList] = useState<StudyMaterialCommentListItem[]>([]); 
-      //      state : 코멘트 보여주기 상태    //
+      //          state : 코멘트 보여주기 상태    //
       const [showComment, setShowComment] = useState<boolean>(false);
-      //        state:  자료 개수 상태        //
-      const [ count, setCount ] = useState<number>(0);
-      //        state:  자료 댓글 상태        //
-      const [materialComment, setMaterialComment] = useState<StudyMaterialCommentListItem[]>([]);
-
-      //           state : Host Notice 모달 상태                       //
-      const [hostNoticeModelOpen, setHostNoticeModelOpen] = useState(false);
       
+      //          state : Host Notice 모달 상태                       //
+      const [hostNoticeModelOpen, setHostNoticeModelOpen] = useState(false);
+      //          state : 일반 Notice 모달 상태                       //
+      const [noticeModelOpen, setNoticeModelOpen] = useState(false);
+      
+      //           state : 공지사항  리스트  상태            //
+      const [ noticeList, setNoticeList ] = useState<StudyNoticeListItem[]>([]);
+      //           state : to do  리스트  상태            //
+      // const [ todoList, setTodoList] = useState<StudyTodoListItem[]>([]);
+      //          state:  자료 댓글 상태        //
+      const [materialCommentList, setMaterialCommentList] = useState<StudyMaterialCommentListItem[]>([]);
+
+      
+
+
       //          event handler: 자료 댓글  변경 이벤트 처리          //
       const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if(!showComment) return;
@@ -216,24 +263,17 @@ export default function Service( ) {
         
       }
       
-      //          event handler: 공지사항 모달 출력 이벤트 처리          //
-      const onHostNoticeModelOpenClickHandler = (event: MouseEvent<HTMLDivElement> ) =>{
-        if(event.target === modalBackground.current){
-          setHostNoticeModelOpen(false);
-        }
-      }
 
       //          event handler: 자료 댓글  클릭 이벤트 처리          //
       const onContentsClickHandler = () => {
         setShowComment(!showComment);
-        
       }
 
       //          event handler: 댓글  삭제 버튼 클릭 이벤트 처리          //
       const onCommentCloseHandler = (deleteIndex: number) =>{
           // div 박스 삭제
-          const newComments = materialComment.filter((url, index) => index !== deleteIndex);
-          setMaterialComment(newComments);
+          if(!isHost) return;
+          const newComments = materialCommentList.filter((url, index) => index !== deleteIndex);
       }
   
       //          event handler: 키 프레스 클릭 이벤트 처리          //
@@ -247,61 +287,147 @@ export default function Service( ) {
         }        
       }
 
-      // effect : 컴포넌트 마운트 시 마다 자료번호마다 댓글 리스트 불러오기 // 
-      useEffect( ()=>{
+      
 
+
+      //           function: get study to do list response 처리 함수          //
+      const getStudyTodoListResponse = ( responseBody :  ResponseDto) =>{
+        const { code } = responseBody;
+        if(code === 'NU') alert('존재하지 않는 유저입니다.');
+        if(code === 'NS') alert('존재하지 않는 스터디입니다.');
+        if(code === 'DBE') alert('데이터베이스 오류입니다.');
+        if(code !== 'SU'){ 
+          navigator(MAIN_PATH);
+          return;      
+        }
+        // const { todoList } = responseBody as GetStudyTodoListResponseDto;
+        // setTodoList();
+      }
+
+      //           function: get study material comment list response 처리 함수          //
+      const getStudyMaterialCommentResponse = (responseBody :  ResponseDto)=>{
+        const { code } = responseBody;
+        if(code === 'NU') alert('존재하지 않는 유저입니다.');
+        if(code === 'NS') alert('존재하지 않는 스터디입니다.');
+        if(code === 'DBE') alert('데이터베이스 오류입니다.');
+        if(code !== 'SU'){ 
+          navigator(MAIN_PATH);
+          return;      
+        }
+        // const { materialCommentList } = responseBody as GetStudyMaterialCommentListResponseDto;
+        setMaterialCommentList(materialCommentList);
+      }
+
+      //           effect : 방 번호  path variable이 바뀔때 마다 공지사항 및 투두리스트 및 자료 코멘트 불러오기             //
+      useEffect(()=>{
+          // const accessToken = cookies.accessToken;
+          // if (!accessToken) {
+          //   alert('존재하지 않는 유저입니다.');
+          //   return;
+          // }
+    
+          // if(!studyNumber){
+          //   alert('잘못된 접근입니다.');
+          //   navigator(MAIN_PATH);
+          //   return;
+          // }
+          // getStudyNoticeListRequest(studyNumber,accessToken).then(getStudyNoticeListResponse);
+
+      },[])
+
+      //          effect : 컴포넌트 마운트 시 마다 자료번호마다 코멘트 자료번호 리스트 불러오기          // 
+      useEffect( ()=>{
+        setMaterialNumberList(StudyMaterialCommentListMock);
         // TODO: API 호출로 변경
-        setMaterialNumberList(StudyMaterialCommentListMock);
+        // const imageMaterialList = StudyMaterialListMock.map(item => item.studyMaterialImageUrl);
+        // setMaterialImageList(imageMaterialList);                
       },[materialNumber])
       
-      // effect : 조회하는 스터디 자료번호 변경될 때 마다 변경되는 함수 // 
-      useEffect( ()=>{
-        setCount(StudyMaterialCommentListMock.length);
-        setMaterialNumberList(StudyMaterialCommentListMock);
+        //          component: notice  컴포넌트          //
+        const Notice = () =>{
 
-      },[materialNumber])
-      
-      //    render : 알림 화면 렌더링    //
+          //          event handler: 모달 토글 클릭 이벤트 처리          //
+          const toggleModal = () =>{
+            isHost ? setHostNoticeModelOpen(!hostNoticeModelOpen): setNoticeModelOpen(!noticeModelOpen);
+          }
+
+          hostNoticeModelOpen ? document.body.classList.add('active-host-modal') : document.body.classList.remove('active-host-modal');
+
+          noticeModelOpen ? document.body.classList.add('active-modal') : document.body.classList.remove('active-modal');
+
+          //           function: get study notice list response 처리 함수          //
+          const getStudyNoticeListResponse = ( responseBody : GetStudyNoticeListResponseDto | ResponseDto) =>{
+            const { code } = responseBody;
+            if(code === 'NU') alert('존재하지 않는 유저입니다.');
+            if(code === 'NS') alert('존재하지 않는 스터디입니다.');
+            if(code === 'DBE') alert('데이터베이스 오류입니다.');
+            if(code !== 'SU'){ 
+              navigator(MAIN_PATH);
+              return;      
+            }
+
+            const {noticeList}  = responseBody as GetStudyNoticeListResponseDto;
+            setNoticeList(noticeList);
+          }
+
+
+
+        //          render : notice 컴포넌트 렌더링          //
+          return(
+            <div className="notice-box">
+              <div className="notice-contents-box">
+                <div className="notice-icon" onClick={toggleModal}></div>
+                  {hostNoticeModelOpen && <HostNoticeManageModal  />}
+                  {noticeModelOpen && <NoticeModal   />}  
+                <div className="notice-title">공지사항</div>
+              </div>
+              <div className="notice-message" >
+                  <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
+                    {noticeList?.map((noticeItem,index)=>
+                      // <div className=''>{noticeListItem.studyNoticeContent}</div>
+                      <ServiceNoticeItem key = {noticeItem.studyNoticeNumber} noticeItem = {noticeItem}/>
+                    )}
+                  </Scrollbars>
+              </div>
+            </div>        
+          )
+        }
+
+        //          component: todoList  컴포넌트          //
+        const ToDoList = () =>{
+
+          return(
+            <div className="list-box">
+              <div className="list-contents-box">
+                <div className="list-icon" ></div>
+                <div className="list-title">{'Study TO DO List'}</div>
+              </div>
+              <div className="list-message" >
+                <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}>
+                  { StudyToDoListMock.map( (todoListItem,index) =>
+                    <ServiceToDoItem studyToDoItem ={todoListItem} />
+                  )}
+                </Scrollbars>
+              </div>  
+            </div>
+          )
+        }
+
+      //    render : notice 카드 렌더링    //
       return(
         <div className="side-bar">
           <div className="alert-box">
             <div className="alert-title-1" onClick={onMenuClickHandler}>알림</div>
-            
             <div className="alert-message-1" onClick={onMenuClickHandler}>채팅</div>
-          
           </div>  
-          <div className="notice-box">
-            <div className="notice-contents-box">
-              <div className="notice-icon"></div>
-              <div className="notice-title">공지사항</div>
-            </div>
-            <div className="notice-message" onClick={onHostNoticeModelOpenClickHandler}>
-                <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}> 
-                  {StudyNoticeMock.map((noticeListItem,index)=>
-                    <NoticeItem  noticeItem = {noticeListItem}/>
-                  )}
-                </Scrollbars>
-            </div>
-          </div>
-          <div className="list-box">
-            <div className="list-contents-box">
-              <div className="list-icon"></div>
-              <div className="list-title">{'Study TO DO List'}</div>
-            </div>
-            <div className="list-message" >
-              <Scrollbars renderTrackVertical={(props) => <div {...props} className='track-vertical' />} renderThumbVertical={(props) => <div {...props} className='thumb-vertical' />}>
-                { StudyToDoListMock.map( (todoListItem,index) =>
-                  <ToDoItem studyToDoItem ={todoListItem} />
-                )}
-              </Scrollbars>
-            </div>  
-          </div>
+          <Notice/>
+          <ToDoList/>
           <div className="comment-box">
             <div className="comment-contents-box">
               <div className="comment-icon"></div>
               <div className="comment-title">{`0번 자료 코멘트`}</div>
               {/* host authorization   */}
-              <div className="delete-icon" ></div>
+              <div className="delete-icon"></div>
               {/* guest */}            
             </div>
             <div className="comment-list">  
@@ -310,7 +436,7 @@ export default function Service( ) {
                 renderTrackVertical={(props) => <div {...props} className='comment-track-vertical' />} 
                 renderThumbVertical={(props) => <div {...props} className='comment-thumb-vertical' />}>
                   {StudyMaterialCommentListMock.map(( commentListItem, index ) => (
-                    <CommentItem key={commentListItem.studyNumber} commentItem={commentListItem} />
+                    <CommentItem key={commentListItem.studyNumber} commentItem={commentListItem}  />
                   ))}
                 </Scrollbars>
               </div>
@@ -400,13 +526,16 @@ export default function Service( ) {
 
       const [viewImage, setViewImage] = useState<string>('');
 
+      //          state: 자료 이미지 상태                 //
+
       //          component: 자료 이미지 내용 컴포넌트           //
       const MaterialContents = () =>{
 
-
+        
         //          state: 자료 이미지 상태                 //
         const {materialImageList,setMaterialImageList} = useImagePagination<MaterialListItem>();
-
+        // const [studyUserList, setStudyUserList ] = useState<StudyUserListItem[]>([]);
+        
         // effect : 컴포넌트 마운트 시 마다 자료 정보 리스트 불러오기 // 
         useEffect(() => {
           const imageMaterialList = StudyMaterialListMock.map(item => item.studyMaterialImageUrl);
@@ -418,7 +547,7 @@ export default function Service( ) {
           <div className="study-image-material-box">
             <div className="study-image-material" >
             {/* <input ref = {fileInputRef} type="file" src={materialImageList.} accept='image/*' style={{display : 'none'}}  /> */}
-            <img src={viewImage} alt=""className='study-image-material' />
+            { viewImage ? <img src={viewImage  } alt=""className='study-image-material' />: "" }
             </div>
           </div>
         )
@@ -432,7 +561,7 @@ export default function Service( ) {
         //          state: 댓글 리스트 페이지네이션 상태            //
         const {currentPageNumber,materialImageList, setMaterialImageList, setCurrentPageNumber, currentSectionNumber, setCurrentSectionNumber, viewImageList,totalSection } = useImagePagination<MaterialListItem[]>();
         //          state: 이미지 인풋 ref 상태           //
-        const imageRef = useRef<HTMLInputElement | null>(null);
+        // const imageRef = useRef<HTMLInputElement | null>(null);
 
         //          event handler: 다음 버튼 클릭 이벤트 처리          //
         const onNextButtonClickHandler = () => {
@@ -487,9 +616,9 @@ export default function Service( ) {
         }
 
         //          event handler: 자료 이미지 닫기 버튼 클릭 이벤트 처리          //
-        const onMaterialImageCloseHandler = ( deleteIndex: number )=>{
-          if(!imageRef.current) return;
-        }      
+        // const onMaterialImageCloseHandler = ( deleteIndex: number )=>{
+        //   if(!imageRef.current) return;
+        // }      
 
         // effect : 컴포넌트 마운트 시 마다 자료 정보 리스트 불러오기 // 
         useEffect(() => {

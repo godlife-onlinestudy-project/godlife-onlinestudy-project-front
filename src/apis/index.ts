@@ -39,6 +39,9 @@ import {
   PostStudyResponseDto,
 } from "./dto/response/study";
 import GetModifyStudyResponseDto from "./dto/response/study/get-modify-study.response.dto";
+import GetStudyNoticeListResponseDto from "./dto/response/studyService/get-study-notice-list.response";
+import { PatchStudyNoticeRequestDto, PostStudyNoticeRequestDto } from "./dto/request/studyService";
+import { PatchStudyNoticeResponseDto, PostStudyNoticeResponseDto } from "./dto/response/studyService";
 
 //        description: Domain URL       //
 const DOMAIN = "http://localhost:4000";
@@ -422,23 +425,7 @@ export const getSearchWordStudyListRequest = async (
 };
 
 
-//        description: get study  API end point        //
-const GET_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}`;
 
-export const getStudyRequest  =  async  ( studyNumber : string | number, token: string ) =>{
-    const result = await axios.get(GET_STUDY_URL(studyNumber),authorization(token))
-    .then(response =>{
-        const responseBody : GetStudyResponseDto = response.data;
-        console.log(responseBody);
-        return responseBody;
-    })
-    .catch(error =>{
-        const responseBody : ResponseDto = error.response.data;
-        console.log(responseBody);
-        return responseBody;        
-    })
-    return result;
-};
 
 
 
@@ -477,3 +464,81 @@ export const getUserRequest = async (email: string) => {
 
   return result;
 };
+
+//        description: get study  API end point        //
+const GET_STUDY_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}`;
+
+export const getStudyRequest  =  async  ( studyNumber : string | number, token: string ) =>{
+    const result = await axios.get(GET_STUDY_URL(studyNumber),authorization(token))
+    .then(response =>{
+        const responseBody : GetStudyResponseDto = response.data;
+        console.log(responseBody);
+        return responseBody;
+    })
+    .catch(error =>{
+        const responseBody : ResponseDto = error.response.data;
+        console.log(responseBody);
+        return responseBody;        
+    })
+    return result;
+};
+
+
+//        description: get study notice list  API end point        //
+const GET_STUDY_NOTICE_LIST = (studyNumber:string | number ) => `${API_DOMAIN}/service/${studyNumber}/notice`;
+// GetStudyNoticeListResponseDto
+
+export const getStudyNoticeListRequest = async (studyNumber : string | number,token: string) =>{
+  const result = await axios.get(GET_STUDY_NOTICE_LIST(studyNumber),authorization(token)) 
+      .then((response) =>{
+        const responseBody : GetStudyNoticeListResponseDto = response.data;
+        return responseBody;
+      })
+      .catch((error) =>{
+        const responseBody : ResponseDto = error.response.data;
+        return responseBody;
+      });
+  return result;            
+}
+
+//        description: post study notice   API end point        //
+const POST_STUDY_NOTICE_URL = (studyNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/study-notice`;
+
+export const postStudyNoticeRequest = async(requestBody: PostStudyNoticeRequestDto,studyNumber : number |string,token: string) =>{
+    const result = await axios.post(POST_STUDY_NOTICE_URL(studyNumber ),requestBody,authorization(token))
+        .then(response =>{
+            const responseBody : PostStudyNoticeResponseDto = response.data;
+            const { code } = responseBody;
+            return code;
+        })
+        .catch(error =>{
+            const responseBody : ResponseDto = error.response.data;
+            const { code } = responseBody;
+            return code;
+        })
+    return result;
+}
+
+//        description: patch study notice  API end point        //
+const PATCH_STUDY_NOTICE_URL = (studyNumber: string | number, studyNoticeNumber:string |  number) => `${API_DOMAIN}/service/${studyNumber}/study-notice/${studyNoticeNumber}`;
+
+export const patchStudyNoticeRequest = async(requestBody : PatchStudyNoticeRequestDto ,studyNumber :string |  number, studyNoticeNumber: string | number,token: string) =>{
+    const result = await axios.patch(PATCH_STUDY_NOTICE_URL(studyNumber,studyNoticeNumber ),requestBody,authorization(token) )
+        .then(response =>{
+            const responseBody : PatchStudyNoticeResponseDto = response.data;
+            const { code } = responseBody;
+            return code;
+        })
+        .catch(error =>{
+            const responseBody : ResponseDto = error.response.data;
+            const { code } = responseBody;
+            return code;
+        })
+    return result;
+  }
+
+//        description: delete study notice  API end point        //
+const DELETE_STUDY_NOTICE_URL = (studyNumber: string | number, studyNoticeNumber: string | number) => `${API_DOMAIN}/service/${studyNumber}/study-notice/${studyNoticeNumber}`;
+
+// DELETE_STUDY_NOTICE_URL
+

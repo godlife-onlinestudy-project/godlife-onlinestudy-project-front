@@ -10,11 +10,11 @@ interface Props {
 //          component: 일반 유저 투두 리스트 아이템 컴포넌트          //
 export default function ToDoItem({ studyToDoItem }: Props) {
     //          state: Properties          //
-    const { studyListNumber, studyNumber, studyListContents, studyListCheck } = studyToDoItem;
+    const { studyListNumber, studyNumber, studyListContent, studyListCheck } = studyToDoItem;
     //          state: 투두 리스트 textarea 참조 상태          //
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     //          state: 투두 리스트 상태              //
-    const [todoList, setTodoList] = useState<string>(studyListContents);
+    const [todoList, setTodoList] = useState<string>(studyListContent);
     //          state: 투두 리스트 textarea 수정 상태          //
     const [textareaEdit, setTextareaEdit] = useState<boolean>(false);
 

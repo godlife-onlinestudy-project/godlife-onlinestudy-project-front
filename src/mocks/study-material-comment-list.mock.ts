@@ -5,7 +5,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email@email.com",
+        userEmail : "email@email.com",
         userProfileImageUrl : "",
         userGrade : "방장",
         userNickName : "오오츠",     
@@ -15,7 +15,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email1@email.com",
+        userEmail : "email1@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크",     
@@ -25,7 +25,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email2@email.com",
+        userEmail : "email2@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크f",     
@@ -35,7 +35,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email2@email.com",
+        userEmail : "email2@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크f",     
@@ -45,7 +45,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email2@email.com",
+        userEmail : "email2@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크f",     
@@ -55,7 +55,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email2@email.com",
+        userEmail : "email2@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크f",     
@@ -65,7 +65,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email2@email.com",
+        userEmail : "email2@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크f",     
@@ -75,7 +75,7 @@ const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     {
         studyNumber : 1,
         studyMaterialNumber : 1,
-        commentUserEmail : "email2@email.com",
+        userEmail : "email2@email.com",
         userProfileImageUrl : "",
         userGrade : "일반",
         userNickName : "오오츠크f",     
