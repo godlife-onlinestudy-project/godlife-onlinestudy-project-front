@@ -3,21 +3,21 @@ import LoginUser from "./login-user.interface";
 import MyToDoItem from "./my-to-do-list-item.interface";
 import StudyModify from "./study-modify-interface";
 import PeerjsMessage from "./peerjs-message";
-import StudyListItem from "./study-list.inteface";
+import Study from "./study.inteface";
 import UserGradeList from "./user.grade.interface";
-import MaterialListItem from "./study-material-list.interface";
+import MaterialListItem from "./study-material-list-item.interface";
 import JoinStudyListItem from "./join-study-list-item.interface";
-import StudyTodoListItem from "./study-to-do-list.interface";
-import StudyUserListItem from "./study-user-list.interface";
+import StudyTodoListItem from "./study-to-do-list-item.interface";
+import StudyUserListItem from "./study-user-list-item.interface";
 import StudyChatListItem from "./study-chat-list";
 import JoinedStudyListItem from "./joined-study-list-item.interface";
 import SearchStudyRoomItem from "./study-room-item.interface";
 import MyStudyRoomInfoItem from "./my-study-room-list-info-item.interface";
-import StudyNoticeListItem from "./study-notice.interface";
+import StudyNoticeListItem from "./study-notice-list-item.interface";
 import PeerjsReceiveMessage from "./peerjs-receive-message";
 import MaterialManageListItem from "./material-manage-list-item.interface";
 import RecommendationStudyRoomItem from "./recommendation-study-room-item.interface";
-import StudyMaterialCommentListItem from "./study-material-comment-list.interface";
+import StudyMaterialCommentListItem from "./study-material-comment-list-item.interface";
 
 export type {
   User,
@@ -26,7 +26,7 @@ export type {
 
   StudyModify,
   PeerjsMessage,
-  StudyListItem,
+  Study,
   UserGradeList,
   MaterialListItem,
   JoinStudyListItem,

@@ -1,25 +1,27 @@
-#notice-wrapper {
-    position: fixed;
+#notice-host-modal{
+    width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(125, 127, 129, 0.8);
-    z-index: 1000;
-
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 100;
+    background-color : rgba(0,0,0,0.4);
     font-family: 'Spoqa Han Sans Neo';
-    background-color: rgba(255, 255, 255, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+.overlay{
+    background-color: rgba(49,49,49,0.8);
 }
 
 .notice-card {
+    position: absolute;
+    left: 25%;
+    top: 10%;
     width: 900px;
     height: 870px;
+    transform: translate(-50%, -50%);
 
     border-radius: 15px;
     border: 3px solid rgba(24, 160, 251, 1);
@@ -31,7 +33,7 @@
 
     background-color: rgba(232, 241, 255, 1);
     border-radius: 30px;
-    position: relative;
+
 }
 
 .notice-button-box {

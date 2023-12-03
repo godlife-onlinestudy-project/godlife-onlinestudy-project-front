@@ -4,6 +4,7 @@ import DefaultProfileImage from 'assets/default-user-icon.png';
 import  dayjs from 'dayjs';
 import { ChangeEvent, useState, useRef, KeyboardEvent, useEffect } from 'react';
 import { MATERIAL_COMMENT_CHANGE_COMPLETE_MESSAGE } from 'constant';
+// import { useUserStore } from 'stores';
 
 interface Props {
     commentItem: StudyMaterialCommentListItem;
@@ -12,25 +13,27 @@ interface Props {
 export default function CommentItem({ commentItem }: Props) {
 
     //          state: Properties          //
-    const {studyNumber , studyMaterialNumber ,commentUserEmail,userProfileImageUrl} = commentItem;
+    const {userEmail,userProfileImageUrl} = commentItem;
     const { userGrade , userNickName ,materialComment } =  commentItem;
     const { writeDatetime} = commentItem;   
 
-    //          state : 자료 코멘트 박스 보여주기 상태               //
+    //          state: 자료 코멘트 박스 보여주기 상태          //
     const [showCommentBox,setShowCommentBox] = useState<boolean>(false);
-    //          state : 자료 코멘트 박스 색상 변경 상태  //
+    //          state: 자료 코멘트 박스 색상 변경 상태          //
     const [backgroundColor,setBackgroundColor] = useState<string>('white');
     //          state: 댓글 상태              //
     const [comment, setComment] = useState<string>(materialComment);
     //          state: 댓글 textarea 참조 상태          //
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-    //          state: 댓글 박스 상태         //
+    //          state: 댓글 박스 상태          //
     const [showComments, setShowComments] = useState<boolean>(false);
-    //          state  :       텍스트 상자 참조 상태         //
+    //          state:   텍스트 상자 참조 상태          //
     const contentsTextAreaRef = useRef<HTMLTextAreaElement | null>(null);  
-    //          state :         수정 여부    상태        //
+    //          state:     수정 여부 상태          //
     const [isModified, setIsModified] = useState(false);
 
+    //          state: 로그인 유저 상태          //
+    // const { user } = useUserStore();    
       
     //      function : 작성일 경과 시간 함수           //
     const getElapsedTime = () =>{
@@ -44,7 +47,7 @@ export default function CommentItem({ commentItem }: Props) {
         return `${ Math.floor(gap/86400)}일 전`;
     };
 
-    // event handler : 배경화면 변경하는 클릭 이벤트 처리       //
+    //          event handler : 배경화면 변경하는 클릭 이벤트 처리       //
     const onBackGroundColorClickHandler = ( )=>{
         setShowCommentBox(!showCommentBox);
         if(!showCommentBox){
@@ -81,14 +84,16 @@ export default function CommentItem({ commentItem }: Props) {
         }
     }
     
-    //            event handler: 포커스 처리  이벤트 처리          //
+    //          event handler: 포커스 처리  이벤트 처리          //
     const handleFocus = () => {
         setIsModified(false);
       };
 
-    //           event handler: 댓글 변경 이벤트 처리          //
+    //          event handler: 댓글 변경 이벤트 처리          //
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if(!showComments) return;
+
+        // 댓글 유저와 접속 유저의 이메일 일치 여부
         const comment = event.target.value;
         setComment(comment);
 
@@ -100,6 +105,9 @@ export default function CommentItem({ commentItem }: Props) {
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
         setIsModified(true);
     }
+
+    //          function : get study material commnt          //
+
 
     //     effect : 댓글 작성시 값이 변경 되기         //
     useEffect(()=>{
@@ -127,7 +135,7 @@ export default function CommentItem({ commentItem }: Props) {
                 <div className="comment-list-user-nickname">{userNickName}</div>
                 <div className="comment-list-edit-icon-box" onClick={onShowContentsClickHandler} >
                     {/* 코멘트 유저와 접속 유저 일치 여부 */}
-                    {   commentUserEmail &&
+                    {   userEmail &&
                     <div className='comment-list-edit-icon' ></div>}
                 </div>
             </div>

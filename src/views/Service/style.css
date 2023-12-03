@@ -398,6 +398,14 @@
     cursor: pointer;
 }
 
+.body.active-host-modal {
+    overflow-y: hidden;
+}
+
+.body.active-modal {
+    overflow-y: hidden;
+}
+
 .notice-box{
     width: 192px;
     height: 158px;
@@ -430,11 +438,14 @@
     background-image: url(assets/notice-icon.png);
     background-position: 50% 50%;
     background-size: 100% 100%;
+
+    
 }
 
-.notice-icon{
+.notice-ico :hover{
     cursor: pointer;
 }
+
 
 .notice-title{
     width: 62px;

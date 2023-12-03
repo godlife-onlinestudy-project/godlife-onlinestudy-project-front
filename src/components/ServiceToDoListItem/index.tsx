@@ -8,11 +8,11 @@ interface Props{
     studyToDoItem :  StudyTodoListItem;
 }
 
-export default function ToDoItem({studyToDoItem} : Props){
+export default function ServiceToDoItem({studyToDoItem} : Props){
   
     
     //          state: Properties                               //
-    const { studyListNumber,studyNumber, studyListContents, studyListCheck} = studyToDoItem;
+    const { studyListNumber,studyNumber, studyListContent, studyListCheck} = studyToDoItem;
     //          state: 투두 리스트 박스 상태         //
     const [showToDolist, setShowToDolist] = useState<boolean>(false);
     //          state: 투두 리스트 textarea 참조 상태          //
@@ -48,8 +48,8 @@ export default function ToDoItem({studyToDoItem} : Props){
             <div className="todo-list-item-icon-box">
                 <div className="todo-list-item-icon"></div>
             </div>
-            {/* <div className="todo-list-item-contents">cutString(studyListContents,40)</div> */}
-            <input type="text" className="todo-list-item-contents" value = {cutString(studyListContents,40)} />
+            {/* <div className="todo-list-item-contents">cutString(studyListContent,40)</div> */}
+            <input type="text" className="todo-list-item-contents" value = {cutString(studyListContent,40)} />
         </div>
         <div className="todo-list-item-bottom">
             <div className="todo-list-item-bottom-line"></div>

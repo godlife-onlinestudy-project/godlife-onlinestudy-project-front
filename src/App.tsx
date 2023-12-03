@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect }  from 'react';
 import { Outlet, Route, Router, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
-import StudyListItem from 'types/study-list.inteface';
+import StudyListItem from 'types/study.inteface';
 import StudyCreate from 'views/StudyCreate';
 import { useUserStore } from 'stores';
 import { useCookies } from 'react-cookie';
@@ -37,14 +37,14 @@ function App() {
 
   //          function: get sign in user response 처리 함수          //
   const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
-    // const { code } = responseBody;
-    // if (code !== 'SU') {
-    //   setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
-    //   setUser(null);
-    //   return;
-    // }
+    const { code } = responseBody;
+    if (code !== 'SU') {
+      setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
+      setUser(null);
+      return;
+    }
 
-    // setUser({ ...responseBody as GetSignInUserResponseDto });
+    setUser({ ...responseBody as GetSignInUserResponseDto });
   }
 
   //          effect: 현재 path가 변경될 때마다 실행될 함수          //
