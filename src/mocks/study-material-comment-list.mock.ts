@@ -1,4 +1,4 @@
-import StudyMaterialCommentListItem from "types/study-material-comment-list.interface";
+import StudyMaterialCommentListItem from "types/study-material-comment-list-item.interface";
 
 const StudyMaterialCommentListMock : StudyMaterialCommentListItem[] = [
     

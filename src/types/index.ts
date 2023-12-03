@@ -17,7 +17,7 @@ import StudyNoticeListItem from "./study-notice-list-item.interface";
 import PeerjsReceiveMessage from "./peerjs-receive-message";
 import MaterialManageListItem from "./material-manage-list-item.interface";
 import RecommendationStudyRoomItem from "./recommendation-study-room-item.interface";
-import StudyMaterialCommentListItem from "./study-material-comment-list.interface";
+import StudyMaterialCommentListItem from "./study-material-comment-list-item.interface";
 
 export type {
   User,
