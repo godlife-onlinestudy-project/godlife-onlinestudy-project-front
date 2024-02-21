@@ -157,6 +157,10 @@ export default function Authentication() {
             window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
         }
 
+        const onKakaoOuathButtonClickHandler = (provider: string) => {
+            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
+        }
+
         //        render : 로그인 페이지 랜더링        //
         return (
             <div className='sign-in-card'>
@@ -209,7 +213,7 @@ export default function Authentication() {
                             <div className='google-logo-image'></div>
                             <div className='google-logo-name'>Google</div>
                         </div>
-                        <div className='kakao-sign-in-box'>
+                        <div className='kakao-sign-in-box' onClick={() => onKakaoOuathButtonClickHandler('kakao')}>
                             <div className='kakao-logo-image'></div>
                             <div className='kakao-logo-name'>Kakao</div>
                         </div>
