@@ -161,6 +161,10 @@ export default function Authentication() {
             window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
         }
 
+        const onGoogleOuathButtonClickHandler = (provider: string) => {
+            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
+        }
+
         //        render : 로그인 페이지 랜더링        //
         return (
             <div className='sign-in-card'>
@@ -209,7 +213,7 @@ export default function Authentication() {
                 <div className='Oauth-box'>
                     <div className='Oauth-box-title'>다음계정을 통해 로그인</div>
                     <div className='Oauth-authentification-icon-box'>
-                        <div className='google-sign-in-box'>
+                        <div className='google-sign-in-box' onClick={() => onGoogleOuathButtonClickHandler('google')}>
                             <div className='google-logo-image'></div>
                             <div className='google-logo-name'>Google</div>
                         </div>
