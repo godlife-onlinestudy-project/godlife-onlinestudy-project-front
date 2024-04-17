@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# 🎓 갓생살기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+갓생살기 온라인 스터디 그룹 플랫폼(front)
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+# 📄 프로젝트 정보
 
-### `npm start`
+### 1. 제작 기간
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> 2023.10.02 ~ 11.30
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 2. 참여 인원
+> |                    Name                    |  Position   |
+> | :----------------------------------------: | :---------: |
+> | [박진우](https://github.com/skinlotion)    | Back, Front |
+> | [김경훈](https://github.com/statkkh)       | Back, Front |
+> | [이수광](https://github.com/soso1461)      | Back, Front |
+> | [조창석](https://github.com/changseokjo)   | Back, Front |
 
-### `npm test`
+### 3. 역할 분담
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> - 박진우 : 로그인 페이지 구현
+> - 김경훈 : 온라인스터디 운영 페이지 구현
+> - 이수광 : 스터디방 생성 페이지, 마이 페이지 구현
+> - 조창석 : 스터디 메인 페이지 구현
 
-### `npm run build`
+<br />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 📚 기술 스택
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Front-end
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Typescript
+> 
+> React
+>
+> HTML/CSS
 
-### `npm run eject`
+<br />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ # ⛏ ERD & AWS Architecture
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<details>
+  <summary>ERD</summary>
+  <div markdown="1" style="padding-left: 15px;">
+    <img src = "https://github.com/godlife-onlinestudy-project/godlife-onlinestudy-project-back/assets/72859594/06681e1b-d30d-4951-a543-e5750b8ae0de" />
+  </div>
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br />
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<details>
+  <summary>AWS Architecture</summary>
+  <div markdown="1" style="padding-left: 15px;">
+    <img src = "https://github.com/godlife-onlinestudy-project/godlife-onlinestudy-project-back/assets/72859594/ceca2582-f7ff-4a2e-9a10-8531f2a64c7d" />
+  </div>
+</details>
 
-## Learn More
+<br />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 📁 기타 자료
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 1. 기획문서
+
+> [온라인 스터디 그룹 - Notion](https://www.notion.so/3a9188e2868945f49ff70362616648a1)
+ 
+<br />
+
+> [온라인 스터디 그룹 - Figma](https://www.figma.com/file/OiGiRguaxpBkxSHiNJlF04/%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%8A%A4%ED%84%B0%EB%94%94%EA%B7%B8%EB%A3%B9-%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%84%9C%EB%B9%84%EC%8A%A4?type=design&node-id=0-1&mode=design&t=xFiIfqgo2J7oKsXQ-0)
+
+### 2. 발표 PPT
+
