@@ -148,14 +148,26 @@ export default function Authentication() {
         const onSearchPasswordCardLinkClickHandler = () => {
             setView('search-password-card');
         }
+
+        //          event handler: 네이버 로그인 버튼 클릭 이벤트 처리          //
+        const onNaverOauthButtonClickHandler = (provider: string) => {
+            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
+        }
+
+        //          event handler: 카카오 로그인 버튼 클릭 이벤트 처리          //
+        const onKakaoOuathButtonClickHandler = (provider: string) => {
+            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
+        }
+
+        //          event handler: 구글 로그인 버튼 클릭 이벤트 처리          //
+        const onGoogleOuathButtonClickHandler = (provider: string) => {
+            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
+        }
+        
         //          effect : 이메일 엔터치면 비밀번호 인풋박스로 넘어가게           //
         useEffect(() => {
             if (signInLevel === 2 && passwordRef.current) passwordRef.current.focus();
         }, [signInLevel])
-
-        const onNaverOauthButtonClickHandler = (provider: string) => {
-            window.location.href = `http://localhost:4000/auth/oauth2/${provider}`;
-        }
 
         //        render : 로그인 페이지 랜더링        //
         return (
@@ -205,11 +217,11 @@ export default function Authentication() {
                 <div className='Oauth-box'>
                     <div className='Oauth-box-title'>다음계정을 통해 로그인</div>
                     <div className='Oauth-authentification-icon-box'>
-                        <div className='google-sign-in-box'>
+                        <div className='google-sign-in-box' onClick={() => onGoogleOuathButtonClickHandler('google')}>
                             <div className='google-logo-image'></div>
                             <div className='google-logo-name'>Google</div>
                         </div>
-                        <div className='kakao-sign-in-box'>
+                        <div className='kakao-sign-in-box' onClick={() => onKakaoOuathButtonClickHandler('kakao')}>
                             <div className='kakao-logo-image'></div>
                             <div className='kakao-logo-name'>Kakao</div>
                         </div>
