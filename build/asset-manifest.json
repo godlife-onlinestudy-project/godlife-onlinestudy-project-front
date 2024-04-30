@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ee12ad49.css",
+    "main.js": "/static/js/main.7646c4a5.js",
+    "static/media/background.png": "/static/media/background.9352f3c56ece81615d5a.png",
+    "static/media/sprout-icon.png": "/static/media/sprout-icon.b2d24d9c3ca8854f9cbf.png",
+    "static/media/send-email-icon.png": "/static/media/send-email-icon.94e7d4e2590a9f2fc2e6.png",
+    "static/media/tree-icon.png": "/static/media/tree-icon.46b02d7e758fc4246545.png",
+    "static/media/warning-icon.png": "/static/media/warning-icon.187fea746ebd8b795104.png",
+    "static/media/weeds-icon.png": "/static/media/weeds-icon.f80139388a35932db530.png",
+    "static/media/default-profile-image.png": "/static/media/default-profile-image.8d49e377c7c342895ec2.png",
+    "static/media/default-user-icon.png": "/static/media/default-user-icon.8d49e377c7c342895ec2.png",
+    "static/media/leaf-icon.png": "/static/media/leaf-icon.ec30537ffdf52d55e1e4.png",
+    "static/media/todolist-delete-icon.png": "/static/media/todolist-delete-icon.cf2b10369fec3f75e58d.png",
+    "static/media/todolist-add-icon.png": "/static/media/todolist-add-icon.65726b9ae6679d81ef8b.png",
+    "static/media/arrow-down-icon.png": "/static/media/arrow-down-icon.ec81df77b6a531ae531d.png",
+    "static/media/file-upload-icon.png": "/static/media/file-upload-icon.2246ea78d018def8e642.png",
+    "index.html": "/index.html",
+    "main.ee12ad49.css.map": "/static/css/main.ee12ad49.css.map",
+    "main.7646c4a5.js.map": "/static/js/main.7646c4a5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee12ad49.css",
+    "static/js/main.7646c4a5.js"
+  ]
+}
