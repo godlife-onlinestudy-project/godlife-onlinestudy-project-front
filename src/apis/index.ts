@@ -44,7 +44,7 @@ import { PatchStudyNoticeRequestDto, PostStudyNoticeRequestDto } from "./dto/req
 import { PatchStudyNoticeResponseDto, PostStudyNoticeResponseDto } from "./dto/response/studyService";
 
 //        description: Domain URL       //
-const DOMAIN = "http://43.203.193.5:4000";
+const DOMAIN = "http://43.202.24.102:4000";
 
 //        description: API Domain 주소       //
 const API_DOMAIN = `${DOMAIN}/api`;
