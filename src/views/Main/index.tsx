@@ -145,7 +145,7 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
 
     //        event handler: 스터디 시작 하기 버튼 클릭 이벤트 처리       //
     const onStudyStartButtonClickHandler = (studyNumber: number) => {
-      navigator(SERVICE_PATH(studyNumber));
+      navigator(SERVICE_PATH(4));
     }
 
     //        event handler: 유저 투두리스트 추가 버튼 클릭 이벤트 처리        //
@@ -517,7 +517,7 @@ const Main = forwardRef<HTMLDivElement>((props, ref) => {
           return item.studyCategory1 === filterStudyCategory && (Array.isArray(filterPublicCategory) ? filterPublicCategory.includes(item.studyPublicCheck) : item.studyPublicCheck === filterPublicCategory);
         }
       }));
-
+      
     }, [selectedStudyPublicCheckCategory, selectedStudyCategory]);
 
     //        event handler: 검색 값 변경 이벤트 처리       //
