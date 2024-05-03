@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import ModalSideMenu from 'components/ModalSideMenu';
 import Scrollbars from 'react-custom-scrollbars-2';
 
-export default function StudyDateModal() {
+export default function StudyDateModal({ modalCloseHandler, studyNumber }: {modalCloseHandler: () => void; studyNumber: string | number}) {
     //          state : 스터디 시간 미설정에 대한 오류 여부  상태          //
     const [timeError, setTimeError] = useState<boolean>(false);
     //          state: 박스 상태          //
@@ -436,9 +436,9 @@ export default function StudyDateModal() {
     // render : 다음 스터디 일정 렌더링 //
     return (
         <div id='notice-wrapper'>
-            <div className='notice-card'>
+            <div className='reset-card'>
                 <div className='notice-button-box'>
-                    <button type='button' className='modal-close-button'>
+                    <button type='button' className='modal-close-button' onClick={modalCloseHandler}>
                         X
                     </button>
                 </div>

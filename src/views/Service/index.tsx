@@ -81,6 +81,7 @@ export default function Service( ) {
     const getStudyUserResponse = (responseBody : GetStudyUserListResponseDto | ResponseDto) =>{
       const { code } = responseBody;
       if(code === 'NU') alert('존재하지 않는 유저입니다.');
+      console.log(code);
       if(code === 'DBE') alert('데이터베이스 오류입니다.');
       if (code !== 'SU'){ 
         navigator(MAIN_PATH);
@@ -176,7 +177,7 @@ export default function Service( ) {
       };
       
       const modalOpenHandler = () =>{
-        if(!isHost) return;
+        // if(!isHost) return;
         setShow(true)
       };
 

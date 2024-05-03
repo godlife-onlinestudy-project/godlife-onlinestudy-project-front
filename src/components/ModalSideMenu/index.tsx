@@ -12,6 +12,7 @@ import StudyServiceMaterialManageModal from 'views/modal/StudyServiceMaterialMan
 import { getModifyStudyRequest } from 'apis';
 import { accessTokenMock } from 'mocks';
 import { useCookies } from 'react-cookie';
+import StudyDateModal from 'views/modal/StudyDateModal';
 
 interface Props {
     studyItem: StudyModify;
@@ -62,7 +63,7 @@ function ModalSideMenu({modalCloseHandler}: {modalCloseHandler: () => void}) {
             <div className='menu-bar'>
                 {selectedOption === 'study' && <StudyModifyModal studyItem={study} setStudyItem={setStudyListItem} modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} />}
                 {selectedOption === 'member' && <MemberManageModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} />}
-                {selectedOption === 'studyDate' && <StudyDate />}
+                {selectedOption === 'studyDate' && <StudyDateModal modalCloseHandler={modalCloseHandler} studyNumber={studyNumber} />}
                 {selectedOption === 'material' && <StudyServiceMaterialManageModal modalCloseHandler={modalCloseHandler} />}
             </div>
 

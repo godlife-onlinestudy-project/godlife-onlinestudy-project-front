@@ -30,7 +30,8 @@ export default function ManinpagePublicStudyRoomJoinModal({ item, setShowModal }
 
 
     const onJoinClickHandler = () => {
-        navigator(SERVICE_PATH(item.studyNumber));
+        // navigator(SERVICE_PATH(item.studyNumber));
+        navigator(SERVICE_PATH(4));
     }
 
     //          effect: 컴포넌트 마운트 시 참여한 스터디 방 정보 리스트 불러오기          //
@@ -44,7 +45,7 @@ export default function ManinpagePublicStudyRoomJoinModal({ item, setShowModal }
     return(
         <div id='studyroom-join-modal-wrapper'>
             <div className='studyroom-join-modal-card'>
-                <div className='studyroom-join-modal-card-close-button-box'>
+                <div className='studyroom-join-modal-card-close-button-box' onClick={onClose}>
                     <div className='studyroom-join-modal-card-close-button' onClick={onClose}></div>
                 </div>
                 <div className='studyroom-join-modal-header'>
