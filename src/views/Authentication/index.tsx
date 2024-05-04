@@ -150,17 +150,17 @@ export default function Authentication() {
 
         //          event handler: 네이버 로그인 버튼 클릭 이벤트 처리          //
         const onNaverOauthButtonClickHandler = (provider: string) => {
-            window.location.href = `http://43.202.24.102:4000/auth/oauth2/${provider}`;
+            window.location.href = `http://ec2-43-202-24-102.ap-northeast-2.compute.amazonaws.com:4000/auth/oauth2/${provider}`;
         }
 
         //          event handler: 카카오 로그인 버튼 클릭 이벤트 처리          //
         const onKakaoOuathButtonClickHandler = (provider: string) => {
-            window.location.href = `http://43.202.24.102:4000/auth/oauth2/${provider}`;
+            window.location.href = `http://ec2-43-202-24-102.ap-northeast-2.compute.amazonaws.com:4000/auth/oauth2/${provider}`;
         }
 
         //          event handler: 구글 로그인 버튼 클릭 이벤트 처리          //
         const onGoogleOuathButtonClickHandler = (provider: string) => {
-            window.location.href = `http://43.202.24.102:4000/auth/oauth2/${provider}`;
+            window.location.href = `http://ec2-43-202-24-102.ap-northeast-2.compute.amazonaws.com:4000/auth/oauth2/${provider}`;
         }
         
         //          effect : 이메일 엔터치면 비밀번호 인풋박스로 넘어가게           //
