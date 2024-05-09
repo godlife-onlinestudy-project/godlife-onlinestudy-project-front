@@ -110,6 +110,19 @@ const GET_SEARCH_STUDY_LIST_URL = () => `${API_DOMAIN}/main/search`;
 const GET_SEARCH_WORD_STUDY_LIST_URL = (studyName: string) =>
   `${API_DOMAIN}/main/search/${studyName}`;
 
+// description: healthcheck API end point //
+const HEALTHCHECK_URL = () => `${DOMAIN}/healthcheck`;
+
+// description: Check server health status //
+export const checkHealthStatus = async () => {
+  try {
+    const response = await axios.get(HEALTHCHECK_URL());
+    return response.status;
+  } catch (error) {
+    return null;
+  }
+};
+
 // description: sign in email chesck request //
 export const signInEmailCheckRequest = async (
   requestBody: SignInEmailCheckRequestDto
