@@ -44,7 +44,7 @@ import { PatchStudyNoticeRequestDto, PostStudyNoticeRequestDto } from "./dto/req
 import { PatchStudyNoticeResponseDto, PostStudyNoticeResponseDto } from "./dto/response/studyService";
 
 //        description: Domain URL       //
-const DOMAIN = "http://ec2-43-202-24-102.ap-northeast-2.compute.amazonaws.com:4000";
+const DOMAIN = "https://api.godlifestudy.co.kr";
 
 //        description: API Domain 주소       //
 const API_DOMAIN = `${DOMAIN}/api`;
