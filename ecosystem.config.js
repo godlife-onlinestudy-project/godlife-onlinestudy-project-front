@@ -2,7 +2,7 @@ module.exports = {
   apps : [{
     name: 'godlife-front',
     script: 'serve',
-    args: ['build', '3000']
+    args: ['build', '3001']
   }],
 
   deploy : {
