@@ -2,7 +2,7 @@
 
 갓생살기 온라인 스터디 그룹 플랫폼(front)
 
-(http://52.79.190.65:3000)
+(https://www.godlifestudy.co.kr)
 
 <br />
 
