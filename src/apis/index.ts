@@ -123,6 +123,16 @@ export const checkHealthStatus = async () => {
   }
 };
 
+const OAUTH_URL = () => `https://www.godlifestudy.co.kr/oauth`;
+
+export const loginWithOauth = async () => {
+  try {
+    const response = await axios.post(OAUTH_URL());
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // description: sign in email chesck request //
 export const signInEmailCheckRequest = async (
   requestBody: SignInEmailCheckRequestDto
