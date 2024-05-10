@@ -67,7 +67,7 @@ function App() {
         <Route path={MY_PAGE_PATH} element={<MyPage />} />
       </Route>
       <Route path={SERVICE_PATH(':studyNumber')} element={<Service />} /> 
-      <Route path='oauth/:token/:expirationTime' element={<OAuth />} />
+      <Route path='/oauth/:token/:expirationTime' element={<OAuth />} />
       <Route path='*' element={<h1>404 Not Found</h1>} />  
     </Routes>
 
